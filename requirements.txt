@@ -4,4 +4,5 @@ beautifulsoup4
 requests
 pandas
 langchain
-faiss-cpu 
+faiss-cpu
+langchain-community
