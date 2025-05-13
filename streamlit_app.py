@@ -105,7 +105,7 @@ def query_openrouter(prompt):
     client = get_openrouter_client()
 
     completion = client.chat.completions.create(
-        model="openai/gpt-3.5-turbo",
+        model="mistralai/mistral-7b-instruct:free",
         messages=[
             {
                 "role": "system",
