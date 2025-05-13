@@ -101,21 +101,12 @@ def get_openrouter_client():
         api_key=st.secrets['deepseek_key']
     )
 
-def query_openrouter(prompt):
+def query_openrouter(messages):
     client = get_openrouter_client()
 
     completion = client.chat.completions.create(
         model="mistralai/mistral-7b-instruct:free",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are an expert in Ataccama data transformation logic. Respond clearly and helpfully.",
-            },
-            {
-                "role": "user",
-                "content": prompt,
-            },
-        ],
+        messages=messages,
         extra_headers={
             "HTTP-Referer": "https://ata-transformation-assistant.streamlit.app/",
             "X-Title": "Ata-transform-bot",
@@ -125,20 +116,40 @@ def query_openrouter(prompt):
     return completion.choices[0].message.content
 
 # -------- UI Logic --------
+
+# Initialize chat history if needed
+if "messages" not in st.session_state:
+    st.session_state.messages = [
+        {
+            "role": "system",
+            "content": "You are an expert in Ataccama data transformation logic. Respond clearly and helpfully."
+        }
+    ]
+
 st.write("Let's start building! What can we help you build today?")
 user_request = st.chat_input("Please enter a transformation plan request")
 
 if user_request:
     try:
-        # Optionally use retrieval to prepend context to user request
+        # Retrieve relevant documentation context
         context_docs = retriever.get_relevant_documents(user_request)
         context = "\n\n".join([doc.page_content for doc in context_docs[:2]])  # limit to 2 docs
+        enriched_user_input = f"""Here is some context from documentation:\n{context}\n\nUser question:\n{user_request}"""
 
-        final_prompt = f"""Here is some context from documentation:\n{context}\n\nUser question:\n{user_request}"""
+        # Add enriched input to message history
+        st.session_state.messages.append({"role": "user", "content": enriched_user_input})
 
         with st.spinner("Querying OpenRouter..."):
-            answer = query_openrouter(final_prompt)
-            st.write(answer)
+            response = query_openrouter(st.session_state.messages)
+            st.session_state.messages.append({"role": "assistant", "content": response})
+            st.write(response)
+
     except Exception as e:
         st.error("Something went wrong with the OpenRouter request.")
         st.exception(e)
+
+# Optional: display chat history in UI
+with st.expander("Conversation history"):
+    for msg in st.session_state.messages:
+        if msg["role"] != "system":
+            st.markdown(f"**{msg['role'].capitalize()}**: {msg['content']}")
