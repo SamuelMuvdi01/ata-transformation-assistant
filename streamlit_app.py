@@ -105,7 +105,7 @@ def query_openrouter(prompt):
     client = get_openrouter_client()
 
     completion = client.chat.completions.create(
-        model="tngtech/deepseek-r1t-chimera:free",
+        model="openai/gpt-3.5-turbo",
         messages=[
             {
                 "role": "system",
