@@ -16,7 +16,7 @@ from langchain.vectorstores import FAISS
 st.set_page_config(page_title="Ata-transform-bot")
 st.title("Welcome to Ataccama's Transformation Assistant Bot")
 
-ai.api_key = st.secrets["OpenAI_key"]
+#ai.api_key = st.secrets["OpenAI_key"]
 
 # -------- Cached data loader and vector store builder --------
 @st.cache_resource
