@@ -1,2 +1,7 @@
 streamlit
 openai
+beautifulsoup4
+requests
+pandas
+langchain
+faiss-cpu 
