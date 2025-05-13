@@ -98,7 +98,7 @@ retriever = load_vectorstore()
 def get_openrouter_client():
     return OpenAI(
         base_url="https://openrouter.ai/api/v1",
-        api_key=st.secrets["ollama_api_key"]
+        api_key=st.secrets['deepseek_key']
     )
 
 def query_openrouter(prompt):
