@@ -1,11 +1,10 @@
 import streamlit as st
-import openai as ai
+from openai import OpenAI
 from bs4 import BeautifulSoup
 import requests as req
 import pandas as pd
 import os
 
-from langchain_community.llms import Ollama
 from langchain.chains import RetrievalQA
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -15,8 +14,6 @@ from langchain_community.vectorstores import FAISS
 # Streamlit setup
 st.set_page_config(page_title="Ata-transform-bot")
 st.title("Welcome to Ataccama's Transformation Assistant Bot")
-
-#ai.api_key = st.secrets["OpenAI_key"]
 
 # -------- Cached data loader and vector store builder --------
 @st.cache_resource
@@ -94,35 +91,54 @@ def load_vectorstore():
 
     return db.as_retriever()
 
-# Load retriever once
 retriever = load_vectorstore()
 
-# -------- UI --------
+# -------- OpenRouter Integration --------
+@st.cache_resource
+def get_openrouter_client():
+    return OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=st.secrets["ollama_api_key"]
+    )
+
+def query_openrouter(prompt):
+    client = get_openrouter_client()
+
+    completion = client.chat.completions.create(
+        model="tngtech/deepseek-r1t-chimera:free",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are an expert in Ataccama data transformation logic. Respond clearly and helpfully.",
+            },
+            {
+                "role": "user",
+                "content": prompt,
+            },
+        ],
+        extra_headers={
+            "HTTP-Referer": "https://ata-transformation-assistant.streamlit.app/",
+            "X-Title": "Ata-transform-bot",
+        },
+    )
+
+    return completion.choices[0].message.content
+
+# -------- UI Logic --------
 st.write("Let's start building! What can we help you build today?")
 user_request = st.chat_input("Please enter a transformation plan request")
 
-def is_ollama_running():
-    try:
-        r = req.get("http://localhost:11434")
-        return r.status_code == 200
-    except:
-        return False
-
-# -------- Response Logic --------
 if user_request:
-    if not is_ollama_running():
-        st.error("Ollama is not running. Start it with: `ollama serve`")
-    else:
-        try:
-            llm = Ollama(model="llama3")
-            qa_chain = RetrievalQA.from_chain_type(
-                llm=llm,
-                retriever=retriever,
-                chain_type="stuff"
-            )
-            with st.spinner("Thinking..."):
-                gpt_response = qa_chain.run(user_request)
-                st.write(gpt_response)
-        except Exception as e:
-            st.error("Something went wrong.")
-            st.exception(e)
+    try:
+        # Optionally use retrieval to prepend context to user request
+        context_docs = retriever.get_relevant_documents(user_request)
+        context = "\n\n".join([doc.page_content for doc in context_docs[:2]])  # limit to 2 docs
+
+        final_prompt = f"""Here is some context from documentation:\n{context}\n\nUser question:\n{user_request}"""
+
+        with st.spinner("Querying OpenRouter..."):
+            answer = query_openrouter(final_prompt)
+            st.write(answer)
+    except Exception as e:
+        st.error("Something went wrong with the OpenRouter request.")
+        st.exception(e)
