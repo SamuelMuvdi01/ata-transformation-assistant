@@ -3,6 +3,6 @@ openai
 beautifulsoup4
 requests
 pandas
-langchain
-faiss-cpu
 langchain-community
+faiss-cpu
+sentence-transformers
