@@ -5,7 +5,7 @@ import requests as req
 import pandas as pd
 import os
 
-from langchain.llms import Ollama
+from langchain_community.llms import Ollama
 from langchain.chains import RetrievalQA
 from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
