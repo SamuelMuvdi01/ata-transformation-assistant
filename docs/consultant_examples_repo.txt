@@ -1,0 +1,90 @@
+Consultant information regarding Ataccama Transformation plans with examples:
+
+**Ataccama Transformation Plan - Step Definitions**
+
+An Ataccama Transformation Plan is made up of modular blocks called "steps." Each step performs a specific task in a data pipeline. Steps fall into three categories: Input, Transform, and Output.
+
+---
+
+**Input Steps**
+
+1. **Catalog Item Input**
+   Reads a catalog item, such as a table or view, from Ataccama's Knowledge Catalog. Includes access to data and metadata.
+
+2. **Input**
+   A generic input step used to embed one transformation plan into another. This allows the plan to be reused as a template in other plans.
+
+3. **Monitoring Project Post-Processing Input**
+   Loads data and data quality evaluation results from a Monitoring Project. The transformation plan must be initialized with the correct monitoring project.
+
+4. **ONE Data Reader**
+   Reads data stored in ONE Data, Ataccama’s internal data store. ONE Data can hold tables and catalog items.
+
+---
+
+**Transform Steps**
+
+1. **Add Attribute**
+   Adds a new column to the data flow.
+
+2. **Condition**
+   Splits the data flow into two branches based on a condition or expression.
+
+3. **Delete Attributes**
+   Removes columns from the data flow.
+
+4. **Embedded Component**
+   Inserts a component from a Desktop environment into the transformation plan.
+
+5. **Embedded Transformation Plan**
+   Embeds another transformation plan created in the ONE web app.
+
+6. **Filter**
+   Filters out records that do not meet a given expression condition.
+
+7. **Join**
+   Joins two data flows using a specified key, similar to an SQL join.
+
+8. **Split**
+   Splits one data flow into three output streams based on a condition.
+
+9. **Transform Data**
+   Transforms column values using expressions written in ONE Expression Language. Reference expressions can be found in the "ata-expressions-tables.txt" file.
+
+10. **Union Stream**
+    Performs an SQL-style union of two data flows, merging them horizontally into a single output.
+
+---
+
+**Output Steps**
+
+1. **Database Output**
+   Writes the result of the transformation to an external database.
+
+2. **Data Remediation Output**
+   Writes data and data quality results from a Monitoring Project into a ONE Data table.
+
+3. **File Output**
+   Writes data to a file (e.g. CSV) in ONE Object Storage. Files are available only when generated as part of a DQ Monitoring Project using the Post-Processing Input step.
+
+4. **ONE Data Writer**
+   Writes data into a selected ONE Data table.
+
+5. **Output**
+   A generic output step used when embedding this plan into another plan. Complements the generic Input step.
+
+---
+
+Let me know if you'd like me to structure this as a CSV, JSON, or Markdown document for alternative ingestion formats.
+
+
+Example 1:
+Prompt: "I need to make a transformation plan that filters out any record where the country column is not USA"
+Response: "For this, you would use the filter step, what you would do is set up your input step with the appropriate input source, then you would connect a FILTER step to the input source, then in the filter data step, you would write your expression in the condition field. The condition should be country IS 'USA' alternatively you can use country =  'USA'"
+
+Example 2:
+Prompt: "I need to split my flow into customers with a FICO score over 700 or equal to 700 and a fico under 700"
+response: "You would use a condition for this step as the condition will give you an output of 2 flows. You would connect your condition step to your input, and in the condition inside the step, you would type the expression fico >= 700 , which will give you all FICO scores equal to or over 700 to the out_true flow, and everything under 700 will go out the out_false flow"
+
+Example 3: "I need to create a new attribute in my data flow and then set it to be a ratio named ratio of another attribute named score"
+response: "For this, you would use the add attributes step to create a new attribute named ratio, then set it to type float, and then set the expression to be toFloat(score / 100) to give you the ratio"
