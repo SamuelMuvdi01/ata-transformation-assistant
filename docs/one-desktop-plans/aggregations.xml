@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configDoc date="2025-05-14 01:11:16" fileName="aggregations.plan" runtimeVersion="15.2.0.240425-7925-ed10bffb" cfgFilePath="workspace://Training (2)/Training_commented/plans/aggregations.plan" screen="images/screen_aggregations.plan.png" companyImage="images/logo_about.png" version="1.0">
+  <generatorMeta date="2025-05-14 01:11:27" about="{1}
+
+Version: {4} 
+Runtime: {5} 
+Build: {6} 
+
+Copyright © 2002-{3} {2}. All rights reserved.
+
+Your use of the product is subject to the {0} end user license agreement." name="Ataccama ONE Desktop" company="Ataccama Corporation"/>
+  <configAlg image="images/TextFileReader.large.png" name="Continent In (Text File Reader)" class="com.ataccama.dqc.tasks.io.text.read.TextFileReader">
+    <properties lineMaxReadLength="65536" fileName="../data/in/Continents/{continent_name}.csv" fieldSeparator=";" stringQualifierEscape="&quot;" numberOfLinesInFooter="0" compression="NONE" encoding="UTF-8" lineSeparator="\r\n" stringQualifier="&quot;" numberOfLinesInHeader="1">
+      <columns>
+        <textReaderColumn name="src_continent" ignore="true" type="STRING"/>
+        <textReaderColumn name="src_country" ignore="false" type="STRING"/>
+        <textReaderColumn name="src_population_2014" ignore="false" type="LONG">
+          <dataFormatParameters decimalSeparator="." thousandsSeparator=","/>
+        </textReaderColumn>
+        <textReaderColumn name="src_population_2015" ignore="false" type="LONG">
+          <dataFormatParameters decimalSeparator="." thousandsSeparator=","/>
+        </textReaderColumn>
+        <textReaderColumn name="src_sex_ratio" ignore="false" type="FLOAT">
+          <dataFormatParameters decimalSeparator="." thousandsSeparator=","/>
+        </textReaderColumn>
+        <textReaderColumn name="src_density__per_sq_km_" ignore="false" type="FLOAT">
+          <dataFormatParameters decimalSeparator="." thousandsSeparator=","/>
+        </textReaderColumn>
+      </columns>
+      <dataFormatParameters falseValue="false" dateTimeFormat="yy-MM-dd HH:mm:ss" decimalSeparator="." dayFormat="yy-MM-dd" trueValue="true" dateFormatLocale="en_US" thousandsSeparator=""/>
+      <errorHandlingStrategy rejectFileName="rejected.txt">
+        <errorInstructions>
+          <errorInstruction dataStrategy="READ_POSSIBLE" errorType="EXTRA_DATA" putToLog="true" putToReject="false"/>
+          <errorInstruction dataStrategy="STOP" errorType="LONG_LINE" putToLog="true" putToReject="true"/>
+          <errorInstruction dataStrategy="STOP" errorType="PROCESSING_ERROR" putToLog="true" putToReject="false"/>
+          <errorInstruction dataStrategy="READ_POSSIBLE" errorType="INVALID_DATE" putToLog="true" putToReject="false"/>
+          <errorInstruction dataStrategy="READ_POSSIBLE" errorType="SHORT_LINE" putToLog="true" putToReject="true"/>
+          <errorInstruction dataStrategy="NULL_VALUE" errorType="UNPARSABLE_FIELD" putToLog="true" putToReject="false"/>
+        </errorInstructions>
+      </errorHandlingStrategy>
+      <shadowColumns>
+        <shadowColumnDef name="continent_name" type="STRING"/>
+      </shadowColumns>
+    </properties>
+  </configAlg>
+  <configAlg image="images/GroupAggregator.large.png" name="Group Aggregator (Group Aggregator)" class="com.ataccama.dqc.tasks.analysis.aggregator.GroupAggregator">
+    <properties>
+      <aggregationSets>
+        <aggregationSet>
+          <aggregations>
+            <aggregation expression="sum(src_population_2015)" name="Population 2015"/>
+            <aggregation expression="avg(src_density__per_sq_km_)" name="Average density"/>
+            <aggregation expression="count(src_country)" name="Count of number countries"/>
+            <aggregation expression="maximum(src_population_2015)" name="The biggest population value"/>
+          </aggregations>
+          <groupBy>
+            <component expression="continent_name" name="Continent Name"/>
+          </groupBy>
+        </aggregationSet>
+        <aggregationSet>
+          <aggregations>
+            <aggregation expression="avg(src_density__per_sq_km_)" name="average desity per square kilometer"/>
+            <aggregation expression="count(src_country)" name="Number of countries"/>
+          </aggregations>
+          <groupBy>
+            <component expression="src_population_2014 &lt; src_population_2015" name="Growth population"/>
+          </groupBy>
+        </aggregationSet>
+      </aggregationSets>
+    </properties>
+  </configAlg>
+  <configAlg image="images/TextFileWriter.large.png" name="all records (Text File Writer)" class="com.ataccama.dqc.tasks.io.text.write.TextFileWriter">
+    <properties writeHeader="true" fileName="../data/out/all_records.csv" fieldSeparator=";" generateMetadata="true" stringQualifierEscape="&quot;" writeAllColumns="true" compression="NONE" encoding="UTF-8" lineSeparator="\r\n" stringQualifier="&quot;" useStringQualifierOnAllColumns="false">
+      <columns/>
+      <dataFormatParameters falseValue="false" dateTimeFormat="yyyy-MM-dd HH:mm:ss" decimalSeparator="." dayFormat="yyyy-MM-dd" trueValue="true" dateFormatLocale="en_US" thousandsSeparator=""/>
+    </properties>
+  </configAlg>
+  <configAlg image="images/TextFileWriter.large.png" name="Aggregation Results (Text File Writer)" class="com.ataccama.dqc.tasks.io.text.write.TextFileWriter">
+    <properties writeHeader="true" fileName="../data/out/aggregation_results.csv" fieldSeparator=";" generateMetadata="true" stringQualifierEscape="&quot;" writeAllColumns="true" compression="NONE" encoding="UTF-8" lineSeparator="\r\n" stringQualifier="&quot;" useStringQualifierOnAllColumns="false">
+      <columns/>
+      <dataFormatParameters falseValue="false" dateTimeFormat="yyyy-MM-dd HH:mm:ss" decimalSeparator="." dayFormat="yyyy-MM-dd" trueValue="true" dateFormatLocale="en_US" thousandsSeparator=""/>
+    </properties>
+  </configAlg>
+</configDoc>

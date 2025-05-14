@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configDoc date="2025-05-14 00:52:18" fileName="01_profiling.plan" runtimeVersion="15.2.0.240425-7925-ed10bffb" cfgFilePath="workspace://Training (2)/Training_commented/plans/01_profiling.plan" screen="images/screen_01_profiling.plan.png" companyImage="images/logo_about.png" version="1.0">
+  <generatorMeta date="2025-05-14 00:52:45" about="{1}
+
+Version: {4} 
+Runtime: {5} 
+Build: {6} 
+
+Copyright © 2002-{3} {2}. All rights reserved.
+
+Your use of the product is subject to the {0} end user license agreement." name="Ataccama ONE Desktop" company="Ataccama Corporation"/>
+  <configAlg image="images/TextFileReader.large.png" name="client_tiers (Text File Reader)" class="com.ataccama.dqc.tasks.io.text.read.TextFileReader">
+    <properties lineMaxReadLength="65536" fileName="../data/in/client_tiers.csv" fieldSeparator=";" stringQualifierEscape="" numberOfLinesInFooter="0" compression="NONE" encoding="UTF-8" lineSeparator="\r\n" stringQualifier="" numberOfLinesInHeader="1">
+      <columns>
+        <textReaderColumn name="code" ignore="false" type="STRING"/>
+        <textReaderColumn name="name" ignore="false" type="STRING"/>
+        <textReaderColumn name="name_fr" ignore="false" type="STRING"/>
+        <textReaderColumn name="name_it" ignore="false" type="STRING"/>
+      </columns>
+      <dataFormatParameters falseValue="false" dateTimeFormat="yy-MM-dd HH:mm:ss" decimalSeparator="." dayFormat="yy-MM-dd" trueValue="true" dateFormatLocale="en_US" thousandsSeparator=""/>
+      <errorHandlingStrategy rejectFileName="rejected.txt">
+        <errorInstructions>
+          <errorInstruction dataStrategy="READ_POSSIBLE" errorType="EXTRA_DATA" putToLog="true" putToReject="false"/>
+          <errorInstruction dataStrategy="STOP" errorType="LONG_LINE" putToLog="true" putToReject="true"/>
+          <errorInstruction dataStrategy="STOP" errorType="PROCESSING_ERROR" putToLog="true" putToReject="false"/>
+          <errorInstruction dataStrategy="READ_POSSIBLE" errorType="INVALID_DATE" putToLog="true" putToReject="false"/>
+          <errorInstruction dataStrategy="READ_POSSIBLE" errorType="SHORT_LINE" putToLog="true" putToReject="true"/>
+          <errorInstruction dataStrategy="NULL_VALUE" errorType="UNPARSABLE_FIELD" putToLog="true" putToReject="false"/>
+        </errorInstructions>
+      </errorHandlingStrategy>
+      <shadowColumns/>
+    </properties>
+  </configAlg>
+  <configAlg image="images/TextFileReader.large.png" name="party_full_1 (Text File Reader)" class="com.ataccama.dqc.tasks.io.text.read.TextFileReader">
+    <properties lineMaxReadLength="65536" fileName="../data/in/party_full_1.csv" fieldSeparator=";" stringQualifierEscape="&quot;" numberOfLinesInFooter="0" compression="NONE" encoding="ISO-8859-1" lineSeparator="\r\n" stringQualifier="&quot;" numberOfLinesInHeader="1">
+      <columns>
+        <textReaderColumn name="src_name" ignore="false" type="STRING"/>
+        <textReaderColumn name="src_gender" ignore="false" type="STRING"/>
+        <textReaderColumn name="src_birth_date" ignore="false" type="STRING"/>
+        <textReaderColumn name="src_sin" ignore="false" type="STRING"/>
+        <textReaderColumn name="src_card" ignore="false" type="STRING"/>
+        <textReaderColumn name="src_address" ignore="false" type="STRING"/>
+        <textReaderColumn name="src_email" ignore="false" type="STRING"/>
+        <textReaderColumn name="src_primary_key" ignore="false" type="STRING"/>
+        <textReaderColumn name="meta_last_update" ignore="false" type="STRING"/>
+        <textReaderColumn name="src_tier" ignore="false" type="STRING"/>
+      </columns>
+      <dataFormatParameters falseValue="false" dateTimeFormat="yy-MM-dd HH:mm:ss" decimalSeparator="." dayFormat="yy-MM-dd" trueValue="true" dateFormatLocale="en_US" thousandsSeparator=""/>
+      <errorHandlingStrategy rejectFileName="rejected.txt">
+        <errorInstructions>
+          <errorInstruction dataStrategy="READ_POSSIBLE" errorType="EXTRA_DATA" putToLog="true" putToReject="false"/>
+          <errorInstruction dataStrategy="STOP" errorType="LONG_LINE" putToLog="true" putToReject="true"/>
+          <errorInstruction dataStrategy="STOP" errorType="PROCESSING_ERROR" putToLog="true" putToReject="false"/>
+          <errorInstruction dataStrategy="READ_POSSIBLE" errorType="INVALID_DATE" putToLog="true" putToReject="false"/>
+          <errorInstruction dataStrategy="READ_POSSIBLE" errorType="SHORT_LINE" putToLog="true" putToReject="true"/>
+          <errorInstruction dataStrategy="NULL_VALUE" errorType="UNPARSABLE_FIELD" putToLog="true" putToReject="false"/>
+        </errorInstructions>
+      </errorHandlingStrategy>
+      <shadowColumns/>
+    </properties>
+  </configAlg>
+  <configAlg image="images/ProfilingAlgorithm.large.png" name="Profiling (Profiling)" class="com.ataccama.dqc.tasks.profiling.ProfilingAlgorithm">
+    <properties defaultLocale="en_US" outputFile="../data/pro/party_full_1.profile" outputLimit="1000" exportToEndpoint="false" tableNamePrefix="pro" threaded="true" dataSource="PostgreSQL">
+      <businessDomains strictThreshold="25.0" looseThreshold="20.0"/>
+      <domains>
+        <customs/>
+        <datetime active="true" threshold="80"/>
+        <enum valueCountLimit="20" active="true"/>
+        <numeric active="true" threshold="80"/>
+        <pattern active="true" patternCountLimit="10"/>
+        <specval active="true" gradientThreshold="100"/>
+      </domains>
+      <fkAnalysis>
+        <fkAnalysis rightInputName="in" name="Foreign key 1" leftInputName="tiers">
+          <components>
+            <fkComponent rightColumn="src_tier" leftColumn="code"/>
+          </components>
+        </fkAnalysis>
+      </fkAnalysis>
+      <inputs>
+        <profilingInput name="tiers" drillThrough="true">
+          <businessRules/>
+          <dataToProfile>
+            <profiledData expression="code" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="name" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="name_fr" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="name_it" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+          </dataToProfile>
+          <dependencies/>
+          <pkAnalysis/>
+          <rollUps/>
+        </profilingInput>
+        <profilingInput name="in" drillThrough="true">
+          <businessRules>
+            <businessRule expression="length(src_sin) is 9 and trashNonDigits(src_sin)=src_sin" name="SIN Valid"/>
+            <businessRule expression="toDate(meta_last_update,&#39;yyyy/MM/dd&#39;) &lt; today()" name="MetaUpdate in future"/>
+          </businessRules>
+          <dataToProfile>
+            <profiledData expression="src_name" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="src_gender" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="src_birth_date" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="src_sin" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="src_card" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="src_address" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="src_email" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="src_primary_key" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="meta_last_update" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+            <profiledData expression="src_tier" maskName="characters" analyseBusinessDomain="false" analyseDomain="true">
+              <frequencyAnalysis calculate="true"/>
+              <groupSizeAnalysis calculate="true"/>
+              <standardStats quantiles="10" calculate="true" extremes="5" calculateAggregated="true"/>
+            </profiledData>
+          </dataToProfile>
+          <dependencies>
+            <dependencyAnalysis name="Dependency 1">
+              <dependants>
+                <dependant expression="src_sin" threshold="90"/>
+              </dependants>
+              <determinant>
+                <keyComponent expression="src_name"/>
+              </determinant>
+            </dependencyAnalysis>
+          </dependencies>
+          <pkAnalysis>
+            <pkAnalysis name="PK 1">
+              <components>
+                <keyComponent expression="src_primary_key"/>
+              </components>
+            </pkAnalysis>
+            <pkAnalysis name="PK 2">
+              <components>
+                <keyComponent expression="src_name"/>
+                <keyComponent expression="src_sin"/>
+                <keyComponent expression="src_card"/>
+              </components>
+            </pkAnalysis>
+          </pkAnalysis>
+          <rollUps>
+            <rollUp expression="decode(src_gender,&#39;M&#39;,&#39;MALE&#39;,&#39;F&#39;,&#39;FEMALE&#39;,src_gender)" name="Gender"/>
+          </rollUps>
+        </profilingInput>
+      </inputs>
+      <masks>
+        <maskCfg copyOther="true" name="characters">
+          <characterGroups>
+            <characterGroup characters="[:letter:]" symbol="L"/>
+            <characterGroup characters="[:digit:]" symbol="D"/>
+          </characterGroups>
+        </maskCfg>
+        <maskCfg copyOther="true" name="words">
+          <characterGroups>
+            <characterGroup repeatedSymbol="W" characters="[:letter:]" symbol="L" repeatedThreshold="2"/>
+            <characterGroup repeatedSymbol="N" characters="[:digit:]" symbol="D" repeatedThreshold="2"/>
+          </characterGroups>
+        </maskCfg>
+        <maskCfg copyOther="true" name="case_sensitive">
+          <characterGroups>
+            <characterGroup characters="[:lowercase:]" symbol="L"/>
+            <characterGroup characters="[:uppercase:]" symbol="U"/>
+            <characterGroup characters="[:digit:]" symbol="D"/>
+          </characterGroups>
+        </maskCfg>
+        <maskCfg copyOther="true" name="mask_digits">
+          <characterGroups>
+            <characterGroup characters="[:digit:]" symbol="D"/>
+          </characterGroups>
+        </maskCfg>
+      </masks>
+      <userMetadata>
+        <items/>
+      </userMetadata>
+    </properties>
+  </configAlg>
+</configDoc>
