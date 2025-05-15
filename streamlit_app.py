@@ -8,17 +8,17 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
-# Streamlit setup
+# --- Streamlit setup ---
 st.set_page_config(page_title="Ata-transform", page_icon="images/ataccama_logo.png")
 st.title("Welcome to :violet[Ataccama's] Transformation Assistant Bot")
 
-# -------- Cached data loader and vector store builder --------
+# --- Load and cache vector stores ---
 @st.cache_resource
 def load_vectorstores():
     def load_and_chunk(directory):
         documents = []
         for file in os.listdir(directory):
-            if file.endswith(".txt") or file.endswith(".html") or file.endswith(".xml"):
+            if file.endswith((".txt", ".html", ".xml")):
                 path = os.path.join(directory, file)
                 loader = TextLoader(path)
                 documents.extend(loader.load())
@@ -33,12 +33,9 @@ def load_vectorstores():
     desktop_db = FAISS.from_documents(desktop_chunks, embeddings)
     webapp_db = FAISS.from_documents(webapp_chunks, embeddings)
 
-    desktop_db.save_local("vector_index_chunks_desktop")
-    webapp_db.save_local("vector_index_chunks_webapp")
-
     return desktop_db.as_retriever(), webapp_db.as_retriever()
 
-# -------- OpenRouter Integration --------
+# --- OpenRouter integration ---
 @st.cache_resource
 def get_openrouter_client():
     return OpenAI(
@@ -58,7 +55,7 @@ def query_openrouter(messages):
     )
     return completion.choices[0].message.content
 
-# -------- UI Logic --------
+# --- Session state setup ---
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {
@@ -75,11 +72,7 @@ if "pending_request" not in st.session_state:
 
 desktop_retriever, webapp_retriever = load_vectorstores()
 
-# Detect greeting or casual input
-def is_smalltalk(text):
-    greetings = ["hi", "hello", "hey", "how are you", "good morning", "good afternoon", "what's up"]
-    return any(phrase in text.lower() for phrase in greetings)
-
+# --- Helpers ---
 def detect_plan_type(text):
     text = text.lower()
     if "desktop" in text or "one desktop" in text:
@@ -103,31 +96,29 @@ def get_contextual_docs(user_input):
     else:
         return [], "ambiguous"
 
-# Prompt input
+# --- UI ---
 st.write("Hi! I'm :violet[Ata-cat]. What can I help you build today?")
 user_request = st.chat_input("Type your question or say hello...")
 
-# Main interaction logic
 if user_request:
-    # Smalltalk/greeting response
-    if is_smalltalk(user_request):
-        reply = "Hi there! 😊 I'm here to help with any Ataccama transformation plan questions. Just let me know what you're working on!"
-        st.session_state.messages.append({"role": "assistant", "content": reply})
-        st.write(reply)
+    context_docs, context_type = get_contextual_docs(user_request)
 
-    # Handle transformation-related input
+    # Handle ambiguity
+    if context_type == "ambiguous" and st.session_state.plan_type is None:
+        st.session_state.pending_request = user_request
+        ask = "Got it! Just to help me retrieve the right info: is this for a **ONE Desktop** plan or a **WebApp transformation** plan?"
+        st.session_state.messages.append({"role": "assistant", "content": ask})
+        st.markdown(f"**You asked:** {user_request}")
+        st.markdown(ask)
+
     else:
-        context_docs, context_type = get_contextual_docs(user_request)
+        actual_request = user_request if st.session_state.pending_request is None else st.session_state.pending_request
+        st.session_state.pending_request = None
 
-        if context_type == "ambiguous" and st.session_state.plan_type is None:
-            st.session_state.pending_request = user_request  # Save it to process later
-            ask = "Got it! Just to help me retrieve the right info: is this for a **ONE Desktop** plan or a **WebApp transformation** plan?"
-            st.session_state.messages.append({"role": "assistant", "content": ask})
-            st.write(ask)
-        else:
-            actual_request = user_request if st.session_state.pending_request is None else st.session_state.pending_request
-            st.session_state.pending_request = None  # clear it now that we have context
+        enriched_user_input = actual_request
 
+        # Add relevant docs if plan_type is known
+        if st.session_state.plan_type in ("desktop", "webapp"):
             context = "\n\n".join([doc.page_content for doc in context_docs[:2]])
             enriched_user_input = (
                 f"The user is asking about a {st.session_state.plan_type.upper()} plan.\n\n"
@@ -135,14 +126,17 @@ if user_request:
                 f"User's question:\n{actual_request}"
             )
 
-            st.session_state.messages.append({"role": "user", "content": enriched_user_input})
+        # Append user message (with or without context)
+        st.session_state.messages.append({"role": "user", "content": enriched_user_input})
 
-            with st.spinner("Let me check the docs for you..."):
-                response = query_openrouter(st.session_state.messages)
-                st.session_state.messages.append({"role": "assistant", "content": response})
-                st.write(response)
+        st.markdown(f"**You asked:** {actual_request}")
 
-# Show conversation history
+        with st.spinner("Let me check the docs for you..."):
+            response = query_openrouter(st.session_state.messages)
+            st.session_state.messages.append({"role": "assistant", "content": response})
+            st.markdown(response)
+
+# --- Conversation history ---
 with st.expander("Conversation history"):
     for msg in st.session_state.messages:
         if msg["role"] != "system":
