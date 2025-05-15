@@ -1,0 +1,73 @@
+Data Transformation Plans
+ONE allows you to transform data using data transformation plans, which are visual representations of data processing job definitions. This guide details the steps to create and run a transformation plan to process input data, transform it, and define the output format.
+
+Prerequisites
+Ensure the data source connection of the catalog item you want to use in your transformation plan has data export enabled. In the Data Catalog, go to Sources > [your data source] > Connections. In the three dots menu of your connection, select "Show details," and ensure "Enable exporting and loading of data" is enabled. If not, add the missing credentials.
+
+Create Plan to Transform a Catalog Item
+
+In Data Quality > Transformation plans, select "Create".
+
+
+Provide a name for the new plan (e.g., "Customers transformation plan") and select "Save."
+
+
+On the plan canvas, add a data input (catalog item input) and data output (ONE Data writer step).
+
+
+Configure the steps:
+
+Add attributed step to create a new attribute (e.g., full_name) using ONE expressions.
+Delete attributes step to remove surplus attributes from the output.
+Filter step, for instance, to filter out records from a specific country.
+
+Optionally preview data to verify the plan is functioning according to your expectations.
+
+
+Validate the plan to check for any errors.
+
+
+Run the transformation plan to trigger the flow of data through the plan.
+
+
+Available Steps
+
+Catalog Item Input: Reads data from the selected catalog item.
+
+ONE Data Reader: Reads data from a selected ONE Data catalog item.
+
+File Output: Writes data into a text file in ONE Object Storage.
+
+ONE Data Writer: Writes data into new or existing ONE Data catalog items.
+
+Database Output: Writes transformed catalog items back to the data catalog.
+
+Add Attributes: Adds new attributes using ONE expressions.
+
+Condition: Splits the data flow into two streams based on a ONE expression condition.
+
+Delete Attributes: Deletes selected attributes from the input.
+
+Filter: Filters out records that do not pass a ONE expression condition.
+
+Embedded Component: Inserts a component from ONE Desktop.
+
+Embedded Transformation Plan: Inserts an existing transformation plan created in ONE.
+
+Join: Joins two separate data flows into a single data flow using keys.
+
+Split: Splits data into three streams based on a ONE expression condition.
+
+Union Streams: Merges input formats of two defined inputs into a single output format.
+
+Monitoring Project Post-Processing Input: Inputs data and DQ evaluation results from a monitoring project.
+
+Data Preview
+
+Select a step to see a preview of the resultant data.
+
+If the step has multiple outputs, select for which output you want to view the data (e.g., out_true or out_false).
+
+Manual recompute is required to update the preview after editing the plan.
+
+By following these steps, you can create and run effective data transformation plans in ONE.

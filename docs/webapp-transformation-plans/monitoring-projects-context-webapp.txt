@@ -1,0 +1,47 @@
+# Monitoring Projects
+
+Use monitoring projects to manually monitor and track the most critical data assets in ONE. You can select catalog items to apply anomaly detection and schema checks, and evaluate data quality using applied DQ rules.
+
+## Create a Monitoring Project
+
+1. In Data Quality > Monitoring Projects, select "Create".
+2. Provide a name and description for the project, and select the Stewardship group.
+3. Select "Save" and add the required catalog items to the project.
+4. Apply structure checks, anomaly detection, and DQ rules to each catalog item individually.
+5. Publish the changes and run monitoring on the catalog items.
+
+## Structure Checks
+
+- Structure checks alert you of missing columns or changes in data type.
+- Enable on an attribute-by-attribute basis by selecting "Make Mandatory" for the required attributes.
+
+## Anomaly Detection
+
+- Anomaly detection (AI-powered) alerts you of potential anomalies.
+- Enable it on an attribute-by-attribute basis by selecting "Enable Detection".
+
+## DQ Rules
+
+- Apply DQ rules manually or use suggestions.
+- Only rules that contribute to overall Quality are taken into account in the "Overall Quality" section.
+
+## Run Monitoring
+
+1. Publish the changes and select "Run monitoring" on your project.
+2. Schedule the project to run automatically at specific times using the three dots menu and "Schedule".
+
+If you have made any changes, make sure to publish them before running monitoring.
+
+## Data Slices
+
+You can run monitoring on specific data slices rather than the entire catalog item:
+
+1. On the monitoring project Configuration & Results tab, select the catalog item with data slices.
+2. Enable "Run monitoring project on data slice" and select the required data slices.
+3. Run monitoring on the selected data slices.
+
+## Limitations
+
+- If the Data Processing Engines (DPEs) have not been updated to the latest version, data slices may be ignored and monitoring runs on the full catalog item.
+
+By following these steps, you can effectively monitor and analyze your data assets in ONE, ensuring consistent data quality and identifying potential anomalies.
