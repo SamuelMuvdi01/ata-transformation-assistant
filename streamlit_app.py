@@ -103,13 +103,26 @@ user_request = st.chat_input("Type your question or say hello...")
 if user_request:
     context_docs, context_type = get_contextual_docs(user_request)
 
-    # Handle ambiguity
+    # --- 🔄 Let LLM generate clarification message if context is ambiguous ---
     if context_type == "ambiguous" and st.session_state.plan_type is None:
         st.session_state.pending_request = user_request
-        ask = "Got it! Just to help me retrieve the right info: is this for a **ONE Desktop** plan or a **WebApp transformation** plan?"
-        st.session_state.messages.append({"role": "assistant", "content": ask})
-        st.markdown(f"**You asked:** {user_request}")
-        st.markdown(ask)
+
+        clarification_prompt = {
+            "role": "user",
+            "content": (
+                f"The user asked the following question, but didn't mention whether it's for a ONE Desktop plan "
+                f"or a WebApp transformation plan:\n\n{user_request}\n\n"
+                "Please ask the user (in a helpful, friendly way) to clarify which plan type they're referring to."
+            )
+        }
+
+        st.session_state.messages.append(clarification_prompt)
+
+        with st.spinner("Asking for clarification..."):
+            clarification_response = query_openrouter(st.session_state.messages)
+            st.session_state.messages.append({"role": "assistant", "content": clarification_response})
+            st.markdown(f"**You asked:** {user_request}")
+            st.markdown(clarification_response)
 
     else:
         actual_request = user_request if st.session_state.pending_request is None else st.session_state.pending_request
