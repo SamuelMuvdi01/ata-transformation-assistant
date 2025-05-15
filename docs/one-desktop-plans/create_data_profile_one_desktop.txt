@@ -1,0 +1,16 @@
+# Create a Data Quality Profile
+
+A data quality profile is a summary of the state of data, which helps determine future steps and cleansing rules. It allows you to see duplicates and dependencies, evaluate business rules, observe patterns, and more.
+
+## Select Data to Profile
+1. Configure a database connection (see Databases).
+2. In the File Explorer view, select one or more files (CSV, TXT, XLS, XLSX) or database tables, right-click, and select Create Profile.
+
+To create a profile for multiple inputs, one profile file for all of them separated by input (one per table or file) is obtained.
+
+## Configure the Profile or Create a Profiling Plan
+1. In the profile configuration dialog, specify where to create the profile and which columns to profile.
+2. Enable the drill-through functionality to see individual records that comprise the statistics generated (database connection required).
+3. Choose between generating the profile immediately (using specified settings and opening the Profile Viewer) or creating a plan file (for advanced settings or modifications before profiling).
+
+For more information on reading and interpreting the profile, see Read a Data Quality Profile.

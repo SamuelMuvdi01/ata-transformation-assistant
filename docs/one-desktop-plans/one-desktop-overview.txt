@@ -1,0 +1,61 @@
+ONE Desktop Overview
+ONE Desktop (formerly known as DQC) is an Eclipse-based Integrated Development Environment (IDE) designed for building Data Quality (DQ) and Master Data Management (MDM) solutions using Ataccama products.
+
+Development Requirement:
+Ataccama products require ONE Desktop for development and configuration tasks.
+
+ONE Desktop User Interface (UI)
+The UI consists of five main areas:
+
+1. Explorer Panel
+Provides quick access to:
+
+Created Data Quality (DQ) and Model Projects
+
+Local and network disks for locating data files
+
+Connected databases and their tables
+
+Supports many shortcut actions via right-click, such as:
+
+Creating new plans and profiles
+
+Connecting to databases
+
+2. Main Editing Area
+Primary workspace for:
+
+Constructing and visualizing transformation plans
+
+Displaying and editing data files
+
+Viewing data profiles
+
+Creating data models
+
+Multiple documents can be opened in tabs side-by-side
+
+3. Status Panel
+Contains multiple tabs, typically including:
+
+Properties: Displays metadata of selected files, plans, profiles, or databases (e.g., path, size, modification date) and shows problems or warnings
+
+Run Results: Stores results of plan executions, including error details and components with issues
+
+Console: Shows standard IDE output such as plan run progress and server launch messages
+
+Additional tabs can be added and rearranged via Window > Show View > Other...
+
+4. Perspective Switching Panel
+Allows switching between different resource views, for example:
+
+File Explorer
+
+Model Explorer
+
+SVN Repository Explorer
+
+5. Configuration Dialogs
+Dialog windows used to configure components and steps
+
+Typically accessed by double-clicking a step or using right-click context menu

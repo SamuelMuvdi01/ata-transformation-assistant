@@ -1,0 +1,40 @@
+# Components and Modules
+
+## Overview
+There are 95 available components for data cleansing, validation, standardization, as well as technical or auxiliary components.
+
+## Component Description
+### Template Projects
+| Package name | Description | Availability |
+|--------------|-------------|--------------|
+| Data Cleansing Package (CA) | Tutorial on cleansing party attributes, dates, addresses, and more using Canadian or generic components. | Contact us |
+| Data Masking Module (CA) | Set of prebuilt components for masking common entities such as personal identification, address, and so on. | Contact us |
+| Data Masking Module (US) | See the description of Data Masking Module (CA). | Contact us |
+
+### Generic
+| Component name | Description | Availability |
+|----------------|-------------|--------------|
+| Cleanse and Convert Weight Unit and Value | Parses and converts weight values and units. | Free |
+| Cleanse Credit Card Number | Validates credit card numbers and determines card details. | Free |
+| Cleanse Date | Parses dates and validates them while applying business rules. | Free |
+| Cleanse EAN Code (complex) | Validates EAN codes (includes EAN-8, EAN-13, EAN-14, ITF-14, EAN-18, and EAN-128). | Free |
+| Cleanse EAN Code (simple) | Validates EAN-13 codes. | Free |
+| Cleanse Email | Validates and cleanses email addresses. | Free |
+| Cleanse VAT Number GB | Validates British VAT numbers. | Free |
+
+### United States of America
+| Component name | Description | Availability |
+|----------------|-------------|--------------|
+| Address Identifier US (step) | Cleanses, standardizes, and enriches US addresses. | Contact us |
+| Address Quick Search US | Proposes addresses based on the input string containing incomplete parts of an address. | Contact us |
+| Cleanse Company Name US (simple) | Cleanses US company names and searches for legal elements. | Free |
+| Cleanse EIN and ITIN US | Validates and cleanses US Employer Identification Number (EIN) and Individual Taxpayer Identification Number (ITIN). | Free |
+| Cleanse Person Name US | Verifies a person's name, determines gender, and splits name into separate columns. | Free |
+| Cleanse Phone Number US (complex) | Cleanses US phone numbers and can also cleanse foreign numbers. | Free |
+| Cleanse Phone Number US (simple) | Cleanses US phone numbers. | Free |
+| Cleanse Social Security Number US | Validates US Social Security Numbers (SSN). | Free |
+| Mask Address US | Masks US addresses in a smart way while preserving validity and cross-validity. | Contact us |
+| Mask Company Name US | Masks US company names. | Contact us |
+| Mask Person Name US | Masks a person's name using translation lookup files or transliteration. | Contact us |
+| Mask Phone Number US | Masks US phone numbers using seed tables. | Contact us |
+| Mask Social Security Number US | Masks US SSN using seed tables. | |

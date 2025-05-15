@@ -1,0 +1,34 @@
+# Connect to Ataccama ONE Platform
+
+Connecting ONE Desktop to Ataccama ONE Platform allows you to explore and modify metadata, combine data into virtual catalog items, and create complex data quality rules. Follow the steps below to establish the connection.
+
+## Prerequisites
+
+Before you begin, ensure the following:
+
+1. ONE Desktop and Ataccama ONE are set up, running, and reachable from the server where ONE Desktop is available.
+2. The versions of ONE Desktop and Ataccama ONE are the same.
+
+## Create a New Connection
+
+1. In ONE Explorer, select "Create a new server."
+2. If adding a second ONE server, right-click "Servers" in File Explorer > Servers and choose "New > ONE Platform."
+3. Provide a name for the server (Name) and the URL of your Ataccama ONE Platform (URL).
+4. Select an authentication option and configure it.
+    - We recommend using OpenID Connect over Basic authentication for added security.
+    - Provide your username and password for OpenID Connect.
+    - If using OpenID Connect via Web Browser, select "Login" and follow the prompts in your web browser.
+5. Test the connection. If successful, select "Finish."
+
+Your NEW_ATACCAMA_SERVER now appears in ONE Explorer. To establish a connection, select "Connect."
+
+## Manual Server Configuration
+
+If you encounter issues connecting to your server, try manual server configuration:
+
+1. In the server configuration dialog, select "Next" and enter the following information:
+    - ONE URL, authentication option, and required credentials.
+    - GraphQL URL and IP address for MMM.
+    - DPM Admin Console URL, gRPC Host, Port, TLS, and Public Key for Data Processing.
+
+After completing the manual server configuration, save and close the editor. To establish a connection, select "Connect.".

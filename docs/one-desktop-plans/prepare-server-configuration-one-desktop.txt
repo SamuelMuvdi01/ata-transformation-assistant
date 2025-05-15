@@ -1,0 +1,26 @@
+# Prepare Server Configuration
+
+The ONE Runtime Server uses a server configuration XML file for settings. The structure of the server configuration file is defined by the runtime configuration. The Server Configuration Editor in ONE Desktop allows you to edit the server configuration file directly.
+
+## Edit Server Configuration File
+
+1. Right-click a file with a .serverConfig extension and select Open with > Server Configuration Editor or double-click the file name.
+2. Define the following attributes in the Server Config Bean node:
+   - Port
+   - Runtime Configuration file
+   - Server components (as needed)
+   - Temporary folders (if necessary)
+3. Save changes and close the editor.
+
+## Server Components
+
+1. Open the server configuration file in the editor and select the Server Components node in the property tree.
+2. To add a component, navigate to the Server Components node and select Add. Choose the component from the list and confirm.
+3. To remove a component, right-click the component in the property tree and choose Delete.
+4. To configure a component, select the component name in the property tree and define the component attributes in the panel on the right.
+
+## Create Server Configuration File
+
+1. In the File Explorer, right-click a folder and choose New > Server Configuration.
+2. Specify the file Name and select the components you want to use.
+3. Select Finish.

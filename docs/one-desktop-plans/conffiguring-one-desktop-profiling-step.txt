@@ -1,0 +1,39 @@
+# Configure the Profiling Step
+
+When creating a profile using a plan, a Profiling step appears on the canvas connected to a data source. Follow the steps below to configure the Profiling step.
+
+## General Settings
+1. Open the Profiling Step Editor.
+2. Configure settings on the Basic tab, such as step name, output file name, location, and default locale for generated files.
+3. On the Masks tab, create or edit masks to show data patterns instead of content. You can assign these masks to your data columns on the Data tab.
+
+## Drill-through
+1. On the Drill-through tab, configure drill-through functionality. Enable it to inspect individual records that make up the statistics shown in the Profile Viewer.
+2. Specify the database name, optional table prefix, and display limit (optional) to save space for large inputs.
+
+## Foreign Keys
+1. To create a foreign key analysis, select the + sign on the Foreign keys tab.
+2. Enter input names and columns for analysis.
+
+## Input Category
+1. Add a new input to the Profiling step using the folder icon with a yellow + sign above the category list.
+2. Configure data, dependencies (optional), roll ups (optional), business rules (optional), and primary keys (optional) on the corresponding tabs.
+
+### Data
+- Specify column names or expressions, data types, and masks.
+- Configure frequency analysis using discrete, range, or group size settings.
+- Specify the locale for each column and add comments for future reference.
+
+### Dependencies
+- Use the Dependencies tab to define dependencies between determinant(s) and dependent(s) expressing how often they co-occur.
+
+### Roll Ups
+Create separate profile analyses for each value of a specific subset of data.
+
+### Business Rules
+- Define Boolean expressions, which evaluate true or false.
+- Analyze the results to identify domain rules combined with specified thresholds.
+
+### Primary Keys
+- Analyze the uniqueness of a column and determine if it's a primary key.
+- Configure Business Domain Analysis using strict and loose thresholds to display domain matches in the profile results.

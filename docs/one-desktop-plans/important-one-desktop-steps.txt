@@ -1,0 +1,40 @@
+# Frequently Used Steps
+
+## Flow Control Steps
+| Icon | Step Name | Step Description |
+|------|-----------|------------------|
+| Condition step | Condition | Directs data flow. True (right), False (left). |
+| Filter step | Filter | Directs data flow. True (all data). |
+| Extract Filter step | Extract Filter | Directs data flow. True (right), all (left). |
+| Multiplicator step | Multiplicator | Multiplies data flow without modification. |
+| Trash step | Trash | Discards data flow. |
+| Join step | Join | An SQL table join. |
+| Union step | Union | An SQL table union. |
+| Union Same step | Union Same | Like Union, but applies only if the flows are the same. |
+
+## Data Parsing Steps
+| Icon | Step Name | Step Description |
+|------|-----------|------------------|
+| Regex Matching step | Regex Matching | Parses the input string based on a regular expression. |
+| Pattern Parser step | Pattern Parser | Parses the input text based on provided patterns. Defines all components and optional validations against dictionaries. |
+| Guess Name Surname step | Guess Name Surname | A "predefined" version of Generic Parser used for parsing names. |
+| Strip Titles step | Strip Titles | Extracts strings found in the dictionary from the input. |
+| Apply Replacements step | Apply Replacements | Replaces values found in the input with their standardized value. |
+| Lookup step | Lookup | Lookup and validation against a dictionary. |
+
+## Analysis Steps
+| Icon | Step Name | Step Description |
+|------|-----------|------------------|
+| Profiling step | Profiling | Comprehensive analysis written to a file (.profile). |
+| Character Group Analyzer step | Character Group Analyzer | Calculates masks (digit to #, letter to A). |
+| Word Analyzer | Word Analyzer | Substitutes words found in reference dictionaries by symbols. |
+| Relation Analysis step | Relation Analysis | Calculates the number of missing foreign keys for two source flows. |
+| Data Quality Indicator | Data Quality Indicator | Calculates statistics for a given set of business rules. Adds a set of Boolean flags to each record. |
+
+## Match and Merge Steps
+| Icon | Step Name | Step Description |
+|------|-----------|------------------|
+| Unification step | Unification | Assigns group IDs (client, candidate, unification roles). Can perform an incremental process using the repository. |
+| Representative Creator step | Representative Creator | Creates a new record from the defined group (records already have group IDs). Can add calculated values into the original data flow. |
+| Simple Group Classifier step | Simple Group Classifier | Calculates the quality of groups (A - for automatic processing, U - unique, M - for manual processing, C - for additional data cleansing). |
+| Unification Extended step | Unification Extended | Can run the match process in mixed mode - online and batch in parallel. |

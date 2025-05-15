@@ -1,0 +1,63 @@
+# Data Quality Results Steps
+
+## Prerequisites:
+- Connection to ONE Ataccama Platform set up and running.
+- Input data.
+- Add an input with the data for which you want to retrieve results.
+- Use the ONE Metadata Reader step, or create a Join step and create a connection with other input steps.
+
+## DQ Attribute Aggregation Results
+- Returns results of certain DQ aggregations for attributes.
+- Step Description:
+  - Input: Attribute ID (required), Catalog Item ID (required), Aggregation ID.
+  - Optional: Limit, Time Range From, and Time Range To.
+
+## DQ Catalog Item Aggregation Results
+- Returns results of DQ aggregations for a catalog item.
+- Step Description:
+  - Input: Catalog Item ID (required), Aggregation ID.
+  - Optional: Limit, Time Range From, and Time Range To.
+
+## DQ Rule Instance Results
+- Returns results of DQ rule instances and explanations for invalidity.
+- Step Description:
+  - Input: Attribute ID (required), Catalog Item ID (required), Rule ID.
+  - Optional: Limit, Time Range From, and Time Range To.
+  - Default outputs: partition information, explanations for invalidity, and results (count).
+
+## DQ Term Aggregation Results
+- Returns aggregated DQ results for an entire term.
+- Step Description:
+  - Input: Term ID (required), At.
+  - Description: All runs after the specified moment of interest are excluded from the aggregation.
+
+## DQ Term Attribute Aggregation Results
+- Returns results of term aggregation for an attribute.
+- Step Description:
+  - Input: Term ID (required), Attribute ID (required).
+  - Optional: Limit, Time Range From, and Time Range To.
+  - Default outputs: partition information and results.
+
+## DQ Monitoring Project Aggregation Results
+- Returns results of certain aggregations (custom, catalog item level, attribute level).
+- Step Description:
+  - Input: Monitoring Project ID (required), Catalog Item ID (required), Aggregation ID (required).
+  - Optional: Limit, Time Range From, and Time Range To.
+
+## DQ Monitoring Project Check Results
+- Returns results of certain aggregations (custom, catalog item level, attribute level).
+- Step Description:
+  - Input: Monitoring Project ID (required), Catalog Item ID (required), DQ Check ID (required).
+  - Optional: Limit, Time Range From, and Time Range To.
+  - Default outputs: alerts, explanations for invalidity, and results.
+
+## DQ Monitoring Project Filter Values
+- Returns data values of filter attributes.
+- Step Description:
+  - Input: Monitoring Project Processing ID (required), Catalog Item ID (required).
+
+## DQ Monitoring Project Results
+- Returns project validity results over time, aggregated over all catalog items in the monitoring project.
+- Step Description:
+  - Input: Monitoring Project ID (required).
+  - Optional: Limit, Time Range From, and Time Range To.

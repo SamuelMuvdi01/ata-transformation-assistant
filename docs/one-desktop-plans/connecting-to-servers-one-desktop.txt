@@ -1,0 +1,46 @@
+Connecting to Servers
+Ataccama solutions use servers for communication and execution. These guides provide detailed instructions for connecting to various types of servers, including Amazon S3, Google Cloud Storage, JMS, Kafka, and others. Follow these steps to find and configure your server connections in ONE Desktop:
+
+Connecting to Servers
+
+In ONE Desktop, right-click the "Servers" node in the File Explorer and select "New Server."
+
+Choose the appropriate implementation from the dropdown list.
+
+Configure the server connection based on your server implementation.
+
+Implementations
+Generic Implementation
+Use this implementation to connect to RDM or DQIT web application, and specify generic URL resources.
+
+Amazon S3 Server Connection
+
+To connect to Amazon S3, select the Amazon S3 implementation.
+
+Configure the server encryption, URL, access key, and secret key.
+
+Google Cloud Storage Server Connection
+
+To connect to Google Cloud Storage, select the Google Cloud Storage implementation.
+
+Configure the project ID, bucket URI, and key file location.
+
+JMS Implementation
+
+To connect to JMS server, select the JMS implementation.
+
+Configure the connection factory, user, password, and properties.
+
+Kafka Implementation
+
+To connect to Kafka server, select the Kafka implementation.
+
+Configure the connection string, properties, schema registry, and schema registry properties.
+
+SMTP Implementation
+
+To connect to an SMTP server, select the SMTP implementation.
+
+Configure the host, port, user, and password.
+
+Follow these step-by-step guides for each server implementation to connect your system to Ataccama solutions and start working with your data.

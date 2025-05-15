@@ -1,0 +1,26 @@
+# Import Terms from ONE Desktop to ONE
+
+ONE Desktop allows you to batch import terms into ONE, which is particularly useful when you have predefined terms outside of ONE. Follow these steps to import terms from a CSV file into your ONE instance using Text File Reader and ONE Metadata Writer steps.
+
+## Prerequisites
+
+1. Connect to ONE. See "Connect to Ataccama ONE Platform."
+2. Prepare your CSV file with terms containing the Name, Abbreviation, and Definition columns.
+
+## Create a New Plan and Configure ONE Metadata Writer
+
+1. Create a new plan.
+2. Drag and drop your CSV file to the plan to create a Text File Reader step.
+3. Add a new ONE Metadata Writer step and configure it:
+    - Select your ONE Platform Server, Entity Type (businessTerm), Workflow State (draft or published), Parent Type, and Parent Property.
+    - Add columns with parameters Name and Expression from your CSV file.
+4. Define additional columns if needed and provide a Created Id Column Name for future reference.
+
+## Track Import Success and Store IDs
+
+1. Add an Output step connected to the recovery_audit output of ONE Metadata Writer.
+2. In the Output step, ensure "Write All Columns" is checked to track the import success and store IDs of new terms.
+
+## Run the Plan and Review Imported Terms
+
+Run the plan to import the terms from your CSV file to ONE. Review imported terms and the output text file containing all output columns from the recovery_audit output.

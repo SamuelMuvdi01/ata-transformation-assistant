@@ -1,0 +1,38 @@
+# Component Rules in ONE Desktop
+
+Component rules in ONE Desktop can be used for complex data validation tasks that require more advanced rule logic than what is supported in Ataccama ONE. Follow these steps to create a component rule:
+
+## Requirements for Component Rules
+
+- The total number of input records must match the total number of output records in the component.
+- The order of output records must match the order of input records.
+
+## Prerequisites
+
+- Connect ONE Desktop to Ataccama ONE Platform Server.
+- Create a component rule in ONE.
+
+## Create a Component Rule
+
+1. In ONE Desktop, navigate to the ONE Metadata Explorer tab.
+2. Select the created component in ONE (e.g., "Email Check").
+3. Right-click the component and select "Edit Component."
+4. In the Component Editor, implement the validation logic for your component.
+5. Save your changes.
+
+## Score the Records
+
+To score invalid records by severity:
+
+1. Add the "Score Column Assigner" step to the plan. This adds an output column to data displaying the score for each record.
+2. Double-click the "Score assigner" to open it.
+3. Provide the logic for assigning the score (e.g., if the record is invalid, the score could be 1000).
+4. Select "OK" and save your changes.
+
+## Publish the Component
+
+1. Right-click the component and select "Push Changes" to send the changes to ONE.
+2. Confirm the changes.
+3. Make the component available for use by changing its status to "Implemented." Right-click the component and select "Mark As > Implemented."
+
+By following these steps, you can create and implement component rules within ONE Desktop to enhance data validation processes.

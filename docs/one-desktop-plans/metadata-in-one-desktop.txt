@@ -1,0 +1,37 @@
+# Work with Metadata
+
+ONE Desktop uses the ONE Metadata Reader and the ONE Metadata Writer steps to read and write metadata and utilizes the ONE Metadata Explorer to browse your data. Follow these steps to connect to ONE for metadata access:
+
+## Connect to Ataccama ONE Platform
+
+Follow the steps in the "Connect to Ataccama ONE Platform" guide to connect ONE Desktop to Ataccama ONE Platform Server.
+
+## ONE Metadata Explorer
+
+By default, the ONE Metadata Explorer is set to browse Metadata. To switch to browse metametadata:
+
+1. In the ONE Metadata Explorer, select the View Menu icon.
+2. Select "Metadata Presentation" and switch to "Meta Metadata."
+
+## Search in Metadata
+
+To search in ONE metadata, use any of the following methods:
+
+1. Right-click ONE Explorer or ONE Metadata Explorer and select "Search > ONE Search."
+2. Press Ctrl+H and select "ONE Search."
+3. Enter the whole name or a part of a ONE Metadata item property.
+4. Select the entity types you want to search for.
+5. Optionally, limit the search to the selected entity property or search in all properties.
+6. After selecting "Search," the search results appear on the Search tab.
+
+## Using Filter Query in ONE Metadata Reader Step
+
+Double-click "ONE Metadata Reader" step and select "Filter." Enter your filter using AQL search expressions.
+
+For example, to search for a specific item identifier:
+
+AQL Search
+onetome:`
+ {
+    $id = '813adb4c-7746-49ce-gv46-a00d2454432e' }
+` .copy

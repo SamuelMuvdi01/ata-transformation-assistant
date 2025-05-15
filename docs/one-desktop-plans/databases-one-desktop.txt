@@ -1,0 +1,33 @@
+# Databases
+
+Ataccama solutions use databases as data sources and repositories for storing data. You can create profiles based on data stored in databases.
+
+## Connect to a Database
+
+1. Right-click the Databases node in the File Explorer and select New Database Connection.
+2. Configure the connection and select the environment in which to create the connection.
+
+## Set Additional JDBC Properties
+
+1. To set additional JDBC properties, select Edit Driver Properties.
+2. Specify the name of the JDBC property, type, and value or filename.
+
+## View Table Properties
+
+Select the table name in the Databases node to display the table metadata in the Properties tab.
+
+## Execute SQL Queries
+
+1. Double-click a table in the Databases node to display a default SQL query.
+2. Change the query as needed and select Execute to display the results.
+
+## Install Database Connectivity Drivers
+
+1. Download and extract the required driver (usually as an archive) to a desired location.
+2. Go to Window > Preferences > [your product] > Database.
+3. Add or edit a database driver, providing the necessary information (driver name, URL hint, driver class, driver classpath).
+
+## Troubleshoot Connections
+
+- Amazon Redshift driver buffer size defaults to 2 GB. Decrease the size using the fetchRingBufferSize parameter in the connection string to save process memory and prevent memory issues: `jdbc:redshift://redshiftdb.com:5439/dev;fetchRingBufferSize=1M`.
+- Increase the maximum memory size of ONE Desktop for data-intensive queries.

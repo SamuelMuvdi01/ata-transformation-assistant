@@ -1,0 +1,37 @@
+# Nested Components
+Nested components are complex components that use multiple component files to define sophisticated logic in a single entity. These components allow you to use predefined components to clean, filter, or standardize data while keeping the original data intact.
+
+## Create a Nested Component
+### Example 1: Prerequisites
+1. Create a virtual catalog item based on an email address catalog item.
+2. Install the component you want to use (in this example, ___email_complex.comp).
+3. Ensure you are working in the correct environment (configure an environment compatible with ONE Platform).
+
+### Import Component Files
+1. In ONE Explorer > Components, right-click the component name and select Import Files.
+2. Navigate to DQ Projects/___email_complex/components and select ___email_complex.comp.
+3. Import the files found in the following locations as well: DQ Projects/___email_complex/components/data/ext/build, DQ Projects/___email_complex/components/data/ext/lkp, and DQ Projects/___email_complex/components/data/ext/src.
+4. Confirm importing external files to the virtual catalog item.
+
+### Adding and Connecting the Component
+1. From ONE Explorer > Components > vci_test > componentFiles, drag ___email_complex.comp to the canvas of the virtual catalog item.
+2. Connect the component to existing Catalog Item Reader and Integration Output steps.
+
+### Mapping Columns
+1. Double-click the component name and go to the Columns tab.
+2. Map the component columns, for example, in_email: emailaddress and out_email: emailaddress.
+
+### Updating Paths in Component Steps
+1. Update the paths in the steps used in the component as needed.
+2. Repeat this process for any affected steps until there are no errors reported for the component in the Status panel > Properties.
+
+### Publishing the Nested Component
+1. Right-click the vci_test component in ONE Explorer > Components.
+2. Select Publish and set the component state to Implemented.
+3. Click Publish.
+
+## Importing a Nested Component to ONE
+1. Drag a component from File Explorer to any ONE component in ONE Explorer.
+2. Review and import the related external files as needed.
+3. To import nested components, drag them directly onto a ONE component canvas area and save changes by selecting Publish.
+4. All paths in the component are converted to relative paths when the component is published.

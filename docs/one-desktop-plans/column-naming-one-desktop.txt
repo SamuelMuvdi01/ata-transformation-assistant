@@ -1,0 +1,62 @@
+# Column Naming Conventions in ONE Desktop
+
+## General Rules
+    - Use only lowercase letters for column names.
+    - Use prefixes to indicate the type or purpose of a column.
+    - Use suffixes for additional attributes or specific data roles.
+
+## Common Prefixes
+| Prefix | Explanation | Column Type |
+|--------|-------------|-------------|
+| src_ | Source input values; read-only attributes | Read-only columns |
+| meta_ | Source input metadata | Internal, DQ evaluation, temporary columns |
+| dec_ | Decoded source input values | Internal, DQ evaluation, temporary columns |
+| dic_ | Translated master values (from src_ columns) | Internal, DQ evaluation, temporary columns |
+| pur_ | Precleansed (operational) values | Internal, DQ evaluation, temporary columns |
+| tmp_ | Temporary columns (operational) | Internal, DQ evaluation, temporary columns |
+| pat_ | Attribute structure descriptions (patterns) | Internal, DQ evaluation, temporary columns |
+| cnt_ | Counters (operational) | Internal, DQ evaluation, temporary columns |
+| std_ | Standardized attribute values | — |
+| cio_ | Cleansed instance output (best available attribute value) | — |
+| cmo_ | Cleansed master output (result of merge process) | — |
+| out_ | Operational output (best value available for components) | — |
+| sco_ | Attribute score (0 means perfect; higher means worse quality) | Internal, DQ evaluation, temporary columns |
+| exp_ | Scoring explanation; cleansing codes per attribute | Internal, DQ evaluation, temporary columns |
+| lbl_ | Human-readable or GUI-friendly quality explanations | Internal, DQ evaluation, temporary columns |
+| sco_instance | Instance-level score (sum of attribute scores) | Internal, DQ evaluation, temporary columns |
+| exp_instance | Instance-level explanation codes (error message list) | Internal, DQ evaluation, temporary columns |
+| mat_ | Matching attribute values | Internal, DQ evaluation, temporary columns |
+| uni_can_id | Candidate group ID for matching attributes | Matching attributes |
+| uni_can_id_old | Previous candidate group ID (last unification) | Matching attributes |
+| uni_mat_id | Matching group ID (formerly "client group") | Matching attributes |
+| uni_mat_id_old | Previous matching group ID (last unification) | Matching attributes |
+| uni_role / uni_instance_role | Instance unification role | Matching attributes |
+| uni_msr_role | Merge survivor record role | Matching attributes |
+| uni_rule_name | Name of the applied unification rule | Matching attributes |
+| uni_grp_can_role | Group unification role for candidate group (A, C, M, U) | Matching attributes |
+| uni_grp_mat_role | Group unification role for matching group | Matching attributes |
+
+## Common Suffixes
+| Suffix | Explanation |
+|--------|-------------|
+| xxx_rpl | Replacement data |
+| xxx_pat | Parsing data |
+| xxx_id | Attribute identifiers |
+| xxx_orig | Original values found during parsing (e.g., pur_first_name_orig) |
+
+## Obsolete or Rarely Used Prefixes
+
+| Prefix | Explanation |
+|--------|-------------|
+| cyr_ | Analysis of Cyrillic characters (operation) |
+| lat_ | Analysis of Latin characters (operation) |
+| length_ | Attribute length analysis (operation) |
+| char_ | Attribute character analysis (operation) |
+| word_ | Attribute word analysis (operation) |
+| qma_ | Attribute quality mark (ABCDX scale) (operation) |
+| qme_ | Entity quality mark (ABCDX scale) (operation) |
+| uir_ | Address lookup file data (operation) |
+| rpl_can_ | Replacement candidates (incorrect data) |
+| bin_ | Dust bin for text waste (operation) |
+| pri_ | Primary unification (operation) |
+| sec_ | Secondary unification (operation) |

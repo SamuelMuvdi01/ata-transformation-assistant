@@ -1,0 +1,39 @@
+Debugging Expressions and Steps
+Debugging a Function (Expression)
+
+Debugging a function is demonstrated using Business Rules in the Profiling step.
+
+To debug the function (expression), select Debug and use the Expression Debugger.
+
+In the Expression Debugger:
+Edit the expression in the top section.
+Enter data next to the column name.
+Click Evaluate to see the result.
+The Expression Tree on the right shows transformation steps and the result of each transformation.
+
+Debugging a Regular Expression
+
+Debugging regular expressions is done in the Regex Matching step.
+
+Select the regular expression in the navigation panel of the Properties of Regex Matching dialog, then select Debug next to the Pattern field.
+
+In the Regular Expression Debugger:
+Enter text in the Input Text field.
+Press Evaluate to see the substitution options and their results.
+Edit the regular expression if needed and repeat the evaluation process.
+
+Debugging a Step
+
+When a step contains multiple transformations (regular expressions or functions), debug the step as a whole to view how output column values are affected.
+
+Right-click the step and select Debug to open the Step Debugger.
+
+The Step Debugger is divided into in and out sections, both listing the same columns.
+
+Filter out the columns you want to see in the input and output areas by clicking Filter Columns (1).
+
+Use the Filter feature to select specific columns.
+
+To test expressions on real data, right-click the in area and select Import Data:
+Locate the input data file and select OK.
+The table is populated with the first 500 rows of data from the selected file.
