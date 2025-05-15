@@ -12,7 +12,7 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
 # Streamlit setup
-st.set_page_config(page_title="Ata-transform-bot")
+st.set_page_config(page_title="Ata-transform", page_icon = "/images/ataccama_logo.png")
 st.title("Welcome to Ataccama's Transformation Assistant Bot")
 
 # -------- Cached data loader and vector store builder --------
