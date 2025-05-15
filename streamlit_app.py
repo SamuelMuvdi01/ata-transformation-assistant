@@ -75,14 +75,14 @@ if "messages" not in st.session_state:
     st.session_state.messages = [
         {
             "role": "system",
-            "content": "You are an expert in Ataccama data transformation logic. Respond clearly and helpfully."
+            "content": "You are Ata-Cat bot, an expert in Ataccama data transformation logic. Respond clearly and helpfully."
         }
     ]
 
 if "plan_type" not in st.session_state:
     st.session_state.plan_type = None
 
-st.write("Let's start building! What can we help you build today?")
+st.write("Hi! I'm Ata-cat bot. What can I help you build today?")
 user_request = st.chat_input("Please enter a transformation plan request")
 
 # Load retrievers
