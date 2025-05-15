@@ -1,8 +1,5 @@
 import streamlit as st
 from openai import OpenAI
-from bs4 import BeautifulSoup
-import requests as req
-import pandas as pd
 import os
 
 from langchain.chains import RetrievalQA
@@ -11,16 +8,13 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
-
-
 # Streamlit setup
-st.set_page_config(page_title="Ata-transform", page_icon = "images/ataccama_logo.png")
+st.set_page_config(page_title="Ata-transform", page_icon="images/ataccama_logo.png")
 st.title("Welcome to :violet[Ataccama's] Transformation Assistant Bot")
 
 # -------- Cached data loader and vector store builder --------
 @st.cache_resource
 def load_vectorstores():
-    """Load documents and build vector store for both WebApp and Desktop plans."""
     def load_and_chunk(directory):
         documents = []
         for file in os.listdir(directory):
@@ -30,19 +24,15 @@ def load_vectorstores():
                 documents.extend(loader.load())
         splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)
         return splitter.split_documents(documents)
-    
-    # Load Desktop and WebApp plan documents
+
     desktop_chunks = load_and_chunk("docs/one-desktop-plans")
     webapp_chunks = load_and_chunk("docs/webapp-transformation-plans")
-    
-    # Create embeddings
+
     embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
 
-    # Create and save vector stores for each plan type
     desktop_db = FAISS.from_documents(desktop_chunks, embeddings)
     webapp_db = FAISS.from_documents(webapp_chunks, embeddings)
 
-    # Save local vector index for each plan type
     desktop_db.save_local("vector_index_chunks_desktop")
     webapp_db.save_local("vector_index_chunks_webapp")
 
@@ -58,7 +48,6 @@ def get_openrouter_client():
 
 def query_openrouter(messages):
     client = get_openrouter_client()
-
     completion = client.chat.completions.create(
         model="mistralai/mistral-7b-instruct:free",
         messages=messages,
@@ -67,46 +56,46 @@ def query_openrouter(messages):
             "X-Title": "Ata-transform-bot",
         },
     )
-
     return completion.choices[0].message.content
 
 # -------- UI Logic --------
-
-# Initialize session state
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {
             "role": "system",
-            "content": "You are Ata-Cat, an expert in Ataccama data transformation logic. Respond clearly and helpfully."
+            "content": "You are Ata-Cat, an expert in Ataccama data transformation logic. Respond clearly and helpfully, and sound conversational and friendly."
         }
     ]
 
 if "plan_type" not in st.session_state:
     st.session_state.plan_type = None
 
-st.write("Hi! I'm :violet[Ata-cat]. What can I help you build today?")
-user_request = st.chat_input("Please enter a transformation plan request")
+if "pending_request" not in st.session_state:
+    st.session_state.pending_request = None
 
-# Load retrievers
 desktop_retriever, webapp_retriever = load_vectorstores()
 
-# Plan detection and persistence
-def detect_plan_type(user_input):
-    input_lower = user_input.lower()
-    if "desktop" in input_lower or "one desktop" in input_lower:
+# Detect greeting or casual input
+def is_smalltalk(text):
+    greetings = ["hi", "hello", "hey", "how are you", "good morning", "good afternoon", "what's up"]
+    return any(phrase in text.lower() for phrase in greetings)
+
+def detect_plan_type(text):
+    text = text.lower()
+    if "desktop" in text or "one desktop" in text:
         return "desktop"
-    elif "webapp" in input_lower or "transformation plan" in input_lower:
+    elif "webapp" in text or "transformation plan" in text:
         return "webapp"
     return None
 
 def get_contextual_docs(user_input):
     detected = detect_plan_type(user_input)
 
-    # If user clearly specified a plan type, update the session
+    # Update plan type if specified
     if detected:
         st.session_state.plan_type = detected
 
-    # Use session-stored plan type to retrieve docs
+    # Use session-stored plan type to fetch docs
     if st.session_state.plan_type == "desktop":
         return desktop_retriever.get_relevant_documents(user_input), "desktop"
     elif st.session_state.plan_type == "webapp":
@@ -114,38 +103,46 @@ def get_contextual_docs(user_input):
     else:
         return [], "ambiguous"
 
-# Main interaction loop
+# Prompt input
+st.write("Hi! I'm :violet[Ata-cat]. What can I help you build today?")
+user_request = st.chat_input("Type your question or say hello...")
+
+# Main interaction logic
 if user_request:
-    try:
+    # Smalltalk/greeting response
+    if is_smalltalk(user_request):
+        reply = "Hi there! 😊 I'm here to help with any Ataccama transformation plan questions. Just let me know what you're working on!"
+        st.session_state.messages.append({"role": "assistant", "content": reply})
+        st.write(reply)
+
+    # Handle transformation-related input
+    else:
         context_docs, context_type = get_contextual_docs(user_request)
 
-        if st.session_state.plan_type is None:
-            clarification_msg = (
-                "Are you referring to a **ONE Desktop plan** or a **WebApp transformation plan**? "
-                "Please clarify so I can retrieve the correct documentation context."
-            )
-            st.session_state.messages.append({"role": "assistant", "content": clarification_msg})
-            st.write(clarification_msg)
+        if context_type == "ambiguous" and st.session_state.plan_type is None:
+            st.session_state.pending_request = user_request  # Save it to process later
+            ask = "Got it! Just to help me retrieve the right info: is this for a **ONE Desktop** plan or a **WebApp transformation** plan?"
+            st.session_state.messages.append({"role": "assistant", "content": ask})
+            st.write(ask)
         else:
+            actual_request = user_request if st.session_state.pending_request is None else st.session_state.pending_request
+            st.session_state.pending_request = None  # clear it now that we have context
+
             context = "\n\n".join([doc.page_content for doc in context_docs[:2]])
             enriched_user_input = (
                 f"The user is asking about a {st.session_state.plan_type.upper()} plan.\n\n"
                 f"Here is some documentation context:\n{context}\n\n"
-                f"User's question:\n{user_request}"
+                f"User's question:\n{actual_request}"
             )
 
             st.session_state.messages.append({"role": "user", "content": enriched_user_input})
 
-            with st.spinner("Querying OpenRouter..."):
+            with st.spinner("Let me check the docs for you..."):
                 response = query_openrouter(st.session_state.messages)
                 st.session_state.messages.append({"role": "assistant", "content": response})
                 st.write(response)
 
-    except Exception as e:
-        st.error("Something went wrong with the OpenRouter request.")
-        st.exception(e)
-
-# Optional: display chat history in UI
+# Show conversation history
 with st.expander("Conversation history"):
     for msg in st.session_state.messages:
         if msg["role"] != "system":
