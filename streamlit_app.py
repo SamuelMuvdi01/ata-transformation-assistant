@@ -11,9 +11,11 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 
+
+
 # Streamlit setup
 st.set_page_config(page_title="Ata-transform", page_icon = "images/ataccama_logo.png")
-st.title("Welcome to Ataccama's Transformation Assistant Bot")
+st.title("Welcome to :violet[Ataccama's] Transformation Assistant Bot")
 
 # -------- Cached data loader and vector store builder --------
 @st.cache_resource
@@ -75,14 +77,14 @@ if "messages" not in st.session_state:
     st.session_state.messages = [
         {
             "role": "system",
-            "content": "You are Ata-Cat bot, an expert in Ataccama data transformation logic. Respond clearly and helpfully."
+            "content": "You are Ata-Cat, an expert in Ataccama data transformation logic. Respond clearly and helpfully."
         }
     ]
 
 if "plan_type" not in st.session_state:
     st.session_state.plan_type = None
 
-st.write("Hi! I'm Ata-cat bot. What can I help you build today?")
+st.write("Hi! I'm :violet[Ata-cat]. What can I help you build today?")
 user_request = st.chat_input("Please enter a transformation plan request")
 
 # Load retrievers
