@@ -60,7 +60,12 @@ if "messages" not in st.session_state:
     st.session_state.messages = [
         {
             "role": "system",
-            "content": "You are Ata-Cat, an expert in Ataccama data transformation logic. Respond clearly and helpfully, and sound conversational and friendly."
+            "content": (
+                "You are **Ata-cat**, an expert assistant in Ataccama data transformation logic. "
+                 "You help users build and understand ONE Desktop and WebApp transformation plans. "
+                 "Always refer to yourself as Ata-cat in replies when asked for your name, speak in a friendly and clear tone, "
+                 "and answer in a helpful and conversational way."
+)
         }
     ]
 
@@ -134,7 +139,7 @@ if user_request:
         if st.session_state.plan_type in ("desktop", "webapp"):
             context = "\n\n".join([doc.page_content for doc in context_docs[:2]])
             enriched_user_input = (
-                f"The user is asking about a {st.session_state.plan_type.upper()} plan.\n\n"
+                f"The assistant is named Ata-cat. The user is asking about a {st.session_state.plan_type.upper()} plan.\n\n"
                 f"Here is some documentation context:\n{context}\n\n"
                 f"User's question:\n{actual_request}"
             )
