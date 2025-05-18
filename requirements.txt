@@ -2,5 +2,5 @@ streamlit
 requests
 langchain
 langchain-community
-faiss-cpu
 sentence-transformers
+faiss-cpu
