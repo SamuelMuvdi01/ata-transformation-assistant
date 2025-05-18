@@ -1,0 +1,40 @@
+### representative_creator
+
+--- HTML Summary ---
+Summary
+Configuration diagram
+References
+Algorithms
+personnel (Text File Reader)
+
+--- XML Summary ---
+<configDoc date='2025-05-14 01:16:49', fileName='representative_creator.plan', runtimeVersion='15.2.0.240425-7925-ed10bffb', cfgFilePath='workspace://Training (2)/Training_commented/plans/representative_creator.plan', screen='images/screen_representative_creator.plan.png', companyImage='images/logo_about.png', version='1.0'>
+<generatorMeta date='2025-05-14 01:16:57', about='{1}  Version: {4}  Runtime: {5}  Build: {6}   Copyright © 2002-{3} {2}. All rights reserved.  Your use of the product is subject to the {0} end user license agreement.', name='Ataccama ONE Desktop', company='Ataccama Corporation'>
+<configAlg image='images/TextFileReader.large.png', name='personnel (Text File Reader)', class='com.ataccama.dqc.tasks.io.text.read.TextFileReader'>
+<properties lineMaxReadLength='65536', fileName='../data/in/personnel.csv', fieldSeparator=',', stringQualifierEscape='', numberOfLinesInFooter='0', compression='NONE', encoding='ISO-8859-1', lineSeparator='\r\n', stringQualifier='', numberOfLinesInHeader='1'>
+<columns >
+<textReaderColumn name='ser_customer_id', ignore='false', type='INTEGER'>
+<dataFormatParameters decimalSeparator='.', thousandsSeparator=','>
+<textReaderColumn name='src_customer_name', ignore='false', type='STRING'>
+<textReaderColumn name='src_collateral_value', ignore='false', type='STRING'>
+<textReaderColumn name='src_secured_value', ignore='false', type='STRING'>
+<textReaderColumn name='src_type', ignore='false', type='INTEGER'>
+<dataFormatParameters decimalSeparator='.', thousandsSeparator=','>
+<textReaderColumn name='src_source_country', ignore='false', type='STRING'>
+<dataFormatParameters falseValue='false', dateTimeFormat='yy-MM-dd HH:mm:ss', decimalSeparator='.', dayFormat='yy-MM-dd', trueValue='true', dateFormatLocale='en_US', thousandsSeparator=''>
+<errorHandlingStrategy rejectFileName='rejected.txt'>
+<errorInstructions >
+<errorInstruction dataStrategy='READ_POSSIBLE', errorType='EXTRA_DATA', putToLog='true', putToReject='false'>
+<errorInstruction dataStrategy='STOP', errorType='LONG_LINE', putToLog='true', putToReject='true'>
+<errorInstruction dataStrategy='STOP', errorType='PROCESSING_ERROR', putToLog='true', putToReject='false'>
+<errorInstruction dataStrategy='READ_POSSIBLE', errorType='INVALID_DATE', putToLog='true', putToReject='false'>
+<errorInstruction dataStrategy='READ_POSSIBLE', errorType='SHORT_LINE', putToLog='true', putToReject='true'>
+<errorInstruction dataStrategy='NULL_VALUE', errorType='UNPARSABLE_FIELD', putToLog='true', putToReject='false'>
+<shadowColumns >
+<configAlg image='images/AlterFormat.large.png', name='Add columns (Alter Format)', class='com.ataccama.dqc.tasks.flow.AlterFormat'>
+<properties >
+<addedColumns >
+<addedColumn name='size', type='INTEGER'>
+<removedColumns >
+<configAlg image='images/RepresentativeCreator.large.png', name='Representative Creator (Representative Creator)', class='com.ataccama.dqc.tasks.identify.bob.RepresentativeCreator'>
+<properties >
