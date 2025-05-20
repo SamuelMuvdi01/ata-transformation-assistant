@@ -1,0 +1,19 @@
+{
+  "title": "Step Validate Birth Number UA",
+  "headers": [
+    "Contents:",
+    "Step Validate Birth Number UA",
+    "Properties",
+    "Endpoints",
+    "Scoring",
+    "Detailed Description",
+    "Example",
+    "Element Invalid Data Definitions",
+    "Properties",
+    "Element Invalid Data Definition",
+    "Properties",
+    "Enum Invalid Output Type",
+    "Values"
+  ],
+  "content": "This step also generates a fake birth number when the output fake binding property is set and \n            sufficient info to generate the number is present (the gender hint and date hint \n            are both connected and filled with valid values). The generated fake number consists of the date \n            part relevant to the given date hint, the gender part relevant to the given gender and the \n            'filling' character defined by the propertyFake Substitute Character.\n\nThe format of the generated fake number is the following:00000XXXGXwhere0- the date part related to the given date hint (the number of days since 1.1.1900)X- the value defined by theFake Substitute CharacterpropertyG- the gender value: 1 for male, 2 for female - related to the given gender hint\n\nNote that generated fake numbers are not valid, since it is not possible to \n                calculate the valid control digit at present and therefore make the generated number valid \n                (fulfilling the Ukrainian rule for the control digit). Also the 'filling' character\n                may have a non-numerical value and therefore break the 'numerical-digits-only' constraint."
+}

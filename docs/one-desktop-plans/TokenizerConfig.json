@@ -1,0 +1,13 @@
+{
+  "title": "Step Text Vectorizer",
+  "headers": [
+    "Contents:",
+    "Step Text Vectorizer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Tokenizer Feature Config",
+    "Properties"
+  ],
+  "content": "Uses previously created Vectorizer model to process input data."
+}

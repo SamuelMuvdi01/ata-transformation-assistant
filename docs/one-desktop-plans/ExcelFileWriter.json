@@ -1,0 +1,15 @@
+{
+  "title": "Step Excel File Writer",
+  "headers": [
+    "Contents:",
+    "Step Excel File Writer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Excel Sheet Input",
+    "Properties",
+    "Element Column Expr Def",
+    "Properties"
+  ],
+  "content": "The step is able to create or write into new Office 2007 file format (see propertyExcel 2007),\n\t\t\t\tbut the condition described inExcelFileReaderhas to be satisfied."
+}

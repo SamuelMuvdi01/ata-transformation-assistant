@@ -1,0 +1,17 @@
+{
+  "title": "Introduction to writing functions in Java",
+  "headers": [
+    "Introduction to writing functions in Java",
+    "Contents:",
+    "Introduction",
+    "Requirements",
+    "Concepts",
+    "Implementation",
+    "User functions class",
+    "Registering of the class with functions",
+    "Compilation",
+    "Plugin file",
+    "Distribution"
+  ],
+  "content": "This document briefly describes how to write new functions in Java. It is not \n     a complete guide; it only presents basic information on how to write functions.\n\nThe overloading means that a function has a name and function variants. Variants differ from\neach other by argument types and \nnumber  of types. Some types can be implicitly converted and therefore it is not necessary to write\nvariants for all required argument types. The table of implicitly convertible types is:from\\tointegerlongdoubledatetimedayintegeryyynnlongnyynndoublennynndatetimennnyndaynnnyy\n\nAn example of user functions class is:package a;\n\nimport java.math.BigDecimal;\nimport java.math.BigInteger;\nimport java.util.Date;\n\npublic class A {\n\tpublic static String func(String a, int i, Date d, boolean b, BigInteger l, BigDecimal f) {\n\t\treturn a + i + d + b + l + f;Not really helpful but it mainly shows all the usable types.}\n\tpublic static String func1(String a, String b) {\n\t\treturn a + b;\n\t}\n\tpublic static int func1(int a, int b) {\n\t\treturn a + b;\n\t}The latter two methods are two variants of one function.}\n\nAny method declared in the main class is recognized as a new expression function. Due to this fact, any auxiliary methods may produce warnings and debug messages (unconvertible return or parameter types, different method's modifiers than expected). To go around this strict behavior, put the auxiliary functions e.g. into an inner static class.\n\nBoth these java files,A.javaandPluginStartupClass.java, must be compiled to*.classfiles \nusing JDK (Java Development Kit). It's recommended to use the same version of JDK as the version of JRE (Java Runtime Environment) \non which the DQC being extended runs. Though use of a lower version is possible (>= JDK 5). Currently, JDK 6 is the best choice. \nCompilation can be done with an arbitrary Java IDE or by usingjavaccommand line utility:\n\nIn UNIX/Linux:\n\nIn Windows:"
+}

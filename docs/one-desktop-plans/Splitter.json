@@ -1,0 +1,14 @@
+{
+  "title": "Step Splitter",
+  "headers": [
+    "Contents:",
+    "Step Splitter",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Separator Config",
+    "Properties",
+    "Example"
+  ],
+  "content": "Consider the following input string:\n\nand one of the following separator configurations:\n\nBy applying these three configurations to the input string, three sets of words are created:\n\nConsider an input with the following columns and records:\n\nafter applying theSplitterstep with the configuration above, the following output is\n\t\t\tgenerated:"
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Step Normalizer Trainer",
+  "headers": [
+    "Contents:",
+    "Step Normalizer Trainer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Normalizer Feature Trainer Config",
+    "Properties",
+    "Abstract element Normalization Feature Transformation",
+    "Implementations",
+    "Element Min Max Scaling Transformation",
+    "Detailed Description",
+    "Element Standard Normalization Transformation",
+    "Detailed Description"
+  ],
+  "content": "Trains normalization model based on selected normalization type and input data.\n                If result column is filled, use trained model to normalize training data and output the normalization to output column."
+}

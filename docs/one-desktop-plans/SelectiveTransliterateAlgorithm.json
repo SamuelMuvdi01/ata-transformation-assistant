@@ -1,0 +1,13 @@
+{
+  "title": "Step Selective Transliterate",
+  "headers": [
+    "Contents:",
+    "Step Selective Transliterate",
+    "Properties",
+    "Endpoints",
+    "Scoring",
+    "Detailed Description",
+    "Example"
+  ],
+  "content": "The example above executes these transformations:abc -> xbcaabc -> xxbcThese words are not transformed:aa - too shortaab - too many replacements relative to the word lengthaaabcdefg - to many successive replacements"
+}

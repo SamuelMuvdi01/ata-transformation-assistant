@@ -1,0 +1,13 @@
+{
+  "title": "Step Imputer",
+  "headers": [
+    "Contents:",
+    "Step Imputer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Imputer Feature Config",
+    "Properties"
+  ],
+  "content": "Imputing servers for filling in missing data. These missing data are computed based on the type of imputer selcted.\n                This step loads imputers from model located in file specified by field \"model file\".\n                After loading the model, it applies the specified features on selected columns."
+}

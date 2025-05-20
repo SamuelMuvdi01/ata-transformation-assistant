@@ -1,0 +1,18 @@
+{
+  "title": "Step Jdbc Reader",
+  "headers": [
+    "Contents:",
+    "Step Jdbc Reader",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Example",
+    "Element Jdbc Reader Column",
+    "Properties",
+    "Enum Column Type",
+    "Values",
+    "Element Shadow Column Def",
+    "Properties"
+  ],
+  "content": "This step reads data records from the results of a specified query executed on a specified JDBC database table."
+}

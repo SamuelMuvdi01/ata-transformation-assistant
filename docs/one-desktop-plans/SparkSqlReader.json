@@ -1,0 +1,18 @@
+{
+  "title": "Step Spark SQL Reader",
+  "headers": [
+    "Contents:",
+    "Step Spark SQL Reader",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Example",
+    "Element Jdbc Reader Column",
+    "Properties",
+    "Enum Column Type",
+    "Values",
+    "Element Shadow Column Def",
+    "Properties"
+  ],
+  "content": "This step reads data records from the results of a specified query executed on a specified Spark SQL data source.\n\t\t\t\tAs a data source, it is using the environment which is used for running the plan.\n\nSQL Function getLatestPartition()This SQL function gets a value of the last partition in a Hive Databricks table.getLatestPartition([database,] table [, level])database: name of the database, optional, default value is defaulttable: name of the table for which it should return the partitionlevel: level of table partition, default is \"1\", i.e. the top level partitionHow to UseWhen the partition column is a type ofbigint.CREATE TABLE customers (customer_id int,customer_name string) PARTITIONED BY (load_dt bigint);\nselect * from customers where load_dt = ##getLatestPartition(default, customers)## \nwill be replaced by \nselect * from customers where load_dt = 20190101When the partition column is a type ofstring.CREATE TABLE customers (customer_id int, customer_name string) PARTITIONED BY (load_dt string);\nselect * from customers where load_dt > \"##getLatestPartition(default, prices_2019)##\"\nwill be replaced by \nselect * from customers where load_dt = \"20190101\"Two partitionsCREATE TABLE customers (customer_id int, customer_name string) PARTITIONED BY (load_dt string, load_hours string);\nselect * from customers where load_dt = \"##getLatestPartition(default, customers)##\" and load_hours = \"##getLatestPartition(default, customers, 2)##\"\nwill be replaced by \nselect * from customers where load_dt = \"20190101\" and load_hours = \"0100\"How to EnableCustom SQL query is currently considered as an experimental feature and is disabled by default. To turn on the functionality, the following property has to added to spark configuration (e.g. spark.properties file):spark.ata.enableCustomSqlTemplates=true"
+}

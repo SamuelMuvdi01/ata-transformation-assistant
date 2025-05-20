@@ -1,0 +1,15 @@
+{
+  "title": "Step Hive Writer",
+  "headers": [
+    "Contents:",
+    "Step Hive Writer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element H Catalog Column",
+    "Properties",
+    "Enum Column Type",
+    "Values"
+  ],
+  "content": "Writes the incoming data to aHivetable. The target table with appropriate schema must already exist before writing the data.In local mode, it is usingHCatalog ReaderWriterinterface.In MapReduce mode, it is usingHCatalog InputOutputinterface.In Spark mode, it is usingApache Spark SQLinterface.Use buttonCreate / Alter table...to create new or adapt an existing table for writing. After pushing this button you will be prompted to confirm the changes. If you are altering partitions of existing table the original data in this table will be deleted.Due to Hivepartition conceptthe order of columns marked as partition is important.\n\nNoteUsage of the Hortonworks Hive 3 via Spark engine is supported.When usingHiveversion of Hadoop it is not allowed to use upper case in column name.When usingDatabricksversion you can use both upper and lower cases in column names.\n\nKnown issuesIt is not possible to write into existing partitions repeatedly when running via MapReduce engine. This functionality is supported only in Local and Spark modes.Reported for local and MapReduce modes.\n\t\t\t\t\t\t\tHive throws NullPointerException in case if it encounters nulls in partition values.\n\t\t\t\t\t\t\tShould be fixed since Hive 1.2.2 and Hive 2+.HIVE-11470When using partitioning, please make sure that the values in partition do not contain empty strings.Local run is affected by this bugHIVE-10809.When running plan on local computer with Windows operating system, spaces characters in partition values are escaped whereas on other OS they aren't. It causes a problem when you want to write into one partitioned table repeatedly from two \t\tdifferent computers and one runs on Windows."
+}

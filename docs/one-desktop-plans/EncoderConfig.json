@@ -1,0 +1,13 @@
+{
+  "title": "Step One Hot Encoder",
+  "headers": [
+    "Contents:",
+    "Step One Hot Encoder",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Encoder Feature Config",
+    "Properties"
+  ],
+  "content": "Uses previously created model to encode input data."
+}

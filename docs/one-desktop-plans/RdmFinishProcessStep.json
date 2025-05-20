@@ -1,0 +1,13 @@
+{
+  "title": "Step Rdm Integration Output",
+  "headers": [
+    "Contents:",
+    "Step Rdm Integration Output",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Rdm Url Parameters Config",
+    "Properties"
+  ],
+  "content": "RDM Integration Output is used in conjunction with other RDM steps for the synchronization of RDM data with external databases in a process spanning several plans. The step reports back to RDM about the outcome of the process started\n                by RDM Integration Input.\n\nThe step has one input endpoint, which should be connected to a data source with one row that contains parameters for the step. Usually, this a text file generated in the first plan that starts the DB synchronization. In order to\n                report errors during the sychronization process, the parameters source should also contain a column containing an error message."
+}

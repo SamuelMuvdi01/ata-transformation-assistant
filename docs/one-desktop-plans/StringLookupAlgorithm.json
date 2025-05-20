@@ -1,0 +1,13 @@
+{
+  "title": "Step String Lookup",
+  "headers": [
+    "Contents:",
+    "Step String Lookup",
+    "Properties",
+    "Endpoints",
+    "Scoring",
+    "Detailed Description",
+    "Example"
+  ],
+  "content": "If the input value is found in the lookup file, the output value isnull.\n\nIf the input value is NOT found in the lookup file, the output value isnull."
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Logging",
+  "headers": [
+    "Logging",
+    "Contents:",
+    "Introduction",
+    "Configuration",
+    "StdOutLogAppenderFactory",
+    "FileLogAppenderFactory",
+    "JDKHandledLogAppenderFactory",
+    "Example"
+  ],
+  "content": "The following example shows two factories specified. One outputs all log records into four rotating text files. \n    The other one outputs all INFO, WARNING and FATAL level messages to standard output except messages fromWebConsoleComponentwhere only WARNING and FATAL messages are displayed.<loggingConfig>\n    <appenders>\n        <iLogAppenderFactory name=\"rotate\" class='com.ataccama.dqc.commons.logging.factories.JDKHandledLogAppenderFactory'>\n            <handler class='com.ataccama.dqc.commons.logging.handlers.FileHandlerInfo'>\n                <pattern>online%g.log</pattern>\n                <limit>1000000</limit>\n                <count>4</count>\n                <append>true</append>\n                <formatter class='com.ataccama.dqc.commons.logging.handlers.SimpleFormatterInfo'/>\n            </handler>\n        </iLogAppenderFactory>\n        <iLogAppenderFactory name=\"stdout\" class='com.ataccama.dqc.commons.logging.factories.StdOutLogAppenderFactory'/>\n    </appenders>\n    <loggingRules>\n        <loggingRule level=\"DEBUG\" appender=\"rotate\">\n            <trace/>\n        </loggingRule>\n        <loggingRule level=\"INFO\" appender=\"stdout\">\n            <trace/>\n        </loggingRule>\n        <loggingRule level=\"WARNING\" appender=\"stdout\">\n            <trace>\n            <string>WebConsoleComponent</string>\n            </trace>\n        </loggingRule>\n    </loggingRules>\n</loggingConfig>"
+}

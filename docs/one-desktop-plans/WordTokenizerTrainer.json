@@ -1,0 +1,11 @@
+{
+  "title": "Step Word Tokenizer Trainer",
+  "headers": [
+    "Contents:",
+    "Step Word Tokenizer Trainer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description"
+  ],
+  "content": "Step creates the model forWordTokenizer.\n\nTokens are either separated by a whitespace or by a special <SPLIT> tag. At least one <SPLIT> tag is necessary in the input stream, otherwise the model training will fail.\n\nThe following sample shows the correct input format:\n\nMore information about training can be found at OpenNLP website (http://opennlp.apache.org)."
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Step Kafka Writer",
+  "headers": [
+    "Contents:",
+    "Step Kafka Writer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Abstract element Kafka Output Format",
+    "Implementations",
+    "Element Avro File Output Format",
+    "Properties",
+    "Element Column Expr Def",
+    "Properties",
+    "Element Avro Record Output Format",
+    "Properties",
+    "Element Avro Schema Registry Output Format",
+    "Properties",
+    "Element Template Output Format",
+    "Properties",
+    "Element Kafka Property",
+    "Properties",
+    "Element Kafka Property Encrypted",
+    "Properties"
+  ],
+  "content": "Kafka Writer step publishes messages to a specified topic in Kafka. Format of the message is described by the expression template.\n\nIf the topic does not exist yet, a new one is created with 1 partition and replication factor 1. Alternatively, it is possible to create a topic with multiple partitions or multiple replicas using the \"Create topic\" button.\n\nUser can define a key for routing a message to the partitions. This key (Partition Key) is an expression. Partition is decided based on the hash of the\tcompiled key.\n\nEach Message is constructed as one Avro message, i.e. an Avro record (in binary format). The schema of each record is written directly into the specified schema registry.\n\nNote:The Kafka Writer step sets value.deserializer and value.serializer properties to ByteArraySerializer when schema registry is used. Overriding these properties will break the step."
+}

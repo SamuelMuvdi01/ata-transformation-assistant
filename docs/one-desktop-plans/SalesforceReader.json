@@ -1,0 +1,17 @@
+{
+  "title": "Step Salesforce Reader",
+  "headers": [
+    "Contents:",
+    "Step Salesforce Reader",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Salesforce Column",
+    "Properties",
+    "Element Shadow Column Def",
+    "Properties",
+    "Enum Column Type",
+    "Values"
+  ],
+  "content": "Salesforce Reader allows users to connect to the backend of all Salesforce systems. The data retrieved can then be profiled and documented.\n\nThe step can only be used if ONE Desktop is connected to a Salesforce server. It is possible to select which SObject is loaded from Salesforce, as well restrict the maximum number of records read."
+}

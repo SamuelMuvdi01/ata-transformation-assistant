@@ -1,0 +1,20 @@
+{
+  "title": "Monitoring",
+  "headers": [
+    "Monitoring",
+    "Contents:",
+    "Concept",
+    "File output format",
+    "GUI",
+    "Batch",
+    "Online server",
+    "Connection",
+    "Connection options",
+    "Filtering",
+    "Filtering options",
+    "Refresh",
+    "Snapshots",
+    "Drill down"
+  ],
+  "content": "Monitoring allows you to watch the progress of a running configuration or the state of the online server.\n\t\t\tMonitoring has objects called counters, which have the following properties:identificationvaluemax valueunit of valueThe counters create a hierarchy. The root elements are:connectionstepserver component (if connected to an online server)Under the \"connection\" root element there are counters connected to each connection:progress - the number of records that have gone through the connectionstarted - the datetime of the first recordfinished - the datetime of the closureThe format of the identification property of the connection counter is as follows:target_endpoint_name,target_algorithm_name,source_endpoint_name,source_algorithm_nameUnder the \"step\" root element there are counters and hierarchies of counters connected to steps.\n\t\t\tOnly some of the steps have counters and each step can have a different set of counters,\n\t\t\tit depends on what progress is necessary to report. The name of the step is in the identification property.\n\nThis section describes the format of the output file from theFileLoggerCompruntime component. The output file contains two types of lines:starting with *** containing either empty lines or datetimesemicolon separated lines each containing the state of one counterThe file is appended. The first line of one monitoring output is a start of the batch. For example:**** Batch started at:2007-12-07 04:45:14and the last line tells when the batch finished.\n\t\t\tThe counter line is comprised of 7 fields:datetime of reportingnumber value if the counter format is numberunit namedatetime value if the counter format is datetimemax valuepath in the hierarchycounter nameThe counters are reported in intervals set by the configuration and only counters which have values that have changed from the last reporting time are reported. \n\t\t\tAt the end the states of all counters are reported under a line containing the words \"Final state\", such as in the line below:**** Final state at: 2007-12-07 06:02:24.\n\t\t\tOutput example:**** Batch started at:2007-12-07 04:45:14\n**** \n**** 2007-12-07 04:45:14\n**** \n**** 2007-12-07 04:46:14\n2007-12-07 04:46:14;27975;record;;0;/step/input;algorithm_2\n2007-12-07 04:46:14;;date;2007-12-07 04:45:15;0;/Connection/started;in,algorithm_2,out,algorithm_1\n2007-12-07 04:46:14;28050;record;;0;/Connection/processed;in,algorithm_2,out,algorithm_1\n**** \n\n... shortened\n\n**** 2007-12-07 06:01:15\n2007-12-07 06:01:15;637809546;workunit;;666809517;/step/progress;algorithm_2\n**** \n**** 2007-12-07 06:02:15\n2007-12-07 06:02:15;664809519;workunit;;666809517;/step/progress;algorithm_2\n**** \n**** Final state at: 2007-12-07 06:02:24\n2007-12-07 06:02:24;999999;record;;0;/step/input;algorithm_2\n2007-12-07 06:02:24;154999845;workunit;;154999845;/step/progress;algorithm_2\n2007-12-07 06:02:24;;date;2007-12-07 04:45:15;0;/Connection/started;in,algorithm_2,out,algorithm_1\n2007-12-07 06:02:24;;date;2007-12-07 05:24:55;0;/Connection/finished;in,algorithm_2,out,algorithm_1\n2007-12-07 06:02:24;999999;record;;0;/Connection/processed;in,algorithm_2,out,algorithm_1\n**** Batch stopped at:2007-12-07 06:02:24"
+}

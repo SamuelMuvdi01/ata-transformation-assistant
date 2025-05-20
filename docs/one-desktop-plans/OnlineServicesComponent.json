@@ -1,0 +1,10 @@
+{
+  "title": "Online Services Component",
+  "headers": [
+    "Contents:",
+    "Online Services Component",
+    "Properties",
+    "Detailed Description"
+  ],
+  "content": "Initializes and deploys all services which should be available for online requests.\n\nThe Online Services Component requires theHttp Dispatchercomponent to be started.\n\nTo change the configuration files without the need to stop or restart the online server, add paths to the folders containing the files to theVersioned Folderssection of theVersioned File System Component.\n\nNote: it isnot recommendedfor the service to produce any outputs or to modify any files inside the versioned folders (including log files). The changes to the files in versioned folders will be lost if the server stops or the configuration changes and the service restarts. Versioned folders are useful for changes that are done outside the running server."
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Step Kafka Reader",
+  "headers": [
+    "Contents:",
+    "Step Kafka Reader",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Abstract element Kafka Input Format",
+    "Implementations",
+    "Element Avro File Input Format",
+    "Properties",
+    "Element Avro Record Input Format",
+    "Properties",
+    "Element Avro Schema Registry Input Format",
+    "Properties",
+    "Element String Input Format",
+    "Properties",
+    "Element Kafka Property",
+    "Properties",
+    "Element Kafka Property Encrypted",
+    "Properties"
+  ],
+  "content": "Kafka Reader step consumes messages from the specified Kafka topics. Consumer is identified by aGroup Idproperty. Distributed consuming is possible using the sameGroup Id.\n\nBy default, Kafka Reader has enable.auto.commit property set to true and commits read messages over time. \n\t\t\t\tAfter it has finished reading the messages, Kafka Reader step ensures that all the messages were committed.\n\t\t\t\tTo guarantee \"At Least Once\" semantics it is possible to use DQC Transactional Model.\n\t\t\t\tIn this case commit of the read messages will be done only after the whole processing has finished. \n\t\t\t\tTo enable DQC Transactional Model you will need to send the following Java property while starting plans containing Kafka Reader steps: -Dtransaction.coordinator=explicit\n\nNote:The Kafka Reader step sets value.deserializer and value.serializer properties to ByteArraySerializer when schema registry is used. Overriding these properties will break the step."
+}

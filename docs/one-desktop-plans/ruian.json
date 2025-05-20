@@ -1,0 +1,20 @@
+{
+  "title": "RUIAN",
+  "headers": [
+    "RUIAN",
+    "Contents:",
+    "Introduction",
+    "Description",
+    "Data",
+    "Usage",
+    "Full mode",
+    "Incremental mode",
+    "Maintenance",
+    "Folder layouts",
+    "Exchange data",
+    ".csv folder",
+    "Download Ruian",
+    "Update Ruian"
+  ],
+  "content": "Exchange data are delivered in the form of compressed XML files. For each snapshot there \n            exist one file for each city and one file for the whole country. Each update is delivered \n            as one file covering the whole country.\n\nThe dictionary of post offices is present in the folder in the form ofpost_office_x.zip."
+}

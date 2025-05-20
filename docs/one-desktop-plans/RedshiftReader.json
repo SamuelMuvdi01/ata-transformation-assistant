@@ -1,0 +1,17 @@
+{
+  "title": "Step Redshift Reader",
+  "headers": [
+    "Contents:",
+    "Step Redshift Reader",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Jdbc Reader Column",
+    "Properties",
+    "Enum Column Type",
+    "Values",
+    "Element Shadow Column Def",
+    "Properties"
+  ],
+  "content": "This step reads data records from the results of a specified query executed on a specified Redshift database table.\n\nIf the parameterDistributedis checked, this step loads data toAmazon S3when running on cluster\n\t\t\t\tby calling LOAD command and then reads the data from there in distributed fashion.\n\t\t\t\tData from Amazon S3 is NOT automatically deleted."
+}

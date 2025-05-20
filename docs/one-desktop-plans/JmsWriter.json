@@ -1,0 +1,16 @@
+{
+  "title": "Step Jms Writer",
+  "headers": [
+    "Contents:",
+    "Step Jms Writer",
+    "Properties",
+    "Endpoints",
+    "Scoring",
+    "Detailed Description",
+    "Enum Jms Message Model",
+    "Values",
+    "Element Message Property",
+    "Properties"
+  ],
+  "content": "Reference to JMS Server Resource inruntime configuration.\n\nJMS properties specific for Message Broker are specified there, e.g. Connection Factory class name,\n\t\t\tJNDIContextFactoryInitial, JNDIProviderURL.\n\nFormat of the message is configured by an expression template. Supports JMS message properties. Optional output passes processed records.Scorermay be configured to mark possible message transfer errors.\n\nIt is necessary to copy proper JMS MQ implementation JAR to DQC classpath, e.g.[DQC_HOME]\\runtime\\lib\\"
+}

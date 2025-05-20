@@ -1,0 +1,17 @@
+{
+  "title": "Step Character Groups Analyzer",
+  "headers": [
+    "Contents:",
+    "Step Character Groups Analyzer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Example",
+    "Element Analyzed Column",
+    "Properties",
+    "Scoring",
+    "Element Character Group",
+    "Properties"
+  ],
+  "content": "This step serves as a profiler of input characters. It classifies each character against another character (or a string) according to a character group that the original character belongs to.\n\nIt is possible to define whether a single character or a sequence of characters belonging to a single group are classified with a single character or string."
+}

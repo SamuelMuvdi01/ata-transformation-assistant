@@ -1,0 +1,16 @@
+{
+  "title": "Step Salesforce Writer",
+  "headers": [
+    "Contents:",
+    "Step Salesforce Writer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Example",
+    "Enum Operation",
+    "Values",
+    "Element Salesforce Writer Column",
+    "Properties"
+  ],
+  "content": "This step is used for modifying data in SObjects using one of the following operations:"
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Step Sort",
+  "headers": [
+    "Contents:",
+    "Step Sort",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Example",
+    "Element Order By",
+    "Properties"
+  ],
+  "content": "Sorting step that will sort according to a specified key."
+}

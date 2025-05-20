@@ -1,0 +1,11 @@
+{
+  "title": "Step Word Tokenizer",
+  "headers": [
+    "Contents:",
+    "Step Word Tokenizer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description"
+  ],
+  "content": "Step creates a new record for each word token (word, punctuation mark, abbreviation etc.)\n                in the input string.\n\nFor optimal performance, one input record should be one sentence. Prepare large documents\n                withSentenceTokenizer.\n\nOpenNLP model files are necessary for this step. Model files can be trained with theWordTokenizerTrainerstep."
+}

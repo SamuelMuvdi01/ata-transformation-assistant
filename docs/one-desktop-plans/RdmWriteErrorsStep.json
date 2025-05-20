@@ -1,0 +1,13 @@
+{
+  "title": "Step Rdm Write Errors",
+  "headers": [
+    "Contents:",
+    "Step Rdm Write Errors",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Rdm Url Parameters Config",
+    "Properties"
+  ],
+  "content": "RDM Write Errors is used in conjunction with other RDM steps for the synchronization of RDM data with external databases in a process spanning several plans. The step reports errors that occur when trying to synchronize RDM with the\n                external system.\n\nThe step expects two inputs:\n\nExample of the list of errors input:\n\nExample of the parameters input (a text file):"
+}

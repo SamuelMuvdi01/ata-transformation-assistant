@@ -1,0 +1,33 @@
+{
+  "title": "Step Spark Writer",
+  "headers": [
+    "Contents:",
+    "Step Spark Writer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Column Def",
+    "Properties",
+    "Enum Column Type",
+    "Values",
+    "Element Data Type Parameters",
+    "Properties",
+    "Element Shadow Column Def",
+    "Properties",
+    "Element Spark Option Encrypted",
+    "Properties",
+    "Element Spark Writer Bucket Options",
+    "Properties",
+    "Element Partition Column",
+    "Properties",
+    "Element Spark Writer Partition Options",
+    "Properties",
+    "Abstract element Spark Writer Save Options",
+    "Implementations",
+    "Element Save",
+    "Properties",
+    "Element Save as Table",
+    "Properties"
+  ],
+  "content": ""
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Step Group Selector",
+  "headers": [
+    "Contents:",
+    "Step Group Selector",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Example",
+    "Element Group",
+    "Properties",
+    "Element Key Component",
+    "Properties",
+    "Element Result",
+    "Properties",
+    "Element Order By",
+    "Properties",
+    "Element Selection",
+    "Properties",
+    "Enum Selection Method",
+    "Values"
+  ],
+  "content": "This step creates groups of records based on specified key definitions.\n\t\t\t\tThe step will select records from each group based on specified criteria.\n\t\t\t\tRecords can be selected multiple times based on different criteria. The resulting\n\t\t\t\trecords of selection criteria for each group may be dependent on sort order. For example when\n\t\t\t\tselecting the first N records, the sort order of the group determines which records will be selected.\n\nSelection/Grouping Methods:allSelect all records of a group.minSelect the first N (count) records of a group.maxSelect the last N (count) records of a group.medianSelect the middle N (count) records of a group.proportionalSelect N (count) uniformly distributedcountrecords of a group.mincardSelect all group records where each group has at least N (count) records.maxcardSelect all group records where each group has at most N (count) records."
+}

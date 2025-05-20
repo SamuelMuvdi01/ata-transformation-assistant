@@ -1,0 +1,17 @@
+{
+  "title": "Installing server as service",
+  "headers": [
+    "Installing server as service",
+    "Contents:",
+    "Introduction",
+    "Paths",
+    "License Files",
+    "Installing & Uninstalling the Server as a Windows Service",
+    "GUI tool",
+    "Console (unattended) installation",
+    "service_installer parameters",
+    "Lock file",
+    "Starting & Stopping the Server from the Command Line"
+  ],
+  "content": ""
+}

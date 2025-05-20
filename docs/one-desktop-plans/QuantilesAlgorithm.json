@@ -1,0 +1,15 @@
+{
+  "title": "Step Quantiles",
+  "headers": [
+    "Contents:",
+    "Step Quantiles",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Quantile Statistic",
+    "Properties",
+    "Element Quantile Rank",
+    "Properties"
+  ],
+  "content": "Step outputs quantiles in the following format:quantile_name [STRING] - user defined name for the group of quantilesquantile_value [STRING] - value of the quantilesquantile_distinction [STRING] - rank of the quantiles"
+}

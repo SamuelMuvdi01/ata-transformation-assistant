@@ -1,0 +1,22 @@
+{
+  "title": "Step Address Doctor",
+  "headers": [
+    "Contents:",
+    "Step Address Doctor",
+    "Properties",
+    "Endpoints",
+    "Scoring",
+    "Detailed Description",
+    "Element Address Input Element",
+    "Properties",
+    "Enum Address Element Name",
+    "Values",
+    "Element Address Output Element",
+    "Properties",
+    "Element Address Result Parameter",
+    "Properties",
+    "Enum Result Status Name",
+    "Values"
+  ],
+  "content": "The Correction Only (BATCH) processing mode is designed for batch processing of data \n\t\twithout output selection possible. This step, which simulates this mode, \n\t\twill process the input and will try to autocorrect it (if needed), providing a one result per line of input.\n\nIf you want the step to create a detailed log of actions performed during the plan run, click on\n\t\t\tthe dropdown triangle next to theRunbutton and selectRun Configurations. In theRun Configurationsdialogue go to theRuntimestab and in theVM Argumentsfield write-DaddressDoctor.debugLog=debug.xml. This specification will\n\t\t\tsavedebug.xmlinto the folder with the plan. Alternatively, you can specify an arbitrary\n\t\t\tfull path."
+}

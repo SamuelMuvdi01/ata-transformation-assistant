@@ -1,0 +1,11 @@
+{
+  "title": "Step Name Finder",
+  "headers": [
+    "Contents:",
+    "Step Name Finder",
+    "Properties",
+    "Endpoints",
+    "Detailed Description"
+  ],
+  "content": "Step creates a new record for each proper name found in the input string. It can also\n                identify category of the proper name (e.g. person, company).\n\nFor optimal performance, one input record should be one sentence. Prepare large documents\n                withSentenceTokenizer.\n\nOpenNLP model files are necessary for this step. Model files can be trained with theNameFinderTrainerandWordTokenizerTrainersteps."
+}

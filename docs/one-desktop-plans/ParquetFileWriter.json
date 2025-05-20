@@ -1,0 +1,15 @@
+{
+  "title": "Step Parquet File Writer",
+  "headers": [
+    "Contents:",
+    "Step Parquet File Writer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Column Expr Def",
+    "Properties",
+    "Enum E Parquet Compression",
+    "Values"
+  ],
+  "content": "The data output for this step is a file inParquet format.\n\nAlong with a new parquet file, file for verifying the data integrity is generated (with suffix .crc ).\n\nDefines compression type to be used when writing file in parquet format."
+}

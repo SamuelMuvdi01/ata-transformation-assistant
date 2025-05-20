@@ -1,0 +1,23 @@
+{
+  "title": "Step Simple Group Classifier",
+  "headers": [
+    "Contents:",
+    "Step Simple Group Classifier",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Example",
+    "Element Column Set",
+    "Properties",
+    "Element Column Ref",
+    "Properties",
+    "Element Matching Rule",
+    "Properties",
+    "Element Test",
+    "Properties",
+    "Detailed Description",
+    "Element Order By",
+    "Properties"
+  ],
+  "content": "This step works with groups of records usually acquired from the Unification process. Utilizing predefined rules, which compare members of the same group,\n\t\t\tthe overall group quality can be evaluated.\n\t\t\tGroups are defined by the value inGroup Id Column. If this value is empty (null), the record in question defines its own single member group\n\t\t\twith a group role of 'C'.\n\nThreshold for weighted sum of all tests. If this threshold is exceeded (is greater than this value), records are declared not similar (and the test fails)."
+}

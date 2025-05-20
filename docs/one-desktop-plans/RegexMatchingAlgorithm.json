@@ -1,0 +1,18 @@
+{
+  "title": "Step Regex Matching",
+  "headers": [
+    "Contents:",
+    "Step Regex Matching",
+    "Properties",
+    "Endpoints",
+    "Scoring",
+    "Detailed Description",
+    "Element Column Assign",
+    "Properties",
+    "Element Reg Expression",
+    "Properties",
+    "Element Regex Output Column",
+    "Properties"
+  ],
+  "content": "This step extracts values from the input expression and tries to apply them to regular\n\t\t\texpressions in order to extract values to output columns.\n\t\t\tIt works according to the following steps:"
+}

@@ -1,0 +1,18 @@
+{
+  "title": "Step Alter Format",
+  "headers": [
+    "Contents:",
+    "Step Alter Format",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Example",
+    "Element Added Column",
+    "Properties",
+    "Enum Column Type",
+    "Values",
+    "Element Column Ref",
+    "Properties"
+  ],
+  "content": "In the following example, the columndatawill be removed, then a new columnnewdaywill be added.\n\t\t\tNext, the columnidwill be converted to a string by first being removed, then added as a column with the\n\t\t\tsame name, and evaluated with the expression toString(). Other format columns will remain unchanged."
+}

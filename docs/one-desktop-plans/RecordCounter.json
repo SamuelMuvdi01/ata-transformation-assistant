@@ -1,0 +1,11 @@
+{
+  "title": "Step Record Counter",
+  "headers": [
+    "Contents:",
+    "Step Record Counter",
+    "Properties",
+    "Endpoints",
+    "Detailed Description"
+  ],
+  "content": "Note\n\nThe Record Counter step is disabled by default. To enable it, use-DenableRecordCounters=true."
+}

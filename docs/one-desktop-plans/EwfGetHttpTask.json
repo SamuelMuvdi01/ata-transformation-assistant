@@ -1,0 +1,22 @@
+{
+  "title": "Task HTTP Get",
+  "headers": [
+    "Contents:",
+    "Task HTTP Get",
+    "Properties",
+    "Detailed Description",
+    "Element Mapper",
+    "Properties",
+    "Element Parameter",
+    "Properties",
+    "Abstract element Url Resource Config",
+    "Implementations",
+    "Element URL Expression",
+    "Properties",
+    "Detailed Description",
+    "Element URL Resource Bean",
+    "Properties",
+    "Detailed Description"
+  ],
+  "content": "Note: To use the HTTPS protocol, make sure you import the certificate to the Java truststore file:<JAVA_HOME>/lib/security/cacerts."
+}

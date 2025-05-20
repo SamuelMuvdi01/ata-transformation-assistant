@@ -1,0 +1,11 @@
+{
+  "title": "Step Sentence Tokenizer",
+  "headers": [
+    "Contents:",
+    "Step Sentence Tokenizer",
+    "Properties",
+    "Endpoints",
+    "Detailed Description"
+  ],
+  "content": "Step creates a new record for each sentence in the input string.\n\nOpenNLP model files are necessary for this step. Model files can be trained with theSentenceTokenizerTrainerstep."
+}

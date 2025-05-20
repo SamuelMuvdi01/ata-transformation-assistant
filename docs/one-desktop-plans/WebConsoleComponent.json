@@ -1,0 +1,14 @@
+{
+  "title": "Web Console Component",
+  "headers": [
+    "Contents:",
+    "Web Console Component",
+    "Properties",
+    "Detailed Description",
+    "Element Menu Category",
+    "Properties",
+    "Element Menu Item",
+    "Properties"
+  ],
+  "content": "Pre-defined category keys usewc.menu.group.<category_id>notation to add an item under an existing Admin Center section. Possiblecategory_idvalues:info,resources,server,workflows."
+}

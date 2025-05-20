@@ -1,0 +1,8 @@
+{
+  "title": "Introduction",
+  "headers": [
+    "Introduction",
+    "[branding:vendor.product.name]"
+  ],
+  "content": "[branding:vendor.product.name.full] ([branding:product.name.abbreviation])is a complete tool for complex data quality management.\n\t\t[branding:product.name.abbreviation] is designed not only to evaluate, monitor and manage the quality of data in different information\n\t\tsystems, but also to prevent incorrect data from entering such systems in the first place. \n\t\t[branding:product.name.abbreviation] is bundled with a specific set of business rules and localized dictionaries. Banks, insurance and\n\t\ttelecommunication companies choose[branding:product.name.abbreviation]for its ease of implementation and ability to\n\t\tproduce tangible business gains.\n\n[branding:vendor.product.name] can be used for:Data quality control for transactional and analytical applicationsData cleansing and unification during data system migrationsData quality assurance for software integration projectsQuality improvements in address and contact informationData cleansing and unification of customer data for client identification purposesCustomer profile validation and correction of incomplete data recordsCustomer input data validation for self-service online applicationsData profiling during the analysis phase of data integration projects"
+}

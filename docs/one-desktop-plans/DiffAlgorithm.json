@@ -1,0 +1,19 @@
+{
+  "title": "Step Diff",
+  "headers": [
+    "Contents:",
+    "Step Diff",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Column Definition",
+    "Properties",
+    "Enum Column Type",
+    "Values",
+    "Element Key",
+    "Properties",
+    "Element Key Component",
+    "Properties"
+  ],
+  "content": "Column that contains key values of the left (first) input flow. The keys are used to decide whether the left and right records are the same.\n\nThe key can be defined as a composite key.\n\nColumn that contains key values of the left (first) input flow. The keys are used to decide whether the left and right records are the same.\n\nThe key can be defined as a composite key.\n\nThis step joins two separate input data flows into a single output data flow based on corresponding input data flow keys. The data entry points (endpoints) are named respectivelyin_leftandin_right. All data input flows (in_leftandin_right) must contain columns with key values (primary keys), which are defined as column propertiesleftKeyandrightKey. The keys govern how the data records are paired up across the data input flows. All basic data types can be used as a key.\n\nThe step is optimized to identify differences in 2 similar data flows (i.e., the data has to be more or less ordered). Using Diff step in its use case (ordered data) brings the following advantages over the Join step:Efficiency. The step looks for a match in the window defined by the buffer property, not in the whole data set.Specificity. Diff step sends each record to the output exactly once, even when multiple records match. Join step in this case outputs Cartesian product of all matching records.Diff step is non-blocking. To join the data flows, Join step needs to read all the records; Diff starts outputting data immediately. If it finds a match, it will output it straightaway. If it does not, it will output the record after reading buffer number of records.\n\nNote: Make sure the data is ordered, otherwise the step does not find matches.\n\nIf the data input flow contains multiple records with the same key values, the data output flow contains the matched records (not a Cartesian product of data input records as the Join step does).\n\nRecords having a null key value are not joined with any other (null-keyed) records and are processed as unpaired.\n\nNote: Only data defined in the expression property of thecolumnDefinitionproperties are written to the output. If the propertycolumnDefinitionsis empty or missing, then the output remains empty."
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Step Multiplicative Address Doctor",
+  "headers": [
+    "Contents:",
+    "Step Multiplicative Address Doctor",
+    "Properties",
+    "Endpoints",
+    "Scoring",
+    "Detailed Description",
+    "Element Address Input Element",
+    "Properties",
+    "Enum Address Element Name",
+    "Values",
+    "Element Address Output Element",
+    "Properties",
+    "Element Address Result Parameter",
+    "Properties",
+    "Enum Result Status Name",
+    "Values"
+  ],
+  "content": "This step, which represents theFast Completionprocessing mode, \n\t\tallows to obtain up to 100 results per line of input in case the address is not specified correctly. \n\t\tThe maximum number of suggestions can be set up by changing theMaxResultCountparameter to \"100\" \n\t\t(the default \"20\") in SetConfig.xml.\n\nIf you want the step to create a detailed log of actions performed during the plan run, click on\n\t\t\tthe dropdown triangle next to theRunbutton and selectRun Configurations. In theRun Configurationsdialogue go to theRuntimestab and in theVM Argumentsfield write-DaddressDoctor.debugLog=debug.xml. This specification will\n\t\t\tsavedebug.xmlinto the folder with the plan. Alternatively, you can specify an arbitrary\n\t\t\tfull path."
+}

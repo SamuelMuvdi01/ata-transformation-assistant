@@ -1,0 +1,20 @@
+{
+  "title": "Step Join",
+  "headers": [
+    "Contents:",
+    "Step Join",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Example",
+    "Element Column Definition",
+    "Properties",
+    "Enum Column Type",
+    "Values",
+    "Enum Join Type",
+    "Values",
+    "Enum Match Strategy",
+    "Values"
+  ],
+  "content": "• Only data that is defined in the sub-propertiesexpressionsof thecolumnDefinitionproperties are written\n\t\t\t\tto the output. If the propertycolumnDefinitionsis empty or missing, then the output remains empty.\n\t\t\t\t(Though the previous versions of the step generated a default set ofcolumnDefinitions, the current version requires explicit definition of all of thecolumnDefinitions.)\n\n• Not only string type is supported for values inLeft KeyandRight Key.  Alternatively you can use any data type based on the input column or apply an expression transformation."
+}

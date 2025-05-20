@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding='UTF-8' ?>
+<css-styles>
+	<css-style name="tooltip_hover">
+		<style>			
+				body, table {
+					font-size: 11px;
+				}
+				body {
+					scroll	 : hidden;
+					overflow : hidden;
+					font-family: Arial, sans-serif; 
+					color: #000000;
+					background-color: #FFFFE1;
+					margin : 2px;
+				}
+				
+				a {
+					font-family: Arial, sans-serif; font-size:12px;
+					color: #4040FF;  
+				}
+				
+				code {
+					font-family: Courier, serif; 
+					font-size:14px;
+					color: #4040FF;
+				}
+				
+				h1,h2,h3,h4  {
+					font-family: Verdana, Arial,sans-serif;
+					color : #202040;
+					margin-top: 14px;
+					clear : both;
+				}
+				code.signature {
+					font-size: 11pt;
+					color: #000000;
+				}
+				code.signature em {
+					font-style: normal;
+					color: #804080;
+				}
+				code.signature strong {
+				}
+				code.signature b {
+					color: #4040FF;
+				}
+				code.signature samp {
+				}
+				
+				p {
+					margin: 2px 2px 8px 2px;
+				}
+		</style>
+	</css-style>
+	<css-style name="tooltip_proposition">
+		<style>
+				body {
+					scroll	 : no;
+					overflow : hidden;
+					font-family: Arial, sans-serif; 
+					font-size: 14px;
+					color: #000000;
+					background-color: #FFFFE0;
+					margin : 2px;
+				}
+				
+				a {
+					font-family: Arial, sans-serif; font-size:12px;
+					color: #4040FF;  
+				}
+				
+				code {
+					font-family: courier new, serif;
+					font-size: 15px;
+					color: #4040FF;
+				}
+				.description {
+					color: #400000;
+				}
+				h1,h2,h3,h4  {
+					font-family: Verdana, Arial,sans-serif;
+					color : #202040;
+					margin-top: 14px;
+					clear : both;
+				}
+				code.signature {
+					font-size: 11pt;
+					color: #000000;
+				}
+				code.signature em {
+					font-style: normal;
+					color: #804080;
+				}
+				code.signature strong {
+				}
+				code.signature b {
+					color: #4040FF;
+				}
+				code.signature samp {
+				}
+		</style>
+	</css-style>
+	<css-style name="tooltip_new_window">
+		<style>			
+				body, table {
+					font-size: 11px;
+				}
+				body {
+					scroll	 : auto;
+					overflow : auto;
+					font-family: Arial, sans-serif; 
+					color: #000000;
+					background-color: #FFFFE1;
+					margin : 2px;
+				}
+				
+				a {
+					font-family: Arial, sans-serif; font-size:12px;
+					color: #4040FF;  
+				}
+				
+				code {
+					font-family: Courier, serif; 
+					font-size:14px;
+					color: #4040FF;
+				}
+				
+				h1,h2,h3,h4  {
+					font-family: Verdana, Arial,sans-serif;
+					color : #202040;
+					margin-top: 14px;
+					clear : both;
+				}
+				
+				p {
+					margin: 2px 2px 8px 2px;
+				}
+		</style>
+	</css-style>
+</css-styles>

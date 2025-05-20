@@ -1,0 +1,2392 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<expression-tooltips>
+  <operation name="+">
+    <signatures>
+      <signature>a + b</signature>
+    </signatures>
+    <description>Addition of numeric operands a and b, or string concatenation.
+				</description>
+  </operation>
+  <operation name="-">
+    <signatures>
+      <signature>a - b</signature>
+    </signatures>
+    <description>Subtraction of numeric operands a and b</description>
+  </operation>
+  <operation name="*">
+    <signatures>
+      <signature>a * b</signature>
+    </signatures>
+    <description>Multiplication of numeric operands a and b</description>
+  </operation>
+  <operation name="-">
+    <signatures>
+      <signature> -a</signature>
+    </signatures>
+    <description>Negation of numeric operand a. E.g. <code>-(a*c)</code>.<br/>
+					NOTE: unary expression operator cannot immediately follow other
+					arithmetical operator unless parenthesized,
+					thus expression <code>a*-b</code> is invalid, instead use either <code>-b*a</code> or <code>a*(-b)</code>.
+				</description>
+  </operation>
+  <operation name="/">
+    <signatures>
+      <signature>a / b</signature>
+    </signatures>
+    <description>Division of numeric operands a and b</description>
+  </operation>
+  <operation name="div">
+    <signatures>
+      <signature>a div b</signature>
+    </signatures>
+    <description>Division of integer operands without a remainder</description>
+  </operation>
+  <operation name="%">
+    <signatures>
+      <signature>a % b</signature>
+    </signatures>
+    <description>Modulo - the remainder after numerical division of a by b</description>
+  </operation>
+  <operation name="AND">
+    <signatures>
+      <signature>a AND b</signature>
+    </signatures>
+    <description>Logical conjunction</description>
+  </operation>
+  <operation name="OR">
+    <signatures>
+      <signature>a OR b</signature>
+    </signatures>
+    <description>Logical sum</description>
+  </operation>
+  <operation name="XOR">
+    <signatures>
+      <signature>a XOR b</signature>
+    </signatures>
+    <description>Exclusive OR</description>
+  </operation>
+  <operation name="NOT">
+    <signatures>
+      <signature>NOT a</signature>
+    </signatures>
+    <description>Logical negation</description>
+  </operation>
+  <operation name="=, ==">
+    <signatures>
+      <signature>a = b or a == b</signature>
+    </signatures>
+    <description>Tests the equivalence of two values.</description>
+  </operation>
+  <operation name="&lt;&gt;, !=">
+    <signatures>
+      <signature>a &amp;lt;&amp;gt; b or a != b</signature>
+    </signatures>
+    <description>Tests the negated equivalence of two values.</description>
+  </operation>
+  <operation name="&lt;">
+    <signatures>
+      <signature>a &amp;lt; b</signature>
+    </signatures>
+    <description>Tests if the value a is less than b.</description>
+  </operation>
+  <operation name="&gt;">
+    <signatures>
+      <signature>a &amp;gt; b</signature>
+    </signatures>
+    <description>Tests if the value a is greater than b.</description>
+  </operation>
+  <operation name="&lt;=">
+    <signatures>
+      <signature>a &amp;lt;= b</signature>
+    </signatures>
+    <description>Tests if the value a is less than or equal to b.</description>
+  </operation>
+  <operation name="&gt;=">
+    <signatures>
+      <signature>a &amp;gt;= b</signature>
+    </signatures>
+    <description>Tests if the value a is greater than or equal to b.</description>
+  </operation>
+  <operation name="in">
+    <signatures>
+      <signature>a in {elem[, elem]...}</signature>
+    </signatures>
+    <description>Tests whether a is member of the specified set. As opposed to the &quot;is in&quot; operation,
+					if a is not member of the set and a <code>null</code> value is a member of the set, then
+					the result is null.</description>
+  </operation>
+  <operation name="is in">
+    <signatures>
+      <signature>a is in {elem[, elem]...}</signature>
+    </signatures>
+    <description>Tests whether operand a is a member of the specified set. Always returns TRUE or FALSE.</description>
+  </operation>
+  <operation name="not in">
+    <signatures>
+      <signature>a not in {elem[, elem]...}</signature>
+    </signatures>
+    <description>Tests whether operand a is not a member of the specified set. As opposed to the &quot;is not in&quot; operation,
+					if operand a is not member of the set and a <code>null</code> value is a member of the set, then
+					the result is null.</description>
+  </operation>
+  <operation name="is not in">
+    <signatures>
+      <signature>a is not in {elem[, elem]...}</signature>
+    </signatures>
+    <description>Tests whether a is not a member of the specified set.</description>
+  </operation>
+  <operation name="is">
+    <signatures>
+      <signature>a is b</signature>
+    </signatures>
+    <description>Tests if a is equal to b. Null values are allowed as operands.
+					A typical use is <code>a is null</code>.</description>
+  </operation>
+  <operation name="is not">
+    <signatures>
+      <signature>a is not b</signature>
+    </signatures>
+    <description>
+				Tests if a is not equal to b. Null values are allowed as operands.
+					A typical use is <code>a is not null</code>.
+				</description>
+  </operation>
+  <operation name="getParameterValue">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;getParameterValue&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;key&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;default&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					The function returns the value of the property or the default value if there is no property with
+					that key. All property names MUST have a prefix defining where the property should be read from.
+					There are following known prefixes:
+					<ul>
+                        <li>
+                            <code>system.</code> - to get
+                            <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/System.html#getProperties()" class="externalLink" target="_blank"> java system property </a>
+                            A typical use is <code>getParameterValue(&quot;system.java.version&quot;)</code>.
+                            A system property can be set or overridden by specifying the -D option to the java command when running your program.
+                            For example, <code>java.exe -Dmy.prop=&quot;my value&quot; ...</code>.
+                            To get the value of the system property you can use <code>getParameterValue(&quot;system.my.prop&quot;)</code>.
+                        </li>
+                        <li>
+                            <code>env.</code> - to get environment variable.
+                            A typical use is <code>getParameterValue(&quot;env.JAVA_HOME&quot;)</code>.
+                        </li>
+                        <li>
+                            <code>http.</code> - to get HTTP request parameters and some other properties related to HTTP
+                            request line <code>getParameterValue(&quot;http.user-agent&quot;), getParameterValue(&quot;http.soapAction&quot;),
+                            getParameterValue(&quot;http.accept&quot;), ...</code>.
+                        </li>
+                        <li>
+                            <code>security.</code> - to get information about authenticated user, assigned security role(s) and
+                            parameters connected with the authenticated user
+                            <ul>
+                                <li>
+              <code>security.user</code> - returns the authenticated user name</li>
+                                <li>
+              <code>security.user.&lt;attribute_name&gt;</code> - returns the value of the &#39;attribute_name&#39;
+                                    attribute assigned to the current authenticated user. The value is assigned for example by
+                                    setting <a href="authentication.html#ref-LdapIdentityProviderLink" class="internalLink">LdapIdentityProvider</a> and <code>BasicAttribibuteResolver</code>.
+                                </li>
+                                <li>
+              <code>security.role.&lt;role_name&gt;</code> - boolean indicator whether the authenticated user
+                                    has assigned the role with name &#39;role_name&#39;</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p align="justify">
+					<strong>Note:</strong> <code>env.</code> properties are by default inaccessible from security reasons.
+					To retrieve the value of an environment variable (with <code>env.</code> prefix), this option must now be explicitly configured for that variable.
+					In other words, you need to set property <code>ata.function.getParameterValue.allowed</code> to a regular expression matching the enabled properties
+					(for example, <code>ata.function.getParameterValue.allowed=env.OS|env.TEMP</code>).
+					Properties <code>JAVA_HOME</code>, <code>JRE_HOME</code>, <code>HOSTNAME</code>, <code>HOME</code>, <code>USER</code>, and <code>LANGUAGE</code> are by default allowed.
+					To enable this option, proceed with the following steps, depending on your use case.
+                    </p>
+                    <p align="justify">
+					<strong>Run a plan</strong>
+					<ol>
+  						<li>In ONE Desktop, open the plan that you want to run.</li>
+  						<li>In the toolbar, next to the <strong>Run</strong> option, open the dropdown menu and select <strong>Run Configuration</strong>.</li>
+  						<li>In the dialog that opens, switch to the <strong>Runtimes</strong> tab.</li>
+  						<li>In <strong>VM arguments</strong>, add the following line:
+							<code>-Data.function.getParameterValue.allowed=&lt;environment_variable&gt;</code> </li>
+  						<li>Replace the placeholder with the name of the environment variable that you want to use. To provide several variables, separate them using a vertical bar (<code>|</code>), for example:
+							<code>-Data.function.getParameterValue.allowed=env.HOMEDRIVE|env.ProgramW6432|env.DriverData</code> </li>
+                        <li>Select <strong>Apply</strong> to save your changes. You can now select <strong>Run</strong> to immediately execute your plan or select <strong>Close</strong> to continue editing it.</li>
+					</ol>
+                    </p>
+                    <p align="justify">
+                    <strong>Debug a step</strong>
+					<ol>
+  						<li>Make sure ONE Desktop is not running while you are making these changes.</li>
+  						<li>Navigate to your ONE Desktop installation folder.</li>
+  						<li>Open the <code>one-desktop.ini</code> file in a text editor.</li>
+  						<li>Add the following line to the last line in the file:
+  							<code>-Data.function.getParameterValue.allowed=&lt;environment_variable&gt;</code> </li>
+  						<li>Replace the placeholder with the name of the environment variable that you want to use. To provide several variables, separate them using a vertical bar (<code>|</code>), for example:
+							<code>-Data.function.getParameterValue.allowed=env.HOMEDRIVE|env.ProgramW6432|env.DriverData</code> </li>
+                        <li>Save your changes and close the file.</li>
+                        <li>Start ONE Desktop. You can now use the specified environment variable when debugging steps.</li>
+					</ol>
+                    </p>
+				</description>
+  </operation>
+  <operation name="setParameterValue">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;setParameterValue&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;key&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;value&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					The function sets the value of the property. All property names MUST have prefix defining the
+					category where the property should be stored to. Not all property categories allows definition of
+					new properties (for example java system properties - prefix <code>system.</code> cannot be set by DQC).
+					A typical use is <code>setParameterValue(&quot;http.outputParam&quot;, &quot;paramValue&quot;)</code>.
+				</description>
+  </operation>
+  <operation name="getRuntimeVersion">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;getRuntimeVersion&lt;/strong&gt;()</signature>
+    </signatures>
+    <description>The function returns version of product.</description>
+  </operation>
+  <operation name="today">
+    <signatures>
+      <signature>&lt;em&gt;date&lt;/em&gt;&amp;nbsp;&lt;strong&gt;today&lt;/strong&gt;()</signature>
+    </signatures>
+    <description>Returns the current date in type DATE. This function is designed to return
+					the same value for all records ([branding:product.name.abbreviation] application start date),
+					even if [branding:product.name.abbreviation] runs past midnight.
+				</description>
+  </operation>
+  <operation name="now">
+    <signatures>
+      <signature>&lt;em&gt;datetime&lt;/em&gt;&amp;nbsp;&lt;strong&gt;now&lt;/strong&gt;()</signature>
+    </signatures>
+    <description>Returns the current time with the type DATETIME. This function returns always
+				the time when it is evaluated, i.e. it is the current time.</description>
+  </operation>
+  <operation name="getRequestTime">
+    <signatures>
+      <signature>&lt;em&gt;datetime&lt;/em&gt;&amp;nbsp;&lt;strong&gt;getRequestTime&lt;/strong&gt;()</signature>
+    </signatures>
+    <description>Returns the time when the current request processing was started.
+				This is [branding:product.name.abbreviation] application start time in batch mode and the web service
+				request time in online mode.</description>
+  </operation>
+  <operation name="getDate">
+    <signatures>
+      <signature>&lt;em&gt;date&lt;/em&gt;&amp;nbsp;&lt;strong&gt;getDate&lt;/strong&gt;(&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcExpression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Returns the date in the format defined by the specified <code>srcExpression</code> (type DATE or DATETIME),
+					with the time set to zero (HH:mm:ss.SSS).
+				</description>
+  </operation>
+  <operation name="dateAdd">
+    <signatures>
+      <signature>&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;strong&gt;dateAdd&lt;/strong&gt;(&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcDate&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcValue&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;fieldName&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Adds the specified <code>srcValue</code> of the type specified by <code>fieldName</code>
+					(<code>YEAR</code>, <code>MONTH</code> or <code>DAY</code>) to the <code>srcDate</code>.
+					This function allows subtraction, so the <code>srcValue</code> can be negative.
+					The return value is the result of the add(subtract) operation. If any of the operands is invalid or
+					if an unsupported <code>fieldName</code> is attempted to be added to the data type DATE
+					(<code>HOUR</code>, <code>MINUTE</code> or <code>SECOND</code>), then the expression reports an error.
+				</description>
+  </operation>
+  <operation name="dateDiff">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;dateDiff&lt;/strong&gt;(&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;b&gt;startDate&lt;/b&gt;, &lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;b&gt;endDate&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;fieldName&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Returns the difference between <code>endDate</code> and <code>startDate</code> expressed in <code>fieldName</code> units.
+				If the result exceeds the maximum range of INTEGER then the value <code>null</code> is returned.
+				If any of the parameters is invalid, the expression reports an error.
+					<br/>
+					A combination of date type DATE and <code>fieldName</code> <code>HOUR</code>,
+					<code>MINUTE</code>,<code>SECOND</code> can be used - the value of these fields is considered to be <code>0</code>.
+				</description>
+  </operation>
+  <operation name="dateTrunc">
+    <signatures>
+      <signature>&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;strong&gt;dateTrunc&lt;/strong&gt;(&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcDate&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;fieldName&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					The function truncates less important parts of the <code>srcDate</code> up to the level specified by <code>fieldName</code>.
+					Truncation changes values of the fields by the following rules:
+					<code>MONTH</code> and <code>DAY</code> to <code>1</code>,
+					<code>HOUR</code>, <code>MINUTE</code> and <code>SECOND</code> to <code>0</code>.
+					<br/>
+					The function may be used even for the DATE type with the <code>fieldName</code>
+					<code>HOUR</code>, <code>MINUTE</code> and <code>SECOND</code>. The function does not have an
+					effect on the data - result and input values are the same.
+					<br/>
+					If any of the parameters are invalid, the expression reports an error.
+					Example: for <code>srcDate &quot;5.5.1980 12:35:10&quot;</code> and <code>fieldName &quot;HOUR&quot;</code>
+					the function returns <code>5.5.1980 12:00:00</code>.
+				</description>
+  </operation>
+  <operation name="datePart">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;datePart&lt;/strong&gt;(&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcDate&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;fieldName&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					This function returns the value of the field <code>fieldName</code> of <code>srcDate</code>.
+					If any of the parameters is invalid, the expression reports an error.
+					For the fields <code>HOUR</code>, <code>MINUTE</code>
+					and <code>SECOND</code> set for the date-type DATE the function returns 0.
+				</description>
+  </operation>
+  <operation name="upper">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;upper&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Transforms all characters of the string <code>srcStr</code> to upper case.</description>
+  </operation>
+  <operation name="lower">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;lower&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Transforms all characters of the string <code>srcStr</code> to lower case.</description>
+  </operation>
+  <operation name="capitalize">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;capitalize&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Transforms all words in the string <code>srcStr</code> in the following manner:
+					The first character of each word to upper case and all following characters to lower case.
+					A word consists of alphabetic characters (letters). All other characters
+					are considered separators.
+				</description>
+  </operation>
+  <operation name="preserveCase">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;preserveCase&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;maskStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Transforms all characters in <code>srcStr</code> to match the case of characters in
+					 <code>maskStr</code>. If <code>maskStr</code> is shorter than <code>srcStr</code>,
+					 the exceeding characters of <code>srcStr</code> are not modified.
+				</description>
+  </operation>
+  <operation name="squeezeSpaces">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;squeezeSpaces&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Removes whitespace characters from both ends of the string <code>srcStr</code>
+					and reduces multiple whitespace characters within the string. The only whitespace character is the
+					&#39; &#39; character.
+				</description>
+  </operation>
+  <operation name="trim">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;trim&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;fillChars&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Removes whitespace or specified characters from both ends of the string <code>srcStr</code>.
+					Whitespace characters are &#39;\t&#39;, &#39;\n&#39;, &#39;\f&#39;, &#39;\r&#39; and &#39; &#39;. For more information see the
+					<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#trim()" class="externalLink" target="_blank">trim</a>
+					method of the class java.lang.String in the Java API.
+				</description>
+  </operation>
+  <operation name="trimLeft">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;trimLeft&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;fillChars&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Removes whitespace or specified characters from left side of the string <code>srcStr</code>.
+					Whitespace characters are &#39;\t&#39;, &#39;\n&#39;, &#39;\f&#39;, &#39;\r&#39; and &#39; &#39;. For more information see the
+					<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#trim()" class="externalLink" target="_blank">trim</a>
+					method of the class java.lang.String in the Java API.
+				</description>
+  </operation>
+  <operation name="trimRight">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;trimRight&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;fillChars&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Removes whitespace or specified characters from right side of the string <code>srcStr</code>.
+					Whitespace characters are &#39;\t&#39;, &#39;\n&#39;, &#39;\f&#39;, &#39;\r&#39; and &#39; &#39;. For more information see the
+					<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#trim()" class="externalLink" target="_blank">trim</a>
+					method of the class java.lang.String in the Java API.
+				</description>
+  </operation>
+  <operation name="length">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;length&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Returns the number of characters in the string <code>srcStr</code>.</description>
+  </operation>
+  <operation name="indexOf">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;indexOf&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;subStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;fromIndex&lt;/b&gt;&lt;samp&gt;=0&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the index within the string <code>srcStr</code> of the first occurrence of the specified substring <code>subStr</code>, starting at the index <code>fromIndex</code>.
+					If the substring is not found, the value <code>null</code> is returned.
+					If the value <code>fromIndex</code> exceeds the length of the string <code>srcStr</code>, the value <code>null</code> is returned.
+					If the value <code>fromIndex</code> &lt; 0, the start of the search is counted relative to the end of the string. However, if the counted start overlaps the string start,
+					then the search starts at the beginning of the string <code>srcStr</code> instead.
+					<br/>
+      <strong>The index of the first character is 0</strong>.
+				</description>
+  </operation>
+  <operation name="lastIndexOf">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;lastIndexOf&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;subStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;fromIndex&lt;/b&gt;&lt;samp&gt;=0&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the index within the string <code>srcStr</code> of the last (rightmost) occurrence of the substring <code>subStr</code>, starting at the index <code>fromIndex</code> and searching backwards.
+					If the substring is not found, the value <code>null</code> is returned.
+					If the value <code>fromIndex</code> exceeds the length of string <code>srcStr</code>, the value <code>null</code> is returned.
+					If the value <code>fromIndex</code> &lt; 0, the start of search is counted relative to the end of the string. However, if the counted start overlaps the string start,
+					then the search starts at the beginning of the string <code>srcStr</code>.
+					<br/>
+      <strong>The index of the first character is 0</strong>.
+				</description>
+  </operation>
+  <operation name="substr">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;substr&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;beginIndex&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;strLen&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns a new string that is a substring of the string <code>srcStr</code>. The substring begins at the index <code>beginIndex</code> and extends to the character at index <code>beginIndex</code> + <code>strLen</code> - 1.
+					If <code>beginIndex</code> &lt; 0, then <code>beginIndex</code> is set to <code>beginIndex</code> + length(<code>srcStr</code>). If <code>beginIndex</code> is still
+					&lt; 0, <code>beginIndex</code> is set to 0.
+					If <code>strLen</code> is not specified or is greater than length(<code>srcStr</code>) - <code>beginIndex</code>, rest of <code>srcStr</code> is returned.
+					If <code>strLen</code> &lt; 0, <code>strLen</code> is set to 0.
+					An empty substring is returned as null string.<br/>
+					<strong>The index of the first character is 0</strong>.
+				</description>
+  </operation>
+  <operation name="right">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;right&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;count&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+				Returns a new string that is a substring of <code>srcStr</code> containing
+				<code>count</code> of chars taken from the end of the <code>srcStr</code>.
+				</description>
+  </operation>
+  <operation name="left">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;left&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;count&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+				Returns a new string that is a substring of <code>srcStr</code> containing
+				<code>count</code> of chars taken from the start of the <code>srcStr</code>.
+				</description>
+  </operation>
+  <operation name="replicate">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;replicate&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;n&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns <code>n</code> copies of the string <code>srcStr</code> concatenated together without any separator.
+					If <code>n</code> &lt;= 0 or <code>srcStr</code> = &quot;&quot;, then the result value is <code>null</code>.
+				</description>
+  </operation>
+  <operation name="replace">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;replace&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;what&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;withWhat&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Replaces occurrences of the string <code>what</code> with the string <code>withWhat</code> in the string <code>srcStr</code>.
+                    The function returns NULL when <code>srcStr</code> or <code>what</code> is NULL or an empty string.
+					Overlapping occurrences of the string <code>what</code> are replaced only once, i.e. <code>replace(&quot;conoconoco&quot;, &quot;conoco&quot;, &quot;XXXX&quot;)</code>
+					returns <code>&quot;XXXXnoco&quot;</code>.</description>
+  </operation>
+  <operation name="countNonAsciiLetters">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;countNonAsciiLetters&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the number of characters from the string <code>srcStr</code> that include diacritical marks
+				</description>
+  </operation>
+  <operation name="trashNonDigits">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;trashNonDigits&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns a string that consists of only the digits included in the original string <code>srcStr</code>.
+					All other characters are discarded.</description>
+  </operation>
+  <operation name="trashNonLetters">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;trashNonLetters&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns a string that consists only of the letters included in the original string <code>srcStr</code>.
+					All other characters are discarded.</description>
+  </operation>
+  <operation name="trashDiacritics">
+    <signatures/>
+    <description/>
+  </operation>
+  <operation name="removeAccents">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;removeAccents&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns a copy of the string <code>srcStr</code> in which all characters containing diacritic
+					are replaced by the corresponding characters without diacritic. Only latin characters with an accent
+					defined in Unicode standard version 5.0.0 are changed.
+				</description>
+  </operation>
+  <operation name="capitalizeWithException">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;capitalizeWithException&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;leaveExcsAsTheyAre&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;exc&lt;/b&gt;]...)</signature>
+    </signatures>
+    <description>
+					Transforms all words in the string <code>srcStr</code> (with the
+					exception of the words given as parameters <code>exc</code>) in the following manner:
+					the first character of each word to upper case and all following characters to lower case.
+					A word consists of alphabetic characters (letters). All other characters
+					are considered separators.
+					<br/>
+                    Current side-effect is that words from <code>exc</code> are transformed to lower case.
+                    If the parameter <code>leaveExcsAsTheyAre</code> is set to <code>true</code>,
+                    the transformation leaves words from <code>exc</code> as they are in the string <code>srcStr</code>, i.e. without any change.
+				</description>
+  </operation>
+  <operation name="containsWord">
+    <signatures>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;containsWord&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcWord&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Searches for the occurrence of the word <code>srcWord</code> in the string <code>srcStr</code>. Word is a sequence of letters with no whitespaces.
+					Words in the string are defined as sequences of letters separated by a space (&#39; &#39; or the given separator). Beginning,
+					ending and multiple spaces are ignored. This function is case sensitive.
+				</description>
+  </operation>
+  <operation name="transliterate">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;transliterate&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;charsFrom&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;charsTo&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+				Transforms characters of the string <code>srcStr</code>.
+				The transformation replaces all occurrences of any character named in the parameter
+				<code>charsFrom</code> with the corresponding character defined in the parameter <code>charsTo</code> at their corresponding
+				positions, i.e. <code>transliterate(&quot;21d&quot;,&quot;123&quot;,&quot;abc&quot;)</code> evaluates to <code>&quot;bad&quot;</code>
+				</description>
+  </operation>
+  <operation name="trashVowels">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;trashVowels&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Removes all vowels (only latin letters are concerned) and their accented equivalents from the string <code>srcStr</code>.
+					Other characters (digits, punctuation) remain unchanged.
+				</description>
+  </operation>
+  <operation name="trashConsonants">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;trashConsonants&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Removes all consonants (only latin letters are concerned) and their accented equivalents from the string <code>srcStr</code>.
+					Other characters (digits, punctuation) remain unchanged.
+				</description>
+  </operation>
+  <operation name="isNumber">
+    <signatures>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;isNumber&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+				Verifies whether the string <code>srcStr</code> represents a number. All characters
+				of the string must be digits except for the first character which may be either &#39;+&#39; or &#39;-&#39;.
+				Decimal numbers are evaluated as not being numbers (i.e. the characters &#39;.&#39; or &#39;,&#39; are illegal).
+				</description>
+  </operation>
+  <operation name="eraseSpacesInNames">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;eraseSpacesInNames&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;minLength&lt;/b&gt;, &lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;onlyUpper&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Removes spaces between separate characters (words of length 1) in string <code>srcStr</code>.
+					<code>minLength</code> specifies the minimum length of the newly created word
+					(i.e. spaces are removed only if, after their removal, the result word has length at least <code>minLength</code>).
+					The parameter <code>onlyUpper</code> is a boolean value which restricts the space removal.
+					If set to <code>TRUE</code> then only spaces between capitals are processed. If set to
+					<code>FALSE</code> then all spaces between separate characters are processed.
+				</description>
+  </operation>
+  <operation name="substituteAll">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;substituteAll&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcPattern&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcReplacement&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;caseInsensitiveFlag&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Replaces all occurrences of <code>srcPattern</code> in string <code>srcStr</code> with <code>srcReplacement</code>.
+					If the parameter <code>caseInsensitiveFlag</code> is set to TRUE then the search for <code>srcPattern</code> is case insensitive.
+					For information about regular expressions see the &#39;Regular expressions&#39; section in &#39;Expressions&#39; topic of the product help.
+				</description>
+  </operation>
+  <operation name="substituteMany">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;substituteMany&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcPattern&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcReplacement&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcVolume&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;caseInsensitiveFlag&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Replaces all occurrences of <code>srcPattern</code> in the string <code>srcStr</code> with <code>srcReplacement</code>, the
+					maximum number of replacements is defined by the parameter <code>srcVolume</code>. If the total number
+					of replacements in the string <code>srcStr</code> exceeds the <code>srcVolume</code> parameter,
+					only first <code>srcVolume</code> replacements will be applied.
+					If the parameter <code>caseInsensitiveFlag</code> is set to TRUE then the search for <code>srcPattern</code> is case insensitive.
+					For information about regular expressions see the &#39;Regular expressions&#39; section in &#39;Expressions&#39; topic of the product help.
+				</description>
+  </operation>
+  <operation name="word">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;word&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcIdx&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcSeparator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the <code>srcIdx</code>-th word from the string <code>srcStr</code>.
+					Words are defined as sequences of letters separated by <code>srcSeparator</code>.
+					If the <code>srcSeparator</code> is missing or <code>NULL</code> then the space character is assumed.
+					<br/>
+      <strong>The index of the first word is 0</strong>.
+				</description>
+  </operation>
+  <operation name="wordCount">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;wordCount&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcSeparator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the number of non-empty words in the string <code>srcStr</code>.
+					Words are defined as sequences of characters separated by <code>srcSeparator</code>.
+					Beginning, ending and multiple separators are ignored.
+					If the <code>srcSeparator</code> is missing or <code>NULL</code> then the space character is assumed.
+				</description>
+  </operation>
+  <operation name="wordCombinations">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;wordCombinations&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;size&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcSeparator&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;combSeparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns all <code>size</code>-sized combinations of words in the string <code>srcStr</code>.
+					Words are defined as sequences of characters separated by <code>srcSeparator</code>.
+					Leading, trailing and multiple separators are ignored.
+					The words in the combination are separated by <code>srcSeparator</code>, the combinations are separated
+					by <code>combSeparator</code>. The order of the words in the combinations is the same as the order of the words
+					in the string <code>srcStr</code>.
+					If any of the arguments is <code>NULL</code> or <code>size</code> is less than 1, <code>NULL</code> is returned.
+					If <code>size</code> is greater than or equal to the number of words in <code>srcStr</code>, <code>srcStr</code> is returned.
+				</description>
+  </operation>
+  <operation name="distinct">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;distinct&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;b&gt;null&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns a string which contains concatenated first occurrence of parts of the original
+					string <code>srcStr</code>.
+					If the string <code>srcStr</code> is <code>NULL</code> or empty, the function returns <code>NULL</code>.
+				</description>
+  </operation>
+  <operation name="sortWords">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;sortWords&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcLocale&lt;/b&gt;&lt;samp&gt;=null&lt;/samp&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcSeparator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcDesc&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;]]])</signature>
+    </signatures>
+    <description>
+					Returns a string that consists of sorted parts of the string <code>srcStr</code>.
+					If the parameter <code>srcLocale</code> is set then the sort is done for the given locale.
+					<code>srcSeparator</code> specifies the separator of the string parts. If missing, set to <code>NULL</code> or empty,
+					the input string <code>srcStr</code> is parsed to separate characters which are then sorted.
+					If the boolean parameter <code>srcDesc</code> is set to TRUE, reverse sort order is used.
+					If the string <code>srcStr</code> is <code>NULL</code> or empty, the function returns <code>NULL</code>.
+				</description>
+  </operation>
+  <operation name="hamming">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;hamming&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;caseInsensitive&lt;/b&gt;&lt;samp&gt;=true&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the Hamming distance between strings <code>srcStr1</code>
+					and <code>srcStr2</code>. The parameter <code>caseInsensitive</code> determines
+					whether case sensitivity should be considered or not.
+					<code>NULL</code> value is considered as <code>false</code>. By default the
+					function is case INSENSITIVE.
+					If both of the strings are <code>NULL</code> then the result is 0.
+					If just one of the strings is <code>NULL</code> then the result is the length of the other one.
+				</description>
+  </operation>
+  <operation name="levenshtein">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;levenshtein&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;maxDistance&lt;/b&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;caseInsensitive&lt;/b&gt;&lt;samp&gt;=true&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the Levenshtein distance between strings <code>srcStr1</code>
+					and <code>srcStr2</code>. The parameter <code>maxDistance</code> defines
+					maximum value to calculate distance up to (<code>NULL</code> or negative value is considered as 0). Strings
+					with distance greater than this value are considered to have
+					distance <code>maxDistance + 1</code>.
+					The parameter <code>caseInsensitive</code> determines
+					whether the case sensitivity should be considered or not.
+					<code>NULL</code> value is considered as <code>false</code>. By default the
+					function is case INSENSITIVE.
+					If both of the strings are <code>NULL</code> then the result is 0.
+					If just one of the strings is <code>NULL</code> then the result is the length of the other one.
+				</description>
+  </operation>
+  <operation name="editDistance">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;editDistance&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;maxDistance&lt;/b&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;caseInsensitive&lt;/b&gt;&lt;samp&gt;=true&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the edit distance between strings <code>srcStr1</code>
+					and <code>srcStr2</code>. The parameter <code>maxDistance</code> defines
+					maximum value to calculate distance up to (<code>NULL</code> or negative value is considered as 0). Strings
+					with distance greater than this value are considered to have
+					distance <code>maxDistance + 1</code>.
+					The parameter <code>caseInsensitive</code> determines
+					whether case sensitivity should be considered or not.
+					<code>NULL</code> value is considered as <code>false</code>. By default the
+					function is case INSENSITIVE.
+					The difference between Levenshtein and Edit distance lies in the definition
+					of distance of two switched adjacent characters. Levenshtein considers the switch
+					as two changes whereas Edit distance considers the switch to be one change.
+					If both of the strings are <code>NULL</code> then the result is 0.
+					If just one of the strings is <code>NULL</code> then the result is the length of the other string.<br/>
+					This function is also known as <a href="http://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance" class="externalLink" target="_blank">Damerau-Levenshtein distance</a>.
+				</description>
+  </operation>
+  <operation name="jaroWinkler">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;jaroWinkler&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;caseInsensitive&lt;/b&gt;&lt;samp&gt;=true&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;boostTreshold&lt;/b&gt;&lt;samp&gt;=0&lt;/samp&gt;, &lt;b&gt;7&lt;/b&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;prefixLength&lt;/b&gt;&lt;samp&gt;=4&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the Jaro-Winkler score for strings <code>srcStr1</code>
+					and <code>srcStr2</code>. Returned values are between 0 and 1, where 1
+					indicates perfect match (identical strings) and 0 no similarity. It is suited
+					to evaluate short strings (e.g. personal names).
+
+					This is combination of Jaro&#39;s algorithm with Winkler&#39;s boost for identical prefixes.
+					Calculation is extensively described in <a href="http://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance" class="externalLink" target="_blank">Jaro–Winkler distance</a>.
+
+					To disable the Winkler&#39;s prefix boost (obtain pure Jaro), set the boost
+					threshold to value greater than 1.0.
+
+					Default values for <code>boostTreshold</code> and <code>prefixLength</code>
+					are considered to be optimal (according to original Winkler&#39;s papers), but user can
+					adjust these to fine-tune his results.
+
+					By default the function is case INSENSITIVE. When case sensitivity is turned on,
+					uppercase and lowercase variants of the same letter will be considered as two
+					completely different characters.
+
+					There is currently no support / optimization for diacritical marks
+					(function considers <code>c</code> and <code>č</code> as two completely
+					different characters).
+				</description>
+  </operation>
+  <operation name="diceCoefficient">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;diceCoefficient&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;tokenSeparator&lt;/b&gt;&lt;samp&gt;=null&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;ngramLength&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the diceCoefficient for strings <code>srcStr1</code>
+					and <code>srcStr2</code>. Returned values are between 0 and 1, where 1
+					indicates perfect match (identical strings) and 0 no similarity.
+
+					The function is case INSENSITIVE.
+
+					Method uses a set similarity measure called <a href="http://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient" class="externalLink" target="_blank">Sørensen–Dice coefficient</a>.
+					It uses the following formula:
+					<br/>
+      <code>DQ(A, B) = (2 * |A ∩ B|) / (|A| + |B|)</code>, where A, B are sets.<br/>
+
+					Since the measure is originally used for comparing two sets,
+					this implementation offers 3 ways, how to slice input string
+					to &quot;tokens&quot; (set elements). They are distinguished
+					by the signature of the method:
+
+					<ul>
+						<li>
+							<code>diceCoefficient(srcStr1, srcStr2, ngramLength)</code>
+							Sets are filled with extracted ngrams of constant length <code>n</code>
+							created from each string. Any whitespace will be treated as
+							any other character.
+
+							E.g. word <code>OVERVIEW</code> with <code>ngramLength</code> set to 4
+							will be transformed to a set of following ngrams:
+							<code>OVER, VERV, ERVI, RVIE, VIEW</code>
+						</li>
+
+						<li>
+							<code>diceCoefficient(srcStr1, srcStr2, tokenSeparator)</code>
+							Sets are filled with source strings splitted by <code>tokenSeparator</code> character.
+							Therefore compared tokens will be of non-uniform length.
+						</li>
+
+						<li>
+							<code>diceCoefficient(srcStr1, srcStr2, tokenSeparator, ngramLength)</code>
+							Combines two previous approaches. At first, a input string is splitted by
+							<code>tokenSeparator</code>, then separated tokens are transformed to ngrams
+							of constant length (<code>ngramLength</code>) and inserted to a common comparsion
+							set. If the token is shorter than <code>ngramLength</code>, it is inserted
+							to the set as is. (Therefore tokens shorter than <code>ngramLength</code>
+							may appear in comparative sets.)
+						</li>
+					</ul>
+				</description>
+  </operation>
+  <operation name="jaccardCoefficient">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;jaccardCoefficient&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;tokenSeparator&lt;/b&gt;&lt;samp&gt;=null&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;ngramLength&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the jaccardCoefficient for strings <code>srcStr1</code>
+					and <code>srcStr2</code>. Returned values are between 0 and 1, where 1
+					indicates perfect match (identical strings) and 0 no similarity.
+
+					The function is case INSENSITIVE.
+
+					Method uses a set similarity measure called <a href="http://en.wikipedia.org/wiki/Jaccard_index" class="externalLink" target="_blank">Jaccard coefficient</a>.
+					It uses the following formula:
+					<br/>
+      <code>JQ(A, B) = (|A ∩ B|) / (|A ∪ B|)</code>, where A, B are sets.<br/>
+
+					Since the measure is originally used for comparing two sets,
+					this implementation offers 3 ways, how to slice input string
+					to &quot;tokens&quot; (set elements). They are distinguished
+					by the signature of the method:
+
+					<ul>
+						<li>
+							<code>jaccardCoefficient(srcStr1, srcStr2, ngramLength)</code>
+							Sets are filled with extracted ngrams of constant length <code>n</code>
+							created from each string. Any whitespace will be treated as
+							any other character.
+
+							E.g. word <code>OVERVIEW</code> with <code>ngramLength</code> set to 4
+							will be transformed to a set of following ngrams:
+							<code>OVER, VERV, ERVI, RVIE, VIEW</code>
+						</li>
+
+						<li>
+							<code>jaccardCoefficient(srcStr1, srcStr2, tokenSeparator)</code>
+							Sets are filled with source strings splitted by <code>tokenSeparator</code> character.
+							Therefore compared tokens will be of non-uniform length.
+						</li>
+
+						<li>
+							<code>jaccardCoefficient(srcStr1, srcStr2, tokenSeparator, ngramLength)</code>
+							Combines two previous approaches. At first, a input string is split by
+							<code>tokenSeparator</code>, then separated tokens are transformed to ngrams
+							of constant length (<code>ngramLength</code>) and inserted to a common comparison
+							set. If the token is shorter than <code>ngramLength</code>, it is inserted
+							to the set as is. (Therefore tokens shorter than <code>ngramLength</code>
+							may appear in comparative sets.)
+						</li>
+					</ul>
+				</description>
+  </operation>
+  <operation name="find">
+    <signatures>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;find&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcRegex&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;caseInsensitive&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Verifies whether the string <code>srcStr</code> or its parts match the regular expression <code>srcRegex</code>.
+					The parameter <code>caseInsensitive</code> determines
+					whether the case sensitivity should be considered or not. By default the
+					function is case SENSITIVE.
+					If the string <code>srcStr</code> is <code>NULL</code> or empty, the function returns <code>NULL</code>.
+					For information about regular expressions see the &#39;Regular expressions&#39; section in &#39;Expressions&#39; topic of the product help.
+				</description>
+  </operation>
+  <operation name="matches">
+    <signatures>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;matches&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcRegex&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;caseInsensitive&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Verifies whether the string <code>srcStr</code> matches exactly the pattern of the regular expression <code>srcRegex</code>.
+					The parameter <code>caseInsensitive</code> determines
+					whether case sensitivity should be considered or not. By default the
+					function is case SENSITIVE.
+					If the string <code>srcStr</code> is <code>NULL</code> or empty, the function returns <code>NULL</code>.
+					For information about regular expressions see the &#39;Regular expressions&#39; section in &#39;Expressions&#39; topic of the product help.
+				</description>
+  </operation>
+  <operation name="isInFile">
+    <signatures>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;isInFile&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;fileName&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Searches for the string <code>srcStr</code> in a file defined by the parameter
+					<code>fileName</code>. The parameter <code>fileName</code> must be a constant
+					expression and must point to a dictionary with simple values. The function returns
+					<code>TRUE</code> if <code>srcStr</code> is found in the dictionary, and <code>FALSE</code> otherwise.
+					Before the search starts, the value of <code>srcStr</code> is trimmed (all whitespaces from the beginning and end of the string are removed)
+					which may possibly lead to <code>NULL</code> value of the search value.
+				</description>
+  </operation>
+  <operation name="cpConvert">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;cpConvert&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;actualCp&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;correctCp&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+				Takes a string as an input wrongly read using the <code>actualCp</code> charset and
+				transforms it into a correct <code>correctCp</code> charset. E.g. a file which
+				is all in <code>windows-1250</code> charset except for one column, <code>a</code>, which is in the <code>latin2</code>
+				charset. This file will be read using the <code>windows-1250</code> charset and for the <code>a</code>
+				column the expression <code>cpConvert(a, &#39;windows-1250&#39;, &#39;latin2&#39;)</code> can be used.
+				</description>
+  </operation>
+  <operation name="soundex">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;soundex&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the soundex value of the <code>srcStr</code> parameter. It removes accents and non-ascii
+					characters from the <code>str</code> before evaluating the soundex value.
+					See <a href="http://en.wikipedia.org/wiki/Soundex" class="externalLink" target="_blank">Soundex</a> at Wikipedia.
+				</description>
+  </operation>
+  <operation name="metaphone">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;metaphone&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+				Encodes <code>srcStr</code> to a metaphone string. It removes accents from the
+				<code>srcStr</code> before evaluating the metaphone value.
+				See <a href="http://en.wikipedia.org/wiki/Metaphone" class="externalLink" target="_blank">Metaphone</a> at Wikipedia.
+				</description>
+  </operation>
+  <operation name="doubleMetaphone">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;doubleMetaphone&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;isAlternate&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+				Encodes <code>srcStr</code> to a double metaphone primary or secondary string based on the parameter <code>isAlternate</code>.
+				It removes accents from the <code>srcStr</code> before evaluating the double metaphone value.
+				If <code>isAlternate</code> is true, returns secondary secondary string, oOtherwise returns primary string.
+				See <a href="http://en.wikipedia.org/wiki/Metaphone" class="externalLink" target="_blank">Metaphone</a> at Wikipedia.
+				</description>
+  </operation>
+  <operation name="ngram">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;ngram&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcStr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;inSeparator&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;outSeparator&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;size&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+				Takes the <code>srcStr</code> as a sequence of items separated by <code>inSeparator</code> and creates another
+				sequence of all n-grams of these items (sub-sequences of the original sequence) in the original order. N-grams
+				in the output sequence are separated by <code>inSeparator</code>, items inside N-grams by <code>outSeparator</code>.
+				The <code>size</code> parameter is the &quot;N&quot;, the size of the N-grams. The length of both separators as well as of the
+				N-grams has to be at least 1.
+				Note: If there are not enough words for creating Ngram, the function returns NULL.
+				See <a href="http://en.wikipedia.org/wiki/N-gram" class="externalLink" target="_blank">N-gram</a> at Wikipedia.
+				</description>
+  </operation>
+  <operation name="coding.toBase64">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.toBase64&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Encodes the source string to Base64.</description>
+  </operation>
+  <operation name="coding.fromBase64">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.fromBase64&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Decodes the source string from Base64.</description>
+  </operation>
+  <operation name="coding.md5">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.md5&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Creates a hash of the source string using MD5 algorithm.</description>
+  </operation>
+  <operation name="coding.HMacSHA1">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.HMacSHA1&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;key&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Creates a hash-based message authentication code using SHA-1 algorithm.</description>
+  </operation>
+  <operation name="coding.HMacSHA512">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.HMacSHA512&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;key&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Creates a hash-based message authentication code using SHA-512 algorithm.</description>
+  </operation>
+  <operation name="coding.HMacMD5">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.HMacMD5&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;message&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;key&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Creates a hash-based message authentication code using MD5 algorithm.</description>
+  </operation>
+  <operation name="coding.encrypt">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.encrypt&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;key&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;cipher&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+                    Encrypts string using key or key alias and cipher method. If the <code>key</code> and/or <code>cipher</code> is null,
+                    default key/cipher is used. The <code>key</code> may be in form <code>alias:&lt;keyAlias&gt;</code> (for example <code>alias:myKey</code>, then the key alias must be defined
+                    in keystore. Otherwise the <code>key</code> is used as user supplied plain key.<br/>
+                    The supported values for <code>cipher</code> are DES, DESede, AES, AES_CBC<br/>
+                    Returns encrypted string in form <code>crypted:&lt;cipher&gt;[(&lt;alias&gt;)]:...</code>.<br/>
+                    The keystore and keystore password are specified by java options <code>-Dproperties.encryption.keystore</code>,
+                    <code>-Dproperties.encryption.keystore.password</code>, <code>-Dproperties.encryption.keystore.passwordFile</code>.<br/>
+                    It is essential that the keystore contains secure keys without a key password. Keystore may be created
+                    using standard <strong>keytool</strong> utility, e.g. <code>keytool -genseckey -alias keyAlias -keyalg AES -keysize 256 -storetype jceks -storepass PassWord741 -keystore kstore.jceks -keypass &quot;&quot;</code>.
+                    But in case of store type <code>pkcs12</code> the keytool will always set the key password the same as the store password. A better way to manage passwords
+                    of keystore is with the <code>KeyStore Explorer</code> application.
+                </description>
+  </operation>
+  <operation name="coding.decrypt">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.decrypt&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;key&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+                    Encrypts string. If the <code>key</code> is null, internal default is used. The source string have to be in form
+                    <code>crypted:&lt;cipher&gt;[(&lt;alias&gt;)]:...</code>.
+                    If the alias is not specified, user supplied plain <code>key</code> is used to decrypt.
+                </description>
+  </operation>
+  <operation name="coding.urlEncode">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.urlEncode&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;charset&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+                Replaces all url unsupported characters into hexadecimal representation (<code>%HH</code>). The blank is replaced with <code>+</code>.
+                The supported characters are alfanumeric and <code>*-._</code>.
+                The <code>charset</code> parameter is optional (default is according to system settings) and is esencial for char-byte conversion.
+                </description>
+  </operation>
+  <operation name="coding.urlDecode">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.urlDecode&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;charset&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+                Parses url encoded string and replaces bytes in hexadecimal form (<code>%HH</code>) into original characters.
+                The <code>charset</code> parameter is optional (default is according to system settings) and is esencial for char-byte conversion.
+                </description>
+  </operation>
+  <operation name="coding.htmlEscape">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.htmlEscape&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;allEntities&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+                Replaces xml/html special characters <code>&lt;&gt;&amp;&quot;...</code> to entities <code>&amp;lt;&amp;gt;&amp;amp;&amp;quot;...</code>.
+                If the second parameter is true (default is false),
+                replaces also all non-ascii characters into known entities or into <code>&amp;#xHHHH</code> form.
+                </description>
+  </operation>
+  <operation name="coding.htmlUnescape">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.htmlUnescape&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;allEntities&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+                Replaces entities for special xml/html characters <code>&amp;lt;&amp;gt;&amp;amp;&amp;quot;...</code> to original characters <code>&lt;&gt;&amp;&quot;...</code>.
+                If the second parameter is true (default is false),
+                every known entities or <code>&amp;#xHHHH</code> form are replaced, too.
+                Note: the entity <code>&amp;nbsp;</code> (non-breaking space) is unescaped as normal space.
+                </description>
+  </operation>
+  <operation name="encode.md5">
+    <signatures/>
+    <description>Deprecated, use coding.md5 instead.</description>
+  </operation>
+  <operation name="encode.base64">
+    <signatures/>
+    <description>Deprecated, use coding.toBase64 instead.</description>
+  </operation>
+  <operation name="encode.HMacSHA1">
+    <signatures/>
+    <description>Deprecated, use coding.HMacSHA1 instead.</description>
+  </operation>
+  <operation name="encode.HMacSHA512">
+    <signatures/>
+    <description>Deprecated, use coding.HMacSHA512 instead.</description>
+  </operation>
+  <operation name="encode.HMacMD5">
+    <signatures/>
+    <description>Deprecated, use coding.HMacMD5 instead.</description>
+  </operation>
+  <operation name="coding.protect">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.protect&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;user&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;dataElementName&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;input&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+                    Protect input string using Protegrity Application Protector.
+                    <ul>
+                        <li>
+          <code>user</code>: user name defined in the policy</li>
+                        <li>
+          <code>dataElementName</code>: data element name defined in policy</li>
+                        <li>
+          <code>input</code>: value to protect</li>
+                    </ul>
+                </description>
+  </operation>
+  <operation name="coding.unprotect">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;coding.protect&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;user&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;dataElementName&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;input&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+                    Unprotect input string using Protegrity Application Protector.
+                    <ul>
+                        <li>
+          <code>user</code>: user name defined in the policy</li>
+                        <li>
+          <code>dataElementName</code>: data element name defined in policy</li>
+                        <li>
+          <code>input</code>: value to protect</li>
+                    </ul>
+                </description>
+  </operation>
+  <operation name="math.sqr">
+    <signatures>
+      <signature>&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.sqr&lt;/strong&gt;(&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Returns square of x.</description>
+  </operation>
+  <operation name="math.pow">
+    <signatures>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.pow&lt;/strong&gt;(&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;y&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.pow&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;y&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.pow&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;, &lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;y&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns x power to y.
+					Function is undefined and returns null value for negative y and x = 0 or negative x and non-integer y.
+					Function variant for integer x returns null when exponent y &lt; 0 and x is not ±1.
+				</description>
+  </operation>
+  <operation name="math.pi">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.pi&lt;/strong&gt;()</signature>
+    </signatures>
+    <description>
+					Returns π (PI) = 3,1415926536.
+				</description>
+  </operation>
+  <operation name="math.e">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.e&lt;/strong&gt;()</signature>
+    </signatures>
+    <description>
+					Returns Euler&#39;s number (e) = 2,7182818285.
+				</description>
+  </operation>
+  <operation name="math.sqrt">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.sqrt&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Square root of x. Defined for x &gt;= 0.
+				</description>
+  </operation>
+  <operation name="math.exp">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.exp&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Exponential function e<sup>x</sup>. Equivalent to math.pow(math.e(), x).
+				</description>
+  </operation>
+  <operation name="math.log">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.log&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Natural logarithm of x. Defined for x &gt; 0 and math.exp(math.log(x)) = x.
+				</description>
+  </operation>
+  <operation name="math.log10">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.log10&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Common logarithm of x. Defined for x &gt; 0 and math.pow(10, math.log10(x)) = x.
+				</description>
+  </operation>
+  <operation name="math.sin">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.sin&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Sine of x. The argument is assumed in radians.</description>
+  </operation>
+  <operation name="math.cos">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.cos&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Cosine of x. The argument is assumed in radians.</description>
+  </operation>
+  <operation name="math.tan">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.tan&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Tangent of x. The argument is assumed in radians. Undefined for π/2 + k*π</description>
+  </operation>
+  <operation name="math.asin">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.asin&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Arc sine of x. Defined for x ∈ [-1,1].</description>
+  </operation>
+  <operation name="math.acos">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.acos&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Arc cosine of x. Defined for x ∈ [-1,1].</description>
+  </operation>
+  <operation name="math.atan">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;math.atan&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;x&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Arc tangent of x.</description>
+  </operation>
+  <operation name="bitand">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;bitand&lt;/strong&gt;(&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;bitand&lt;/strong&gt;(&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Bitwise AND</description>
+  </operation>
+  <operation name="bitor">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;bitor&lt;/strong&gt;(&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;bitor&lt;/strong&gt;(&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Bitwise inclusive OR</description>
+  </operation>
+  <operation name="bitneg">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;bitneg&lt;/strong&gt;(&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;bitneg&lt;/strong&gt;(&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Bitwise NOT, or complement</description>
+  </operation>
+  <operation name="bitxor">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;bitxor&lt;/strong&gt;(&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;bitxor&lt;/strong&gt;(&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Bitwise exclusive or</description>
+  </operation>
+  <operation name="min">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;min&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the lesser of two operands. If either of the operands is
+					<code>NULL</code>, <code>NULL</code> is returned. Strings are compared
+					lexicographically. For boolean values <code>min(FALSE, ?) = FALSE</code>.
+				</description>
+  </operation>
+  <operation name="max">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;max&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the greater of two operands. If either of the operands is
+					<code>NULL</code>, <code>NULL</code> is returned. Strings are compared
+					lexicographically. For boolean values <code>max(TRUE, ?) = TRUE</code>.
+				</description>
+  </operation>
+  <operation name="safeMin">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;safeMin&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the lesser of two operands.
+					If either of the operands is <code>NULL</code> then the value of the other operand is returned. Strings are compared
+					lexicographically. For boolean values <code>safeMin(FALSE, ?) = FALSE</code>.
+				</description>
+  </operation>
+  <operation name="safeMax">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;safeMax&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the greater of two operands.
+					If either of the operands is <code>NULL</code> then the value of the other operand is returned. Strings are compared
+					lexicographically. For boolean values <code>safeMax(TRUE, ?) = TRUE</code>.
+				</description>
+  </operation>
+  <operation name="count">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;count&lt;/strong&gt;([&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the number of members or non-null <code>expression</code> values in a group. Both 32-bit and 64-bit integer data types are supported.
+				</description>
+  </operation>
+  <operation name="countif">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;countif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>count</code>.<br/>
+				</description>
+  </operation>
+  <operation name="countDistinct">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;countDistinct&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the number of distinct non-<code>NULL</code> values in a group.
+				</description>
+  </operation>
+  <operation name="countDistinctif">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;countDistinctif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>countDistinct</code>.<br/>
+					Returns the number of distinct non-<code>NULL</code> values in a group.
+				</description>
+  </operation>
+  <operation name="countUnique">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;countUnique&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the number of non-NULL values in a group, which occurs only one time.
+				</description>
+  </operation>
+  <operation name="countUniqueif">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;countUniqueif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>countUnique</code>.<br/>
+					Returns the number of non-NULL values in a group, which occurs only one time.
+				</description>
+  </operation>
+  <operation name="sum">
+    <signatures>
+      <signature>&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;strong&gt;sum&lt;/strong&gt;(&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;sum&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the sum of non-NULL values in a group.
+					For boolean arguments, this function performs the logical sum (OR), e.g. <code>sum(true, true, false) = true</code>. Both 32-bit and 64-bit integer data types are supported.
+				</description>
+  </operation>
+  <operation name="sumif">
+    <signatures>
+      <signature>&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;strong&gt;sumif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;sumif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>sum</code>.<br/>
+					Returns the sum of non-NULL values in a group.
+					For boolean arguments, this function performs the logical sum (OR), e.g. <code>sum(true, true, false) = true</code>.
+				</description>
+  </operation>
+  <operation name="avg">
+    <signatures>
+      <signature>&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;strong&gt;avg&lt;/strong&gt;(&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;strong&gt;avg&lt;/strong&gt;(&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					If the input is of an integer type, function returns the average value of non-<code>NULL</code> values in a group. Result is an integer number rounded down.
+					For example avg(2, null, 4) = 6/2 = 3.
+					If the input is of a float type, function returns the average value of non-<code>NULL</code> values in a group. Result is a number of a float type not rounded.
+					For example	 avg(1.5, 2.6, 3.8) = 7.9/3 = 2.633333333333333
+					If the input is of a date type, function returns the average value of non-<code>NULL</code> values in a group. Result is a date type rounded down.
+					For example avg(2019-10-05, 2018-11-11, 2006-12-12) = 2015-03-10
+					If the input is of a daytime type, function returns the average value of non-<code>NULL</code> values in a group. Result is a daytime type rounded down.
+					For example avg(2019-10-05 10:20:30, 2018-11-11 00:00:00, 2006-12-12 12:00:00) = 2015-03-10 23:06:50
+				</description>
+  </operation>
+  <operation name="avgif">
+    <signatures>
+      <signature>&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;strong&gt;avgif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;strong&gt;avgif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>avg</code>.<br/>
+					If the input is of an integer type, function returns the average value of non-<code>NULL</code> values in a group. Result is an integer number rounded down.
+					For example avg(2, null, 4) = 6/2 = 3.
+					If the input is of a float type, function returns the average value of non-<code>NULL</code> values in a group. Result is a number of a float type not rounded.
+					For example	 avg(1.5, 2.6, 3.8) = 7.9/3 = 2.633333333333333
+					If the input is of a date type, function returns the average value of non-<code>NULL</code> values in a group. Result is a date type rounded down.
+					For example avg(2019-10-05, 2018-11-11, 2006-12-12) = 2015-03-10
+					If the input is of a daytime type, function returns the average value of non-<code>NULL</code> values in a group. Result is a daytime type rounded down.
+					For example avg(2019-10-05 10:20:30, 2018-11-11 00:00:00, 2006-12-12 12:00:00) = 2015-03-10 23:06:50
+				</description>
+  </operation>
+  <operation name="maximum">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;maximum&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;result&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the maximum of non-<code>NULL</code> values in group.
+					When the second argument is used, returns its (first non-null) value for record having maximum.
+				</description>
+  </operation>
+  <operation name="maximumif">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;maximumif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;result&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>maximum</code>.<br/>
+					Returns the maximum of non-<code>NULL</code> values in group.
+					When the second argument is used, returns its (first non-null) value for record having maximum.
+				</description>
+  </operation>
+  <operation name="minimum">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;minimum&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;result&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the minimum of non-<code>NULL</code> values in group.
+					When the second argument is used, returns its (first non-null) value for record having minimum.
+				</description>
+  </operation>
+  <operation name="minimumif">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;minimumif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;result&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>minimum</code>.<br/>
+					Returns the minimum of non-<code>NULL</code> values in group.
+					When the second argument is used, returns its (first non-null) value for record having minimum.
+				</description>
+  </operation>
+  <operation name="frequency">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;frequency&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Function assigns a number to each record that represents the total number of records in the same group (from the aggregation context) that share the same value of the expression argument. Frequency function can be used to select the representative record as the one with most or least common value of some attribute.<br/>
+      <br/>
+					<strong>Note:</strong> This function can be only used in <strong>Selection Rules</strong> section of <strong>Representative Creator</strong> step for sorting records and choosing the best record, that can be used later on other places (instance and representative attributes).
+				</description>
+  </operation>
+  <operation name="first">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;first&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the first value in a group (including <code>NULL</code> values).
+					<br/>This aggregation value depends on the order of group members, which is given by context.
+				</description>
+  </operation>
+  <operation name="firstif">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;firstif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>first</code>.<br/>
+					Returns the first value in a group (including <code>NULL</code> values).
+					<br/>This aggregation value depends on the order of group members, which is given by context.
+				</description>
+  </operation>
+  <operation name="last">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;last&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the last value in a group (including <code>NULL</code> values).
+					<br/>This aggregation value depends on the order of group members, which is given by context.
+				</description>
+  </operation>
+  <operation name="lastif">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;lastif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>last</code>.<br/>
+					Returns the last value in a group (including <code>NULL</code> values).
+					<br/>This aggregation value depends on the order of group members, which is given by context.
+				</description>
+  </operation>
+  <operation name="modus">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;modus&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;result&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the most frequent non-<code>NULL</code> value of <code>expression</code> in a group or, if specified,
+					the first non-<code>NULL</code> value of <code>result</code> members having the most frequent non-<code>NULL</code>
+					value <code>expression</code>.
+					<br/>In case of more than one value with the same frequency, one of the matching values will be chosen arbitrarily
+				</description>
+  </operation>
+  <operation name="modusif">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;modusif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;result&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>modus</code>.<br/>
+					Returns the first non-<code>NULL</code> value of <code>result</code> members having the most frequent non-<code>NULL</code>
+					value <code>expression</code>.
+					<br/>In case of more than one value with the same frequency, one of the matching values will be chosen arbitrarily
+				</description>
+  </operation>
+  <operation name="concatenate">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;concatenate&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;maxLen&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns a concatenated string made up of non-<code>NULL</code> values in a group, separated by the value in <code>separator</code>(optional).
+					The resultant string never exceeds <code>maxLen</code> characters. Elements causing overflow are not added.
+				</description>
+  </operation>
+  <operation name="concatenateif">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;concatenateif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;boolExpression&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;expression&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;], &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;maxLen&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Conditional version of <code>concatenate</code>.<br/>
+					Returns a concatenated string made up of non-<code>NULL</code> values in a group, separated by the value in <code>separator</code>(optional).
+					The resultant string never exceeds <code>maxLen</code> characters. Elements causing overflow are not added.
+				</description>
+  </operation>
+  <operation name="detectCycles">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;detectCycles&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;parents&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;children&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;detectCycles&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;parents&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;children&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the first link of the oriented graph that creates a cycle.
+					The function takes <a href="https://en.wikipedia.org/wiki/Adjacency_list" class="externalLink" target="_blank">adjacency lists</a> of parents and their
+					children and performs recursive <a href="https://en.wikipedia.org/wiki/Depth-first_search" class="externalLink" target="_blank">depth-first search</a>
+					to find cycles. Returns null if cycle is not found.
+				</description>
+  </operation>
+  <operation name="collect">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;collect&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;value&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;struct&lt;/em&gt;&amp;nbsp;&lt;strong&gt;collect&lt;/strong&gt;(&lt;em&gt;struct&lt;/em&gt;&amp;nbsp;&lt;b&gt;value&lt;/b&gt;)</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="case">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;case&lt;/strong&gt;({&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;exprValue&lt;/b&gt;}... [,&amp;nbsp;&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;defaultExpr&lt;/b&gt;&lt;samp&gt;=null&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the value of expression <code>exprValue</code> immediately
+					following the first expression <code>expr</code> whose value is <code>TRUE</code>.
+					If none of the expressions <code>expr</code> is evaluated as <code>TRUE</code>
+					then <code>defaultExpr</code> is returned - if <code>defaultExpr</code> is specified.
+					Otherwise, <code>NULL</code> is returned. The types of all values of <code>exprValue</code> must be the same.
+				</description>
+  </operation>
+  <operation name="decode">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;decode&lt;/strong&gt;(&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;decodeExpr&lt;/b&gt; {,&amp;nbsp;&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;exprValue&lt;/b&gt;}... [,&amp;nbsp;&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;defaultExpr&lt;/b&gt;&lt;samp&gt;=null&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the value of expression <code>exprValue</code> immediately
+					following the first expression <code>expr</code> whose value is equal to <code>decodeExpr</code>.
+					If none of the expressions <code>expr</code> is evaluated as <code>TRUE</code>
+					then <code>defaultExpr</code> is returned - if <code>defaultExpr</code> specified.
+					Otherwise, <code>NULL</code> is returned. The types of all values of <code>exprValue</code> must be the same.
+					Additionally, all types of the value of <code>exprValue</code> must correspond to the type of expression <code>expr</code>.
+				</description>
+  </operation>
+  <operation name="iif">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;iif&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;ifExpr&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;trueExpr&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;elseExpr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns <code>trueExpr</code> if <code>ifExpr</code> is <code>TRUE</code>. If <code>ifExpr</code>
+					is <code>FALSE</code> or <code>UNKNOWN</code>, <code>elseExpr</code> is returned.
+				</description>
+  </operation>
+  <operation name="nvl">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;nvl&lt;/strong&gt;({&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;}...)</signature>
+    </signatures>
+    <description>
+					Returns the value of the first expression <code>expr</code> whose
+					value is not <code>NULL</code>. If no such value exists then <code>NULL</code> is returned.
+				</description>
+  </operation>
+  <operation name="toDate">
+    <signatures>
+      <signature>&lt;em&gt;date&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toDate&lt;/strong&gt;(&lt;em&gt;datetime&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;date&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toDate&lt;/strong&gt;(&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;date&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toDate&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;dateFormat&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;dateLocale&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the date specified in expression <code>expr</code> converted to date type DATE. If the conversion is not
+					successful, then <code>NULL</code> is returned.
+					If single argument is used, <code>expr</code> can be DATE or LONG expression.
+					If <code>expr</code> is a STRING value and its format is defined by the
+					<code>dateFormat</code> parameter (of type STRING) and the localization defined
+					in the <code>dateLocale</code> parameter (of type STRING). The <code>dateFormat</code> and <code>dateLocale</code> strings depend
+					on the classes:
+					<a href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html" class="externalLink" target="_blank">SimpleDateFormat</a> and
+					<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html" class="externalLink" target="_blank">Locale</a>.
+				</description>
+  </operation>
+  <operation name="toDateTime">
+    <signatures>
+      <signature>&lt;em&gt;datetime&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toDateTime&lt;/strong&gt;(&lt;em&gt;date&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;datetime&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toDateTime&lt;/strong&gt;(&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;datetime&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toDateTime&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;dateFormat&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;dateLocale&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the date specified in expression <code>expr</code> converted to date type DATETIME. If the conversion is not
+					successful, then <code>NULL</code> is returned.
+					If single argument is used, <code>expr</code> can be DATE or LONG expression.
+					If <code>expr</code> is a STRING value and its format is defined by the
+					<code>dateFormat</code> parameter (of type STRING) and localization defined
+					in <code>dateLocale</code> parameter (of type STRING). The <code>dateFormat</code> and <code>dateLocale</code> strings depend
+					on the classes:
+					<a href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html" class="externalLink" target="_blank">SimpleDateFormat</a> and
+					<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html" class="externalLink" target="_blank">Locale</a>.
+				</description>
+  </operation>
+  <operation name="getMilliseconds">
+    <signatures>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;getMilliseconds&lt;/strong&gt;(&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;b&gt;srcExpression&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns internal representation of datetime value, i.e. number of milliseconds since the &quot;epoch&quot;
+					which starts at January 1, 1970, 00:00:00 GMT. Returned value can be converted back into DATE/DATETIME using
+					toDate/toDateTime function.
+				</description>
+  </operation>
+  <operation name="toString">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toString&lt;/strong&gt;(&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;strFormat&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;strLocale&lt;/b&gt;]])</signature>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toString&lt;/strong&gt;(&lt;em&gt;datetype&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;strFormat&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;strLocale&lt;/b&gt;])</signature>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toString&lt;/strong&gt;(&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toString&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Converts the expression <code>expr</code> to a STRING value. If the conversion is not
+					successful, then <code>NULL</code> is returned. The parameter
+					<code>strFormat</code> is required for expressions of type DATETIME or DATE.
+					When only the <code>expr</code> parameter is set then the default Java convert method
+					(<code>toString</code>) is used for the conversion.
+					If the parameter <code>strFormat</code> is set, then it is used as the output format.
+					If <code>strLocale</code> is not set, the default locale for the JVM instance is used.
+					If the <code>strFormat</code> parameter (eventually <code>strLocale</code>) is set,
+					then only expressions of date or numeric types (DATETIME, DATE, INTEGER, LONG or FLOAT)
+					can be converted.
+					Conversions for other types with parameters <code>strFormat</code>, eventually <code>strLocale</code> specified are not defined.
+					The <code>strFormat</code> and <code>strLocale</code> strings depend on the classes:
+					<a href="https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html" class="externalLink" target="_blank">SimpleDateFormat</a> and
+					<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html" class="externalLink" target="_blank">Locale</a>.
+					</description>
+  </operation>
+  <operation name="toInteger">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toInteger&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Converts the expression <code>expr</code> to an INTEGER value. If the conversion is not
+					successful, then <code>NULL</code> is returned.
+				</description>
+  </operation>
+  <operation name="toLong">
+    <signatures>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toLong&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toLong&lt;/strong&gt;(&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Converts the expression <code>expr</code> to a LONG value. If the conversion is not
+					successful, then <code>NULL</code> is returned.
+				</description>
+  </operation>
+  <operation name="toFloat">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toFloat&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toFloat&lt;/strong&gt;(&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;toFloat&lt;/strong&gt;(&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Converts the expression <code>expr</code> to a FLOAT value. If the conversion is not
+					successful, then <code>NULL</code> is returned.
+				</description>
+  </operation>
+  <operation name="math.floor">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[math.]floor&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Converts the expression <code>expr</code> to the nearest lower integer value.
+				</description>
+  </operation>
+  <operation name="math.longFloor">
+    <signatures>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[math.]longFloor&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Converts the expression <code>expr</code> to the nearest lower long value.
+				</description>
+  </operation>
+  <operation name="math.ceil, math.ceiling">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[math.]ceil&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[math.]ceiling&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Converts the expression <code>expr</code> to the nearest higher integer value.
+				</description>
+  </operation>
+  <operation name="math.longCeil, math.longCeiling">
+    <signatures>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[math.]longCeil&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;long&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[math.]longCeiling&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Converts the expression <code>expr</code> to the nearest higher long value.
+				</description>
+  </operation>
+  <operation name="math.round">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[math.]round&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;decimalPlaces&lt;/b&gt;&lt;samp&gt;=0&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Rounds the expression <code>expr</code> to a given number of decimal places, specified by <code>decimalPlaces</code>.
+				</description>
+  </operation>
+  <operation name="math.abs">
+    <signatures>
+      <signature>&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[math.]abs&lt;/strong&gt;(&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;b&gt;expr&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns absolute value of the expression <code>expr</code>.
+				</description>
+  </operation>
+  <operation name="xpath">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;xpath&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;xml&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;xpath&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Retrieves the XML element from the source XML string lying on the specified XPath.</description>
+  </operation>
+  <operation name="str.jsonParse">
+    <signatures>
+      <signature>&lt;em&gt;struct&lt;/em&gt;&amp;nbsp;&lt;strong&gt;str.jsonParse&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;)</signature>
+    </signatures>
+    <description>Parses string as json.</description>
+  </operation>
+  <operation name="str.toObject">
+    <signatures>
+      <signature>&lt;em&gt;struct&lt;/em&gt;&amp;nbsp;&lt;strong&gt;str.toObject&lt;/strong&gt;([&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;propName&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;propValue&lt;/b&gt;])</signature>
+    </signatures>
+    <description>Creates struct object (map) from key-value pairs.</description>
+  </operation>
+  <operation name="str.toArray">
+    <signatures>
+      <signature>&lt;em&gt;struct&lt;/em&gt;&amp;nbsp;&lt;strong&gt;str.toArray&lt;/strong&gt;([&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;element&lt;/b&gt;])</signature>
+    </signatures>
+    <description>Creates struct array from values. Exactly one element of array type is converted to struct array.</description>
+  </operation>
+  <operation name="arr.split">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.split&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;mapper&lt;/b&gt;])</signature>
+    </signatures>
+    <description>Splits string. Optionally maps elements.</description>
+  </operation>
+  <operation name="arr.map">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.map&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;mapper&lt;/b&gt;)</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.size">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.size&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;)</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.item">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.item&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;index&lt;/b&gt;)</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.subSequence">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.subSequence&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;from&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;count&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.select">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.select&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;selector&lt;/b&gt;)</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.sort">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.sort&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;descending&lt;/b&gt;])</signature>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.sort&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.accumulate">
+    <signatures>
+      <signature>&lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.accumulate&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;initial&lt;/b&gt;, &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;accumulator&lt;/b&gt;)</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.distinct">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.distinct&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;)</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.contains">
+    <signatures>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.contains&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;value&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.contains&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;predicate&lt;/b&gt;)</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.indexOf">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.indexOf&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;value&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.indexOf&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;predicate&lt;/b&gt;)</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.lastIndexOf">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.lastIndexOf&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;any&lt;/em&gt;&amp;nbsp;&lt;b&gt;value&lt;/b&gt;)</signature>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.lastIndexOf&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;source&lt;/b&gt;, &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;predicate&lt;/b&gt;)</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.intersection">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.intersection&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.union">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.union&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.difference">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.difference&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.symmetricDifference">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.symmetricDifference&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.lcsIntersection">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.lcsIntersection&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.lcsDifference">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.lcsDifference&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.lcsSymmetricDifference">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.lcsSymmetricDifference&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.intersectionResult">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.intersectionResult&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.unionResult">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.unionResult&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.differenceResult">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.differenceResult&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.symmetricDifferenceResult">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.symmetricDifferenceResult&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.lcsIntersectionResult">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.lcsIntersectionResult&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.lcsDifferenceResult">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.lcsDifferenceResult&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="arr.lcsSymmetricDifferenceResult">
+    <signatures>
+      <signature>&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;strong&gt;arr.lcsSymmetricDifferenceResult&lt;/strong&gt;(&lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;a&lt;/b&gt;, &lt;em&gt;array&lt;/em&gt;&amp;nbsp;&lt;b&gt;b&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;])</signature>
+    </signatures>
+    <description/>
+  </operation>
+  <operation name="set.size">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.size&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the number of elements in the string, including empty elements.
+				</description>
+  </operation>
+  <operation name="set.item">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.item&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;index&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns element of the string set at specified position, including empty elements.
+				</description>
+  </operation>
+  <operation name="set.subSequence">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.subSequence&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt;, &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;from&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;count&lt;/b&gt;&lt;samp&gt;=null&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns elements of the string set starting at specified position, including empty elements.
+					The <code>from</code> index can be negative, then starting index is assumed from the last
+					(set.subSequence(&quot;A B C D&quot;, -3, 2) == &quot;B C&quot;).
+					When <code>count</code> is not specified or null, all remaining elements selected
+					(set.subSequence(&quot;A B C D&quot;, -3) == &quot;B C D&quot;).
+				</description>
+  </operation>
+  <operation name="set.indexOf">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.indexOf&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;item&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the position of <code>item</code> in the string set. Returns <code>null</code> if the item is not present.
+				</description>
+  </operation>
+  <operation name="set.indexOfExp">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.indexOfExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;item&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the position of <code>item</code> in the string set. Returns <code>null</code> if the item is not present.
+					The elements are compared according specified comparator.
+				</description>
+  </operation>
+  <operation name="set.lastIndexOf">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lastIndexOf&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;item&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the position of last <code>item</code> in the string set. Returns <code>null</code> if the item is not present.
+				</description>
+  </operation>
+  <operation name="set.lastIndexOfExp">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lastIndexOfExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;item&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the position of last <code>item</code> in the string set. Returns <code>null</code> if the item is not present.
+					The elements are compared according specified comparator.
+				</description>
+  </operation>
+  <operation name="set.contains">
+    <signatures>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.contains&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;item&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Checks whether <code>item</code> is contained in the string set.
+				</description>
+  </operation>
+  <operation name="set.containsExp">
+    <signatures>
+      <signature>&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.containsExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;item&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Checks whether <code>item</code> is contained in the string set.
+					The elements are compared according specified comparator.
+				</description>
+  </operation>
+  <operation name="set.distinct">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.distinct&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns set of distinct elements from source string.
+				</description>
+  </operation>
+  <operation name="set.distinctExp">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.distinctExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns set of distinct elements from source string.
+					The elements are compared according specified comparator.
+				</description>
+  </operation>
+  <operation name="set.sort">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.sort&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;str&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;locale&lt;/b&gt;&lt;samp&gt;=null&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;desc&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns sorted set of elements.
+				</description>
+  </operation>
+  <operation name="set.intersection">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[set.]intersection&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the intersection of sets.
+				</description>
+  </operation>
+  <operation name="set.intersectionResult">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.intersectionResult&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the intersection of sets.
+				</description>
+  </operation>
+  <operation name="set.union">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[set.]union&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the union of sets.
+				</description>
+  </operation>
+  <operation name="set.unionResult">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.unionResult&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns union of sets.
+				</description>
+  </operation>
+  <operation name="set.difference">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[set.]difference&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;singularity&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the difference of sets (set1 \ set2).
+				</description>
+  </operation>
+  <operation name="set.differenceResult">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.differenceResult&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the difference of sets (set1 \ set2).
+				</description>
+  </operation>
+  <operation name="set.symmetricDifference">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[set.]symmetricDifference&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;singularity&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the symmetric difference of sets.
+				</description>
+  </operation>
+  <operation name="set.symmetricDifferenceResult">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.symmetricDifferenceResult&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the symmetric difference of sets.
+				</description>
+  </operation>
+  <operation name="set.intersectionExp">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.intersectionExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the intersection of sets.
+				</description>
+  </operation>
+  <operation name="set.intersectionResultExp">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.intersectionResultExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the intersection of sets.
+				</description>
+  </operation>
+  <operation name="set.unionExp">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.unionExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the union of sets.
+				</description>
+  </operation>
+  <operation name="set.unionResultExp">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.unionResultExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the union of sets.
+				</description>
+  </operation>
+  <operation name="set.differenceExp">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.differenceExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;singularity&lt;/b&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the difference of sets (set1 \ set2).
+				</description>
+  </operation>
+  <operation name="set.differenceResultExp">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.differenceResultExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the difference of sets (set1 \ set2).
+				</description>
+  </operation>
+  <operation name="set.symmetricDifferenceExp">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.symmetricDifferenceExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;singularity&lt;/b&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the symmetric difference of sets.
+				</description>
+  </operation>
+  <operation name="set.symmetricDifferenceResultExp">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.symmetricDifferenceResultExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the symmetric difference of sets.<br/>
+					<strong>Example:</strong>
+      <br/>
+					<strong>Data sources:</strong> <strong>src_string1</strong> = &quot;alfa beta&quot;, <strong>src_string2</strong> = &quot;alfa alfa beta&quot;<br/>
+					<strong>Expression:</strong> <code>set.symmetricDifferenceResultExp(src_string1, src_string2, &#39; &#39;, true, (x,y) { x=y })</code>
+      <br/>
+					<strong>Result:</strong> alfa
+				</description>
+  </operation>
+  <operation name="set.lcsIntersection">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsIntersection&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the intersection of sets (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsIntersectionResult">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsIntersectionResult&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the intersection of sets (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsDifference">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsDifference&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;singularity&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the difference of sets (set1 \ set2) (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsDifferenceResult">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsDifferenceResult&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the difference of sets (set1 \ set2) (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsSymmetricDifference">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsSymmetricDifference&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;singularity&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the symmetric difference of sets (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsSymmetricDifferenceResult">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsSymmetricDifferenceResult&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the symmetric difference of sets (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsIntersectionExp">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsIntersectionExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the intersection of sets (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsIntersectionResultExp">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsIntersectionResultExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the intersection of sets (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsDifferenceExp">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsDifferenceExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;singularity&lt;/b&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the difference of sets (set1 \ set2) (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsDifferenceResultExp">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsDifferenceResultExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the difference of sets (set1 \ set2) (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsSymmetricDifferenceExp">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsSymmetricDifferenceExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;singularity&lt;/b&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the cardinality of the symmetric difference of sets (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.lcsSymmetricDifferenceResultExp">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.lcsSymmetricDifferenceResultExp&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;comparator&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns the symmetric difference of sets (lcs-based intersection).
+				</description>
+  </operation>
+  <operation name="set.approxSymmetricDifference">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;[set.]approxSymmetricDifference&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set1&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;set2&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;boolean&lt;/em&gt;&amp;nbsp;&lt;b&gt;multiset&lt;/b&gt;&lt;samp&gt;=false&lt;/samp&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;tolerance&lt;/b&gt;] [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;diff_function&lt;/b&gt;] [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;singularity&lt;/b&gt;])</signature>
+    </signatures>
+    <description>
+					Returns the number of words which cannot be matched with
+					any word in other set. The matching is based on one of difference function
+					&#39;levenshtein&#39; (default), &#39;editDistance&#39; or &#39;hamming&#39;
+					and tolerance as maximal number of changes in word. If the tolerance
+					is specified as noninteger number less than 1 and greater than 0, means
+					relative - ratio of number of changes divided by length of longer word.
+					<br/>NOTE: This function is equivalent to generic function:
+					<br/>
+      <em>symmetricDifferenceExp(set1, set2, separator, multiset, singularity, (x,y) { diff_function(x,y) &lt;= tolerance })</em>
+					or <em>symmetricDifferenceExp(set1, set2, separator, multiset, singularity, (x,y) { diff_function(x,y) / max(length(x), length(y)) &lt;= tolerance })</em>
+				</description>
+  </operation>
+  <operation name="set.mapExp">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.mapExp&lt;/strong&gt;(&lt;b&gt;set&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;callback&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns string set, whose each element is transformed by functional parameter.
+					<br/>Example: <code>mapExp(&#39;John Walker Smith&#39;, &#39; &#39;, (x) { left(x,3) })</code>
+					returns &quot;Joh Wal Smi&quot;.
+				</description>
+  </operation>
+  <operation name="set.sumExp">
+    <signatures>
+      <signature>&lt;em&gt;numeric&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.sumExp&lt;/strong&gt;(&lt;b&gt;set&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;], &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;callback&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns sum of values calculated by functional parameter for each element.
+					The functional parameter expression must return integer, long or float result.
+					<br/>Example: <code>sumExp(&#39;John Walker Smith&#39;, &#39; &#39;, (x) { length(x) })</code>
+					returns 4 + 6 + 5 = 15. The result for an empty set (null or empty string in
+					the first argument) is 0.
+				</description>
+  </operation>
+  <operation name="set.filterExp">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;set.filterExp&lt;/strong&gt;(&lt;b&gt;set&lt;/b&gt;, &lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;separator&lt;/b&gt;&lt;samp&gt;=&quot; &quot;&lt;/samp&gt;, &lt;em&gt;function&lt;/em&gt;&amp;nbsp;&lt;b&gt;callback&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Returns string set containing elements for which boolean functional parameter is true.
+					Equivalent to set.mapExp(set, separator, (x) { iif(function(x), x, &quot;&quot;) }).
+					<br/>Example: <code>filterExp(&#39;John W. Smith&#39;, &#39; &#39;, (x) { length(x) &gt; 2 })</code>
+					returns &quot;John Smith&quot;.
+				</description>
+  </operation>
+  <operation name="sequence">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;sequence&lt;/strong&gt;(&lt;b&gt;integer&lt;/b&gt; [,&amp;nbsp;&lt;b&gt;start&lt;/b&gt;&lt;samp&gt;=0&lt;/samp&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;step&lt;/b&gt;&lt;samp&gt;=1&lt;/samp&gt;]])</signature>
+    </signatures>
+    <description>
+				Generally it generates next number each time it is called. Exactly: when called it looks if it
+				was already called with given parameters in the running plan or in the online server. If it was not
+				called yet then it creates a counter object
+				which stores lastly generated number; at first the number is the value of the start parameter.
+				Otherwise it takes the already created counter object; increments the value of the object by the step
+				parameter and returns the stored number.
+
+					The default values are <code>sequence(0,1)</code>.
+				</description>
+  </operation>
+  <operation name="namedSequence">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;sequence&lt;/strong&gt;(&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;name&lt;/b&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;start&lt;/b&gt;&lt;samp&gt;=0&lt;/samp&gt; [,&amp;nbsp;&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;step&lt;/b&gt;&lt;samp&gt;=1&lt;/samp&gt;]])</signature>
+    </signatures>
+    <description>
+				Generally it generates next number each time it is called. Exactly: when called it looks if it
+				was already called with given name in the running plan or in the online server. If it was not
+				called yet then it creates a counter object
+				which stores lastly generated number; at first the number is the value of the start parameter.
+				Otherwise it takes the already created counter object; increments the value of the object by the step
+				parameter and returns the stored number. If there are more named sequences with
+				different start and step parameters called in the plan then the counter object is created with
+				the parameters of the first call.
+
+					The default values are <code>namedSequence(0,1)</code>.
+				</description>
+  </operation>
+  <operation name="random">
+    <signatures>
+      <signature>&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;strong&gt;random&lt;/strong&gt;([[&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;from&lt;/b&gt;&lt;samp&gt;=0&lt;/samp&gt;], &lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;to&lt;/b&gt;&lt;samp&gt;=1&lt;/samp&gt;])</signature>
+    </signatures>
+    <description>
+					Generates a random number from the interval defined by the parameters <code>from</code> and <code>to</code>.
+					The <code>from</code> parameter must evaluate to number lower or equal to the <code>to</code> parameter,
+					otherwise <code>null</code> value is returned. If any of the parameters evaluates
+					to <code>null</code> value, <code>null</code> is returned as well.
+					The default values are <code>0</code> for the <code>from</code> parameter and <code>1</code> for the <code>to</code>
+					parameter.
+				</description>
+  </operation>
+  <operation name="randomNanoID">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;randomNanoID&lt;/strong&gt;([&lt;em&gt;integer&lt;/em&gt;&amp;nbsp;&lt;b&gt;size&lt;/b&gt;&lt;samp&gt;=21&lt;/samp&gt; [,&amp;nbsp;&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;b&gt;alphabet&lt;/b&gt;]])</signature>
+    </signatures>
+    <description>
+					Static factory to retrieve a string containing random ID generated by <a href="https://github.com/aventrix/jnanoid" class="externalLink" target="_blank">JNanoID library</a>.
+					Default ID size is 21 characters using only numbers, letters (both lowercase and uppercase), underscore and hyphen.
+					You can specify your own size and also alphabet to use. The alphabet is a string containing all the characters which can be used for generated ID.
+					If <code>size</code> &lt;= 0 or <code>alphabet</code> is &quot;&quot; or <code>null</code>, then the result value is <code>null</code>.
+				</description>
+  </operation>
+  <operation name="randomUUID">
+    <signatures>
+      <signature>&lt;em&gt;string&lt;/em&gt;&amp;nbsp;&lt;strong&gt;randomUUID&lt;/strong&gt;()</signature>
+    </signatures>
+    <description>
+					Static factory to retrieve a type 4 (pseudo randomly generated) UUID.
+					The UUID is generated using a cryptographically strong pseudorandom number generator.
+				</description>
+  </operation>
+  <operation name="geoDistance">
+    <signatures>
+      <signature>&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;strong&gt;geoDistance&lt;/strong&gt;(&lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;lat1&lt;/b&gt;, &lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;long1&lt;/b&gt;, &lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;lat2&lt;/b&gt;, &lt;em&gt;float&lt;/em&gt;&amp;nbsp;&lt;b&gt;long2&lt;/b&gt;)</signature>
+    </signatures>
+    <description>
+					Calculates the shortest distance (in meters) between two points on Earth.
+					The point is defined by its latitude and longitude in degrees. (Note: decimal
+					part of the value represents proportion of degree unit, not minutes of arc,
+					for example 43.25 represents angle 43<sup>o</sup>15&#39;).
+				</description>
+  </operation>
+</expression-tooltips>

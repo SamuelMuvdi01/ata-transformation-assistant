@@ -1,0 +1,17 @@
+{
+  "title": "Step SAP RFC Reader",
+  "headers": [
+    "Contents:",
+    "Step SAP RFC Reader",
+    "Properties",
+    "Endpoints",
+    "Detailed Description",
+    "Element Sap Rfc Column",
+    "Properties",
+    "Element Shadow Column Def",
+    "Properties",
+    "Enum Column Type",
+    "Values"
+  ],
+  "content": "SAP RFC Reader allows users to connect to an SAP RFC server. The Remote Function Call (RFC) interface enables communication between remote SAP systems. The data retrieved can then be profiled and documented.\n\nThe step can only be used if ONE Desktop is connected to an SAP RFC server. It is possible to select which table is loaded from SAP RFC, as well restrict the maximum number of records read."
+}
