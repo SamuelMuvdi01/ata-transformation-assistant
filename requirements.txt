@@ -2,5 +2,7 @@ streamlit
 requests
 langchain
 langchain-community
-sentence-transformers
+pypdf
 faiss-cpu
+sentence-transformers
+bs4

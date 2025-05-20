@@ -1,3 +1,4 @@
+
 import streamlit as st
 import os
 import requests
@@ -5,7 +6,7 @@ import json
 import re
 import hashlib
 
-from langchain_community.document_loaders import TextLoader
+from langchain_community.document_loaders import TextLoader, PyPDFLoader, CSVLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
@@ -26,10 +27,20 @@ def load_vectorstores():
     def load_and_chunk(directory):
         documents = []
         for file in os.listdir(directory):
-            if file.endswith((".txt", ".html", ".xml")):
-                path = os.path.join(directory, file)
-                loader = TextLoader(path)
-                documents.extend(loader.load())
+            path = os.path.join(directory, file)
+            try:
+                if file.endswith((".txt", ".html", ".xml", ".json")):
+                    loader = TextLoader(path, encoding="utf-8")
+                    documents.extend(loader.load())
+                elif file.endswith(".pdf"):
+                    loader = PyPDFLoader(path)
+                    documents.extend(loader.load())
+                elif file.endswith(".csv"):
+                    loader = CSVLoader(file_path=path)
+                    documents.extend(loader.load())
+            except Exception as e:
+                print(f"❌ Error loading {file}: {e}")
+
         splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)
         return splitter.split_documents(documents)
 
@@ -112,14 +123,12 @@ st.write("Hi! I'm :violet[Ata-cat]. What can I help you build today?")
 
 plan_type = st.selectbox("Select your transformation type:", ["desktop", "webapp"])
 
-# 5-point tone slider
 tone = st.select_slider(
     "🗣️ Choose response tone:",
     options=["Very Concise", "Concise", "Neutral", "Chatty", "Very Chatty"],
     value="Neutral"
 )
 
-# Tone instructions
 tone_instruction_map = {
     "Very Chatty": "Be extremely detailed, explain the plan step-by-step, use examples, and describe the function of each Ataccama component.",
     "Chatty": "Be friendly and clear, include best practices and component names.",
@@ -131,24 +140,27 @@ tone_instruction = tone_instruction_map[tone]
 
 user_input = st.chat_input("Type your question...")
 
-# --- Main Execution ---
 if user_input:
     with st.spinner("Interpreting your question..."):
         interpreted_question = interpret_question(user_input)
 
     st.markdown(f"**You asked:** {user_input}")
-    st.markdown(f"🧠 **Refined by Interpreter Agent:** `{interpreted_question}`")
-    st.markdown(f"🧭 **Selected plan type:** `{plan_type}` | 🎚️ **Tone:** `{tone}`")
 
-    # Step 1: Retrieve relevant docs
     with st.spinner("Retrieving relevant documentation..."):
         retriever = desktop_retriever if plan_type == "desktop" else webapp_retriever
         docs = retriever.get_relevant_documents(interpreted_question)
         context_text = "\n\n".join([doc.page_content for doc in docs[:3]])
 
-    # Step 2: Generate final answer
     with st.spinner("Writing a step-by-step answer..."):
+        examples = (
+            "Examples:\n"
+            "- To add or remove columns → use 'Alter Format'\n"
+            "- To rename a column → use 'Column Assigner'\n"
+            "- To filter records → use 'Filter'\n"
+            "- To remove duplicates → use 'Deduplicate'\n\n"
+        )
         full_prompt = (
+            f"{examples}"
             f"The user originally asked: {user_input}\n"
             f"Interpreted and cleaned question: {interpreted_question}\n\n"
             f"Relevant context from documentation:\n{context_text}\n\n"
@@ -162,7 +174,6 @@ if user_input:
         st.session_state.messages.append({"role": "assistant", "content": response})
         st.markdown(response)
 
-# --- Chat History ---
 with st.expander("Conversation history"):
     for msg in st.session_state.messages:
         st.markdown(f"**{msg['role'].capitalize()}**: {msg['content']}")
