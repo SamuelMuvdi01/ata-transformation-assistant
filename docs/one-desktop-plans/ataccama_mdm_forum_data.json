@@ -1,0 +1,1096 @@
+[
+  {
+    "title": "Master data Layer matching- MDM",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/master-data-layer-matching-mdm-1745",
+    "question": {
+      "author": "Yasharth Misra",
+      "timestamp": "[No timestamp]",
+      "content": "Hello, I wanted to know that how do we implement matching options in the master layer of the MDM project.\nI have used in the columns in the instance layer and then used the same in the master layer in the matching step just as used in the cdi example. and then I have used the same name in the matching step but still  nothing is  showing the UI part. Can someone help me with that."
+    },
+    "answers": [
+      {
+        "author": "oliver",
+        "timestamp": "1 month ago",
+        "content": "Hi ​\n@Yasharth Misra\n, Can you please elaborate what exactly you mean by showing the UI part? Do you want to enable matching with authored master records or do you mean displaying matching proposals in UI?\nFor matching of the authored records you need to enable authoring of the records and configure mapping for the matching columns. This can be done in the model in the master entity screen as you can see below:\nCan you maybe share a screenshot what would you like to see in UI or what would you like to achieve?\nYou can also find related documentation on this page:\nhttps://docs.ataccama.com/mdm/latest/mixed-style-in-mdm.html#master-matching\nThanks,\nOliver"
+      },
+      {
+        "author": "Yasharth Misra",
+        "timestamp": "22 days ago",
+        "content": "Hi ​\n@oliver\nso sorry for the late reply. Thank you for responding it was very helpful. So what I mean by the ui part is that after running the project we have to go to the localhost in the browser to see the result\nSo I have 5 sources from where the data is coming\nSo if I go the the master customer\nand in one of the records  seen there is a terminal part where duplicates can be seen which should not be the case so can you help me with the configuration of the matching step in the master layer so that this issue is resolved.\nSo what I have done is  I have made an instance model as follows-\nand so in order to apply the master matching step I have first initialized the vales in the instance layer as follows for eg-\nand then used these values in the master layer for eg as follws-\nand in the master layer (silver record) of the address part I have configured as follows-\nI have done it for all the entities that were there in the project.\nand then used these values in the matching part but still it does not seem to be working I do not know how to configure the matching part. Please help me out in this part.\nThanks again ."
+      },
+      {
+        "author": "oliver",
+        "timestamp": "1 day ago",
+        "content": "Hi ​\n@Yasharth Misra\n. If I understand correctly all your records are coming from the source system as instances. In this case you don’t need to populate the Master matching mapping. This is used only for the matching of Authored records (created directly on the master layer without any instance).\nFor the matching of the instances you need to fill Matching tab on the instance table (I can see it is done for the address entity on your screenshot). They wou will get matching component generated - address_match.comp. You need to configure matching step in this matching component and then do the same for all other entities. You can see some examples in the CDI example project.\nYou can find documentation for the matching step here:\nhttps://docs.ataccama.com/mdm/latest/matching-configuration/matching-step.html\nAlso your existing records will not be rematched automatically. If this is only development or local environment, I would suggest you to drop all the tables and reload the data again after you configure the matching correctly.\nThanks,\nOliver"
+      }
+    ]
+  },
+  {
+    "title": "Running MDM v14.5 Locally on MacOS",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/running-mdm-v14-5-locally-on-macos-1006",
+    "question": {
+      "author": "joyce",
+      "timestamp": "[No timestamp]",
+      "content": "Steps overview:\nDownload all components\nInstall ONE Desktop\nLaunch ONE Desktop and create the MDM CDI example project\nPlace the files in the right structure\nModify a bunch of files so they are working on MacOS\nConfigure the Mac permissions to run things\nLaunch ONE Desktop and create the MDM Banking example project\nLaunch it all (keycloak, postrgres, mdm-server, server), one by one\nDownload:\nBuilds (Latest versions\nhere\n):\nMDM:\nMdm-assembly-14.5.0-linux.zip\nONE Desktop:\nAtaccama-one-desktop-14.5.0-macos.dmg\nONE MDM Server:\nMdm-server-assembly-14.5.0-linux.zip\nPlugins (Latest versions\nhere\n, the official Postgres version for Linux missing for now):\nPostgres:\nhttps://drive.google.com/file/d/1Lho_9BQh78xRWR2QHAAGoQuERof-Rn-e/view?usp=sharing\nKeycloak:\nhttps://ataccama.s3.amazonaws.com/products/releases/keycloak/keycloak-21.1.2-3-demo.zip\nYour license (.plf file)\nInstall ONE Desktop:\nInstall ONE Desktop (\nAtaccama-one-desktop-14.5.0-macos.dmg\n)\nRename the application so that there are no spaces\nMake sure One Desktop application isn’t running while renaming the application\nFor example\nONE Desktop.app\n—>\nONEDesktop.app\nPlace the files in the right structure:\n❗❗ To run the .sh scrips successfully, they need to be placed in a path that contains no spaces. The ONE Desktop path has at least one space, so we need to place the parts we want to run from the terminal on a spaceless path (Keycloak, Postgres, MDM, JRE and Server)\nTo view the contents of ONE Desktop in Finder:\nUnder Applications, right click on the ONE Desktop application\nClick on Show Package Contents\nClick on Contents\nClick on Eclipse\nExtract the following archives in the Eclipse folder and rename the folder names to the following:\nmdm:\nMdm-assembly-14.5.0-linux.zip\nmdm-server:\nMdm-server-assembly-14.5.0-linux.zip\npgsql:\nkeycloak:\nhttps://ataccama.s3.amazonaws.com/products/releases/keycloak/keycloak-21.1.2-3-demo.zip\nThe folder structure should look like this\nYour path without spaces should be similar to\n/Applications/ONEDesktop.app/Contents/Eclipse\nPlace your license in your home folder, e.g.\n/Users/<username>/emp_license_14.plf\nDelete the data folder in\n/Applications/ONEDesktop.app/Contents/Eclipse/pgsql\n(Optional) Replace the ataccama.json file in\n/Applications/ONEDesktop.app/Contents/Eclipse/keycloak/\nwith the one you downloaded\n(Optional) Replace the backup file in\n/Applications/ONEDesktop.app/Contents/Eclipse/pgsql/pginit\nwith the one you downloaded\n(Optional) Download Java jdk (you can find the recommended and supported version\nhere\n) and set it as Java Home\nLaunch ONE Desktop and create the MDM Banking example project:\nOpen Ataccama ONE Desktop and select the Ataccama ONE Desktop perspective.\nIn Model Explorer, select\nNew\nand then\nModel Project\n.\nIn\nUse template:\nselect\nGeneral MDM project - CDI Example.\nConfigure the Mac permissions to run things:\n👉 Don't forget that if you replace some files you will need to again set the permissions and run the xattr command.\nOpen the Terminal (command+Space Terminal) and navigate to the\n/Applications/ONEDesktop.app/Contents/Eclipse\nfolder. Eg:\ncd /Applications/ONEDesktop.app/Contents/Eclipse\nType\nCHMOD -R 777 .\n(the \".\" is intentional)\nType\nxattr -r -d com.apple.quarantine .\nNavigate to\n/Applications/ONEDesktop.app/Contents/Eclipse/pgsql\nType\nchmod -R 0700 .\nNavigate to\n/Applications/ONEDesktop.app/Contents/MacOs\nType\nCHMOD -R 777 .\nLaunch it all, one by one:\nIn the ONE Desktop, under the CDI Example navigate to the Files/bin folder\nRight-click\nstart-mdm-server.sh\n& select Open With Text Editor\nEdit the path listed after\n-config\nto point to the CDI serverConfig\neg.\nconfig=\"/Applications/ONEDesktop.app/Contents/MacOS/workspace/mdm-cdi-example/Files/etc/mdm.serverConfig\"\nLaunch keycloak: double-click on\nstart-keycloak.sh\nand wait for Keycloak startup complete message to appear in the console\nLaunch postgres: double-click on\nstart-db-postgres.sh\nLaunch mdm-server: double-click on\nstart-mdm-server.sh\nLaunch mdm: double-click on\nstart-mdm.sh\n💪 Once everything is launched correctly, you’ll find:\nMDM Web App:\nhttp://localhost:8050/\nMDM Admin Center:\nhttp://localhost:8051/\nKeycloak:\nhttp://localhost:8083/auth"
+    },
+    "answers": [
+      {
+        "author": "hasansan",
+        "timestamp": "4 days ago",
+        "content": "Hi,\nThe Postgres and Keycloak links are not working. The Postgres link gives a \"file not found\" error, and the Keycloak link shows \"access denied.\"\nWhere can I find Postgres and Keycloak for Linux?"
+      }
+    ]
+  },
+  {
+    "title": "Preparing for Ataccama Version Upgrade – What Should I Document and Test?",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/preparing-for-ataccama-version-upgrade-what-should-i-document-and-test-1814",
+    "question": {
+      "author": "Susan24us",
+      "timestamp": "[No timestamp]",
+      "content": "Hello everyone,\nMy organization will soon be upgrading to a higher version of Ataccama, and I want to make sure the transition goes as smoothly as possible.\nI'm reaching out to ask:\nWhat should I be documenting or looking out for before, during, and after the upgrade?\nSome specific things I'm wondering:\nAre there key areas (like DQ rules, workflows, configurations, etc.) that I should definitely back up or document?\nWhat kind of testing should I plan for in UAT? Should I be validating things both before and after the upgrade?\nAre there any common issues or changes I should be aware of that might affect how things work in the new version?\nIf anyone has experience with a recent version upgrade, I’d love to hear what worked well for you—or what you wish you had done differently!\nAlso, if there are any official resources or checklists from Ataccama that you found useful, feel free to share.\nThanks in advance!"
+    },
+    "answers": [
+      {
+        "author": "Rianna",
+        "timestamp": "6 days ago",
+        "content": "Hello here are the notes I have related to upgrades 😊\nWe have a hybrid deployment where we manage the Ataccama Data Processing Engines in house, so maybe some of the below may not be relevant for you if you have a different deployment:\nIf Ataccama have recently released a new version, the team can get really busy with upgrade requests, so it is best to request an upgrade a few months in advance. However in quieter periods a time slot can be available a few weeks/1 month in advance.\nThe Ataccama Data Processing Engines and Ataccama ONE Web must be on the same versions for it to work. Because we have hybrid deployment we therefore have to co-ordinate the upgrade of the DPE(s) in house with the timing of the Ataccama ONE Web upgrade.\nIf you upgrade frequently (for example we upgrade once a year), normally Ataccama ONE Desktop is still compatible if your Ataccama Web is on a newer version than your Ataccama ONE Desktop. So normally we would upgrade the Ataccama ONE Web first.\nWe haven’t experienced any issues with “losing” implementation work after an upgrade. But we have had some minor issues like layout/view issues. So I recommend after an upgrade check all the views (catalog item overview, sources overview, etc.) to see if everything looks in order. Whenever we have had an issue, Ataccama have fixed it quickly.\nNormally Ataccama need half a day to upgrade an environment so it will be unavailable for use in this period.\nIf you have any ONE Desktop plans that imports data from the Ataccama metadata model, also test these after the upgrade as we have experienced before name changes in the metadata model in the upgrade which then broke our ONE desktop plans and we had to correct the plan to the new metadata model names.\nWe have multiple environments (DEV, TEST and PROD) so we would normally leave at least a 1 week gap in the planning with Ataccama to upgrade each environment so we have time to fix any issues experienced before upgrading the next environment.\nI hope that helps a bit 😃\nEdit: one additional item, you will need to request new license files for Ataccama ONE Desktop and the DPEs (if you manage them in house) for the upgraded version. Here is the link to request them:\nLeaseplan | DQG, DQIT | DPE license & User License | PaaS / Hybrid - Support - Jira Service Management (atlassian.net)\n. Normally I get a response in less than 24 hours."
+      }
+    ]
+  },
+  {
+    "title": "Merge Realm Roles",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/merge-realm-roles-1810",
+    "question": {
+      "author": "Raja Koushik",
+      "timestamp": "[No timestamp]",
+      "content": "We have multiple Realm roles created for our data domains in the below fashion\nData Domain 1\nRealm Role - Data Owner\nRealm Role - Data Steward\nData Domain 2\nRealm Role - Data Owner\nRealm Role - Data Steward\nHow can I merge Data Domain 1 and Data Domain 2 into one single New Domain and merge the corresponding Realm Roles?\nI.e.\nData Domain 1\nRealm Role - Data Owner\nRealm Role - Data Steward                                            = New Data Domain\nData Domain 2                                                                                           New Realm Role - Data Owner\nRealm Role - Data Owner                                                              New Realm Role - Data Steward\nRealm Role - Data Steward"
+    },
+    "answers": []
+  },
+  {
+    "title": "While running adddress match componenet I am getting Persistence is not set  error. Please help",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/while-running-adddress-match-componenet-i-am-getting-persistence-is-not-set-error-please-help-1796",
+    "question": {
+      "author": "Akashsingh1991",
+      "timestamp": "[No timestamp]",
+      "content": "07.05.2025 16:24:30 [INFO]     Using Ataccama DQC configuration file D:\\ataccama\\workspace1\\General MDM project - CDI example\\Files\\engine\\trans\\address\\address_match.comp\n07.05.2025 16:24:30 [INFO]     Using runtime configuration file C:\\Users\\AS001086183\\AppData\\Local\\Temp\\runtimeCfg31836356917877677.tmp\n07.05.2025 16:24:30 [INFO]     Ataccama DQC engine initialized.\n07.05.2025 16:24:30 [INFO]     Creating runtime...\n07.05.2025 16:24:31 [INFO]    [Address deduplication] parallel processing of partitions: false\n07.05.2025 16:24:31 [INFO]    [Address deduplication] parallel processing of key rules: false\n07.05.2025 16:24:31 [INFO]    [Address deduplication] parallel processing of matching rules: false\n07.05.2025 16:24:31 [INFO]     Starting runtime...\n07.05.2025 16:24:31 [INFO]     Running runtime...\n07.05.2025 16:24:31 [FATAL]    Internal error occurred during run of the plan: Persistence is not set (the standalone mode may not be configured)[STEP Address deduplication[Md Unify]]\n07.05.2025 16:24:31 [INFO]     Stopping runtime...\n07.05.2025 16:24:32 [INFO]     Finished!\n07.05.2025 16:24:32 [WARNING]  TASK COMPLETED WITH ERRORS. Elapsed time: 00:00:01"
+    },
+    "answers": [
+      {
+        "author": "Cansu",
+        "timestamp": "8 days ago",
+        "content": "Hi ​\n@Akashsingh1991\n, please create a support ticket for this at support.ataccama.com and our team will help as soon as possible 🙋🏻‍♀️"
+      }
+    ]
+  },
+  {
+    "title": "read MDM workflow status using API in v15.4",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/read-mdm-workflow-status-using-api-in-v15-4-1777",
+    "question": {
+      "author": "srini",
+      "timestamp": "[No timestamp]",
+      "content": "How can we retrieve or read the workflow status (running, success, or failed. Etc) using a GET API after triggering the workflow via an Http service?"
+    },
+    "answers": []
+  },
+  {
+    "title": "Introduction to RDM - Part 3️⃣",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/introduction-to-rdm-part-3-941",
+    "question": {
+      "author": "Cansu",
+      "timestamp": "[No timestamp]",
+      "content": "Hi everyone,\nIn the last post of our RDM best practice series, we will go through an example Project configuration, uncovering the key nodes and functionalities. I’ll be linking further reads if you are interested in a deep dive and try testing your skills ⚡\n1. RDM Logical Mode\nAt the heart of the RDM model project lies the\nRDM Logical Model\n. This node is the epicenter for configuring reference data, its entities, relationships, and organizational structures. With support for a myriad of tables and relationships, you can effortlessly model data, define attributes, and establish complex hierarchies. Dive into the details at\nCreating the RDM Data Model\n.\n2. Connected Systems\nIn the realm of\nConnected Systems\n, databases and servers take center stage. Efficiently import/export data to/from RDM by configuring connections to external databases and remote servers. Explore detailed instructions at\nAdding Databases Synchronized with RDM\nand\nAdding Remote Servers for File Transfers\n.\n3. Workflow Configuration\nNavigate to the\nWorkflow Configuration\nnode to define change approval workflows. Customize workflows for specific tables, set up action-triggered email notifications, and establish custom logical states. Master the art of workflow orchestration at\nConfiguring RDM Workflows\n.\n4. Synchronization\nUnleash the power of\nSynchronization\nto seamlessly set up imports, exports, and web service configurations. From text files to external databases, explore the multitude of options at\nRDM Synchronization\n.\n5. App Variables\nThe\nApp Variables\nnode is your go-to place for configuring web application and data model variables. Tailor settings such as database type, web application GUI language, and primary key attribute names. Discover more at\nRDM App Variables\n.\n6. App Configuration\nUnlock the potential of the\nApp Configuration\nnode to generate zip files with configuration files for RDM web application deployment. Learn the ropes at\nHow to Deploy an RDM Web App Configuration\n.\n7. Documentation\nFind a treasure trove of technical and business documentation about the configured data model in the\nDocumentation\nnode.\n8. Task Scheduler\nNavigate to\nTask Scheduler\nto efficiently schedule synchronization or batch export tasks. Dive into the details at\nScheduling RDM Tasks\n.\n9. Auditing\nIn the\nAuditing\nnode, configure the auditing of actions made by web application users. Master the art of auditing at\nSetting up RDM Auditing\n.\n10. etc and Files\nFinally, the\netc\nnode contains configuration XML files, while the\nFiles\nnode houses generated plans, workflow and scheduler files, and other essential data.\nHope this gives you a quick insight on our RDM projects in action. Please let us know if you have any questions in the comments 👇🏻"
+    },
+    "answers": [
+      {
+        "author": "Elena Bu",
+        "timestamp": "1 month ago",
+        "content": "Hello ​\n@Cansu\n, could you please help with a question regarding Section 9: Auditing? We would like to parse\nrdm-audit<>.log\nfile. Where is this file located on the server, and what path should we set for it in the Text File Reader step?"
+      }
+    ]
+  },
+  {
+    "title": "Accessing Data of Catalog Item via Rest API or GraphQL",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/accessing-data-of-catalog-item-via-rest-api-or-graphql-1706",
+    "question": {
+      "author": "karine.davtyan",
+      "timestamp": "[No timestamp]",
+      "content": "Hello everyone,\nI’m working on a project that integrates a data masking tool with Ataccama, and I’m encountering some issues when trying to retrieve actual catalog item data (the row-level data) via the REST API. I’ve been testing both GraphQL and REST approaches, and here’s what I’ve found so far:\nGraphQL vs. REST for Data Retrieval:\nThe GraphQL API appears to focus on metadata – attributes, versioning, policies, etc. However, based on my understanding, the actual table data (the rows and cells) isn’t available through GraphQL; it’s only accessible via a REST endpoint. Based on available documentation for MDM and RDM REST APIs, the REST endpoints follow a pattern using a fixed base path (/api/rest) on the default port (8051) and use basic HTTP authentication.\nEndpoint URL Confusion:\nInitially, I attempted to use an endpoint like:\nhttps://teranet.test.ataccama.online/catalog/data/catalogItem/\n<gid>/data\nwhich returned a 404 error. Later, based on the docs, I switched to the documented REST API base URL:\nhttps://teranet.test.ataccama.online:8051/api/rest/\nBut then my Python script timed out when connecting to that URL.\nHas anyone faced similar issues when trying to access actual catalog item data via the REST API? How do you determine the correct endpoint URL for your environment? Any other suggestions on how I can fetch the actual data from the data tab of a catalog item?\nThanks,\nKarine"
+    },
+    "answers": [
+      {
+        "author": "OGordon100",
+        "timestamp": "1 month ago",
+        "content": "Hi Karine,\nMDM (and RDM) are products in which Ataccama physically stores data, as they are designed to effectively be systems of record.\nBut by very deliberate design, DQ&C does not hold data; only metadata. (For many customers, this is part of\nHybrid Processing\n, in which we process your data in your cloud, and then send only the results back to the central Ataccama platform). The only time in which data can be retrieved is during the\nPost-Processing\nphase of a Monitoring Project (or when\nInvalid result Samples\nare deliberately configured to be retained).\nAs such, because we do not hold data in ONE DQ&C, we therefore have no Rest API in DQ&C to access data in ONE DQ&C.\n(And as an aside - GraphQL is an API spec designed around parsing highly nested information - such as our Metadata Model - so it is not an appropriate tool for tabular data access in general!)\nBut for Data Masking - I’d suggest having a look at our\nData Protection Classification\nfeature.\nHope this clears things up!\nOliver"
+      },
+      {
+        "author": "anna.spakova",
+        "timestamp": "1 month ago",
+        "content": "Hi,\njust to add to ​\n@OGordon100\ncomment, there is a way through ONE Desktop to actually retrieve the data - there is a step called Catalog Item Reader that can access the actual data but it requires that the plan in the ONE Desktop is run remotely on the DPE that has access to the data source - that is achieved by changing the environment in the ONE Desktop tool. See more details:\nhttps://docs.ataccama.com/one-desktop/latest/work-with-ataccama-one/work-with-data.html#read-data-using-catalog-item-reader\nKind regards,\nAnna"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "1 month ago",
+        "content": "Hi ​\n@karine.davtyan\n, does any of the solutions shared above help you with your question? If yes, could you please mark it as a best answer 🙋🏻‍♀️"
+      },
+      {
+        "author": "karine.davtyan",
+        "timestamp": "1 month ago",
+        "content": "Hi ​\n@anna.spakova\n,\nThank you for your answer. Just wondering if there is a way to host a plan that reads the data via that Catalog item reader and writes to a text file directly onto the Ataccama web app for users that don’t have access to ONE desktop. Maybe through the components section of desktop and the web app?\nThanks,\nKarine"
+      },
+      {
+        "author": "may_kwok",
+        "timestamp": "1 month ago",
+        "content": "​\n@karine.davtyan\nwould the Data Export functionality serve your needs?\nhttps://docs.ataccama.com/one/latest/sources/data-export.html\nSeems like this is available from v14 onwards?"
+      },
+      {
+        "author": "anna.spakova",
+        "timestamp": "1 month ago",
+        "content": "Hello,\n​\n@may_kwok\nThank you for responding. What you mention is from the web application access, I think the question was via API. I believe it might still be possible to call those actions via API too if needed, but it would have to be tested first.\n​\n@karine.davtyan\nYou should be able to deploy the component on the orchestration server, that is provided as part of the installation. The component requires to be wrapped into a workflow. You seem to be in Ataccama cloud, so in your case you would deploy this workflow via your cloud git repository. Please note that depending on your deployment type (e.g. hybrid) this might require some adjustments in the workflow as your data might not be accessible by the orchestration server. In those cases you might need to use the Run DPM Job task in the workflow to have it triggered on the hybrid DPE.\nhttps://docs.ataccama.com/runtime-server/latest/workflow-and-scheduler-reference/run-dpm-job.html\nAs this might get complicated, I would consider contacting your Engagement manager or Customer Success Manager and consult with them if needed. Whoever is working on your account might advise better knowing your platform configuration.\nKind regards,\nAnna"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "1 month ago",
+        "content": "Hi ​\n@karine.davtyan\n, I wanted to check if any of the suggestions helped with your use case here? I’m closing this thread for now but if you have any further questions please feel free to share them in the comments or reach out to your CSM directly as Anna suggested above 🙋🏻‍♀️"
+      }
+    ]
+  },
+  {
+    "title": "RDM users in Approval workflow without email notifications",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/rdm-users-in-approval-workflow-without-email-notifications-1709",
+    "question": {
+      "author": "Elena Bu",
+      "timestamp": "[No timestamp]",
+      "content": "Hi All,\nI have a question regarding RDM approval workflow. In our project, we have stages\nInitiator → Review → Publish\n. We have a customer request to allow RDM_admin users to participate in the approval process (i.e., they must be able to review and publish records) but\nnot\nreceive any email notifications.\nWe tried removing RDM_admin role from Notifications section, but that didn’t help because this role remains in Workflows section. We can’t remove RDM_admin role from Workflows section, since that would prevent RDM_admin users from reviewing or rejecting records at all, they wouldn’t be able to participate in Approval workflow.\nThe following settings don’t work, RDM_admin users still receive emails:\nIs there a way to keep RDM_admin’s ability to review and publish without receiving emails? Perhaps by checking user’s role or username in the Conditions section, so that Approval workflow gets skipped for certain users?\nThe documentation for version 15.4 mentions something like\nmeta.username\n, but when we tried, RDM did not recognize\nmeta.username\nand threw an error.\nhere is the related part in the documentation:\nThank you in advance for any guidance!"
+    },
+    "answers": [
+      {
+        "author": "Robert Marinovic",
+        "timestamp": "1 month ago",
+        "content": "Hi ​\n@Elena Bu\nAs far as I know you should not be receiving emails if it isn't configured in any of the workflow steps.\nYou can have the workflow work without email configuration. That is not a mandatory field and can be left empty.\nKeep in mind you also have fields for email templates within the workflow individual steps as well. So ensure that those are also empty (If you don't want emails). Along with the top level, publish reject emails.\nI can see in the screenshot it looks like you have emails setup for notifications after the steps completes, possibly for rejects as well I cannot see from the screenshot.\nMake sure the RDM_admin is not included in those lists, or it will trigger an email notification for them.\nAlso if the any user belongs to multiple roles such as (RDM_admin and RDM_GEO_admin) they will still receive email if they belong to either one.\nSo for specific users you may also need to keep that in mind when testing, as they might be receiving emails from another group that they could be part of, if configured that that. Example: if you remove RDM_admin from the email list and still receive email, make sure that user doesn't also belong to RDM_GEO_admin\nSee screenshot below of example where you can find email field within a workflow specific step."
+      },
+      {
+        "author": "Elena Bu",
+        "timestamp": "1 month ago",
+        "content": "Hi ​\n@Robert Marinovic\n,\nThank you for your detailed reply!\nRight, we don't have to specify the email notification template. I missed that.\nI haven't had a chance to test this solution yet, but I'll let you know as soon as I do!"
+      }
+    ]
+  },
+  {
+    "title": "Ataccama Academy Learning Journey: Master Data & Reference Data Management",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/ataccama-academy-learning-journey-master-data-reference-data-management-1710",
+    "question": {
+      "author": "Cansu",
+      "timestamp": "[No timestamp]",
+      "content": "Hi everyone 👋\nFollowing up on our\nfirst post about getting started with Data Quality & Catalog,\nwe’re excited to guide you through another key path in your learning journey—\nMaster Data Management (MDM)\nand\nReference Data Management (RDM)\n.\nWhether you’re a business user, technical implementer, or solution architect, the\nMDM & RDM On-Demand Learning Path\nin\nAtaccama Academy\nwill give you the essential skills to design, configure, and operate these critical components of the Ataccama platform.\n📚Start with the basics to get familiar with MDM & RDM:\nManaging Master Data\nGain a foundational understanding of Ataccama’s MDM capabilities, platform UI, and core data concepts.\nManaging Reference Data\nExplore how reference data is governed and maintained in Ataccama to ensure consistency and control.\n🧱Build on your foundation with practical configuration, workflows, and deeper implementation techniques:\nONE Desktop Core\nLearn to design data flows, transformations, and rules using the ONE Desktop environment.\nONE Desktop Advanced\nGo further with matching, aggregations, advanced component design, and server configurations.\nONE MDM\nThis in-depth course covers domain modeling, configuration layers (cleansing, matching, mastering), workflows, publishing mastered data, and more.\nONE RDM\nLearn how to configure and operate reference data models, hierarchies, governance workflows, and APIs.\nAdvanced MDM\nTackle advanced topics like streaming interfaces, event handlers, high availability, and MDC performance.\nAdvanced RDM\nDeep dive into advanced configuration and deployment scenarios for large-scale or regulated environments.\n⚡️Take it a step further\nOperating Ataccama\nUnderstand how to manage Ataccama environments across cloud and on-premise deployments—covering monitoring, troubleshooting, disaster recovery, and access management.\nWhether you’re setting up your first MDM model or optimizing complex RDM processes,\nAtaccama Academy’s structured courses\nwill help you get there—step by step.\n📌\nNext Step:\nAccess the MDM & RDM courses in Ataccama Academy\nLet us know in the comments:\nWhat’s your current focus—MDM, RDM, or both?\nWe’re happy to help guide your next step!"
+    },
+    "answers": []
+  },
+  {
+    "title": "MDM Validation",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/mdm-validation-1703",
+    "question": {
+      "author": "Mayuresh",
+      "timestamp": "[No timestamp]",
+      "content": "I am trying to do validation on Tin , on which score and explanation are getting populated but the records which are invalid are not getting highlighted in red and i have enabled validation in the Tin column\nAttaching the snapshots of the steps which i have done while configuring the validation:\nHow should i fix this."
+    },
+    "answers": [
+      {
+        "author": "Phil Holbrook",
+        "timestamp": "1 month ago",
+        "content": "Hi ​\n@Mayuresh\nThe validation scoring settings you have enabled affect the fields within the record details display screen - there’s a separate section for the row-level validation. It’s a little tucked away, and often doesn’t show without scrolling down the dialog.\nAt the bottom of the GUI Settings tab is a link for Record DQ Calculation. This is from the CDI Example project included in the MDM package:\nClick the “composite element link” and it will take you to a screen where you can set the columns that contribute to the overall record score used when calculating the DQ score for the row.\nYou can also set custom DQ thresholds for the entity. If you don’t put anything in there, then it will use the defaults that are set in the global GUI Configuration under Validation Settings → Global Validation Settings:\nNot sure what the defaults are there, but the CDI Example has:"
+      }
+    ]
+  },
+  {
+    "title": "how to apply new changes into clean operation for records already in the db?",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/how-to-apply-new-changes-into-clean-operation-for-records-already-in-the-db-361",
+    "question": {
+      "author": "alexAguilarMx",
+      "timestamp": "[No timestamp]",
+      "content": "We made changes into the clean operation of an entity. it will take effects for new transactions.\nHow can we apply this to the current records that we already have into the database?\nWe are exploring use a\nfull reprocess\nof this entity:\nbut we have some doubts about the setup. For example:\nWhat is the difference between a reprocess vs rematch checkbox?\nWe tried to read the documentation but there is not detail explanation about it.\nThanks in advance!"
+    },
+    "answers": [
+      {
+        "author": "Ales",
+        "timestamp": "2 years ago",
+        "content": "Hi\n@alexAguilarMx\n,\nYou are on a correct way. Existing records can be reprocessed by using either PARTIAL or FULL reprocess operation.\nThe\nReprocess All Entities\ncheckbox simply says: Run the reprocess operation on ALL entities in your model (both instance and master layer). Meaning all records in your MDM hub will be run through the processing again.\nEither use the option \"Reprocess All Entities\" or select entities to be reprocessed in the Entities to Reprocess section.\nThe\nRematch All / Selected Entities\nis a supplementary option to the Reprocess. It restarts the matching process on reprocessed records. By default the engine keeps the identity as originally assigned. If REMATCH enabled, the matching results are recalculated.\nWARNING! Performing the rematch action means, the manual match exceptions entered by any user will be removed and matching will be recalculated!!!\nJust keep in mind that the FULL reprocess operation might take some time - similar to the INITIAL load.\nBTW You can read more about parameters in the configuration UI when you mouse over the label."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@Ales\nI have a follow-up question, if you can help me with it.\nDo previously matched records remain even after rematch if the match logic has changed?"
+      },
+      {
+        "author": "Ales",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@aish_TF\n,\nthis is a very good question. The simple answer would be YES, they should remain in the same groups if you don’t change the rules, HOWEVER\nImagine a situation where you INCREMENTALLY process your data. Some records coming in different loads and matching to existing groups.\nThe engine keeps the existing identities as they are unless you do the rematch. You may have existing master record A and existing master record B, a new record comes and fit to both A and B.\nIn the delta load the record will match to either A or B and make a proposal to the second one.\nSo if you rematch ALL records together it may happen that both A, B and the new one will create one single group. Simply because they now have the connecting points between them and they are allowed to match together.\nHope that answers your questions.\nAles"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "5 months ago",
+        "content": "​\n@Ales\nThank you for your answer. I get it.\nBut why does it get updated with a new match rule name?\nFor example,\nThere are two records, lets say A and B, that matched in a previous match processing and the match rule was rule3\nIn the next rematch for ALL records, A matches C and B matches D by rule2. Now, B also matches E but rule1. So all these 5 records form a group.\nBut the rule names I see are rule2 for A,B,C,D and rule1 for E. How is this determined? And is there a way to see and export that historically A and B matched as per rule3?\nThanks once again. :)"
+      },
+      {
+        "author": "Ales",
+        "timestamp": "2 months ago",
+        "content": "Hi ​\n@aish_TF\n, I’m sorry for late response, did not notice your question.\nyou are saying “ In the next rematch for ALL records ” - this already means ALL records are rematched and the matching results are recalculated. Every record has the most relevant matching rule name stored on it i.e. the matching rule which was used for the final match.\nThere is no history of matches or matching rules used as part of the groups. You would have to enable HISTORY plugin to actually keep the history changes.\nBy default this is disabled.\nHope this helped.\nAles"
+      }
+    ]
+  },
+  {
+    "title": "Usage of Rematch and Reprocess jobs",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/usage-of-rematch-and-reprocess-jobs-1600",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "I have been trying to explore the Reprocess and Rematch options in MDM.\nFrom\nthis\npost I understand that Reprocess is used to reprocess the records. For example, lets say, after an initial load where the email values were not being modified in contact_clean.comp, we are now to determine which emails have the domain\ncompany-name.com\nand are now being updated to have domain\ncompanyname.com .\nSo, I need to run the reprocess job.\nRematch is to run the match step on top of the reprocess since the email values have been modified. What I do not understand is do I run a rematch job only if the email value participates in determining the master record or do I need to run it whenever the reprocess jobs is run irrespective of the changes that took place due to a reprocess?\nThere is another question I have. When we run a load job, the change detection is done right. Does this change detection run on all the records or just the delta records. Post the change detection, matching and merging is run only on the records that changed or all the records?\nI am looking for an answer because I scheduled a workflow to load records and export them, assuming that each time any new records are added or old records get modified, the master records will be updated(when there is a change in one of the related instance records) due to change detection. I did not change any code.\nBut a new record got added and matched to an already existing master record. However, the match_rule that was mentioned in the master record did not justify the matching. I ran a reprocess and rematch job and the new record became a different master record.\nI am looking for an explanation on this and also a suggestion on if I need to run the rematch job everytime I am loading records and need to export them for downstream sources?"
+    },
+    "answers": [
+      {
+        "author": "Phil Holbrook",
+        "timestamp": "3 months ago",
+        "content": "Hi ​\n@aish_TF\nThis is a good example for how the different processes in an MDM load fit together.\nWhen you perform any load, the system will first perform change detection on all the rows that are supplied. So, if it's a full load then all rows in the data set are checked; if it's a delta load then only the rows in the delta set are checked.\nOnly those rows that have changed since the previous load are then processed further through the transformation layers.\nReprocessing plans are effectively a special type of load, where all the rows previously loaded to the instance layer (or a specified subset in the case of a partial reprocess) are treated as \"changed\" for the purposes of carrying on the transformation process. This is particularly useful for cases like yours where the source data is static but enrichment rules in the cleanse plans have changed.\nThe only rows in the instance layer that will be updated during a load are those that are in this \"changed\" state.\nReprocessing can be carried out with or without rematching. Any reprocess will perform the cleanse transformation. If the rematch option is selected then it will additionally run the match plan to update a small group of columns including the master_id and the match_rule.\nIf data columns are updated in the instance layer during a reprocess cleanse, or the row is rematched, then the merge operation will be carried out to propagate these changes to the master layer. If rematch is selected then the master grouping will be re-evaluated first; otherwise the new existing master group will be retained. Either way, the merge plan will be executed for all instances in the master group.\nIf your email address value is not used as part of your matching rules then you do not need to run the reprocess with rematch: it will be evaluated as part of the merge plan and written to the master layer if it meets the survivorship criteria.\nIf the email address is used as part of the match rules then you need either to run a reprocess with rematch or (more likely) add the column to \"rematch if changed section\" list in the matching tab's Advanced Matching Configuration.\nI think what is happening in your process is a result of the way rows are made available for processing during a load versus a reprocess with rematch.\nLet's assume you perform a full load where just one new row is added and every other row is unchanged.  Only that single row will be available to be updated. The engine will attempt to match it against the data already loaded.\nWhen you run a reprocess with rematch, the entire data population is re-opened for matching, and this can lead to different groupings being selected.\nThe possibility of match groups changing means you need to decide the relative merits for running reprocess with rematch across your whole data set. Generally changes will be limited but it does depend on how your match rules are defined.\nI've never seen MDM match a row incorrectly but the logic for the matching can be confusing: we'd need to inspect the rules to work out why this is.  For instance, a common misconception is that match rules are executed \"in order\" - so one match rule should take precedence over another one defined lower in the list. This is not the case, as it wouldn't work with the threading model. This means you can't consider a single rule in isolation: you have to consider all defined rules as a set and make sure each is fully deterministic.\nHope that helps!"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "3 months ago",
+        "content": "Thanks ​\n@Phil Holbrook\nfor the detailed and well explained response.\nI think I have also been believer of the misconception that match rules are executed in order.\nI do get what you explained about reprocess and rematch.\nI have also never experienced MDM matching wrongly.\nLet me try to explain with an example, what I have witnessed here and probably we can figure out what needs to be changed at the configuration level from my end.\nThere are two source systems - A and B\ntwo or more records become part of the same matching group if they have the same name and there are two match rules -\n1. same_email_id - when a record in system A has the same email as another record in system B\n2. same_id - when a record in system A has the same id as another record in system B\nAs you mentioned, it shouldn’t matter what the order of the rules are, still, I’d like to mention that the rules mentioned above are defined in the same order(as seen above)\nIn the first load, one record each from system A and B have same name, same email and same id. So, they match, merge and make a master record(lets say with master record id 1) that has a match rule name of 2nd match rule.\nNow, in the next full load, there is a new record added in system A that has the same name as the master record(id1) created. There is no change in the original two records that participated in formation of master record id 1. I do not run reprocess or rematch steps (there is no change in transformation logic for email as well). The new record becomes a part of the same master record(id 1) and the match rule name is of 2nd match rule.\nAnyway I run a rematch, because I do not expect the newly added record to be a part of this master record. Post that, it becomes an independent master record and the other master record is as it was before the new record was loaded.\nFor sure I am lacking some understanding and would like to clear my concepts here.\nAlso, I had scheduled a job to load the records(which would run match on any new records to either make it a part of an already existing master or make a new master when it does not satisfy any match rule). But now with this scenario I am not sure if I should also trigger a rematch job post load in the scheduled workflow.\nPlease let me know if you need anymore information.\nThank you"
+      },
+      {
+        "author": "Phil Holbrook",
+        "timestamp": "3 months ago",
+        "content": "I can’t work out what’s happening from your description ​\n@aish_TF\n. Could you upload your match plan and some dummy data?\nIt shouldn’t be necessary to schedule a rematch after a load unless new incoming data is likely to change the pre-existing groups - which will generally only happen with more “fuzzy” match criteria."
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "3 months ago",
+        "content": "Hi ​\n@aish_TF\njust want to check if ​\n@Phil Holbrook\n's reply was helpful to your question? Please let us know if you have any follow up questions you might have🙋🏻‍♀️"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "2 months ago",
+        "content": "Hi ​\n@Phil Holbrook\n​\n@Cansu\nApologies for replying so late.\nThank for your reply. I have found the reason behind my issue with Oliver Kerul-kemec’s help.\nUnfortunately, I cannot upload the configurations, but I will try to replicate the scenario or use an example to explain it in private to Cansu in a few days and if it feels worth it, we can publish on community, because I feel it is an interesting scenario.\nThank you for the answers, they did get me to understand a lot about rematch and reprocess jobs.\nRegards,\nAishwarya"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "2 months ago",
+        "content": "That would be a great asset for the community ​\n@aish_TF\nthank you for being willing to share 🙌"
+      }
+    ]
+  },
+  {
+    "title": "How to delete the classification types from the tables and attributes level through One Desktop Plan?",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/how-to-delete-the-classification-types-from-the-tables-and-attributes-level-through-one-desktop-plan-1604",
+    "question": {
+      "author": "A_N",
+      "timestamp": "[No timestamp]",
+      "content": "Hello all,\nI’m using the Ataccama v14.5 there we have created the custom entity for classifications and created the classification types (Internal, Public etc) and added them with tables and attributes through the One Desktop plan. But when i am using the same plan to delete it from table or attributes just by changing the One Metadata Writer property in General tab “workflow state as deleted” and in the Columns tab providing the “Id Column Name as table_id” then it is not deleting anything. Any guidance or suggestions is really helpful. Thanks.\nGeneral tab Screenshot:\nColumns tab screenshot:"
+    },
+    "answers": [
+      {
+        "author": "anna.spakova",
+        "timestamp": "3 months ago",
+        "content": "Hi ​\n@A_N\n,\ncan you please provide more information - what is the relationship between the classificationInstance and the catalogItem? Is it an embedded object? If so, the Id Column Name should contain ID of the classificationInstance object that was created by the ONE Metadata Writer step (you can obtain it with ONE Metadata Reader or from URL when you open the object in the web application). The table ID should be just the parent column.\nPlease let me know if this helps. If not, could you maybe share the screenshots of the metadata model - the classificationInstance object and catalogItem + the plan you used to create it?\nThank you.\nKind regards,\nAnna"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "3 months ago",
+        "content": "Hi ​\n@A_N\n! I’m closing this thread for now. If you have any follow up questions please don’t hesitate to share them in the comments or create a new post🙋🏻‍♀️"
+      }
+    ]
+  },
+  {
+    "title": "Schedule load in MDM",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/schedule-load-in-mdm-1333",
+    "question": {
+      "author": "Kundan",
+      "timestamp": "[No timestamp]",
+      "content": "I have MDM setup and records are loaded using a Full Laod configuration. I need to create a load such that all the records that were added into the source are moved into to MDM hub on a daily basis. The approach being used is to identify all the records updated today and load them into MDM. Can you please suggest if I need to create a Delta Load for this or Full Load works. Also, I need to schedule a run of the load file on daily basis.How can I do it?"
+    },
+    "answers": [
+      {
+        "author": "AKislyakov",
+        "timestamp": "9 months ago",
+        "content": "Hi\n@Kundan\n,\nA Full Load can work if you're transferring all records from the source to the MDM. In that case, the Full Load compares source records with their copies on the MDM and determines each record's status (unchanged/updated/inserted/deleted), then processes them accordingly.\nIf you want to minimize the amount of data transferred, you can create a Delta Load. You can extract newly updated/inserted/deleted records from the source using timestamps or audit logs and transfer only those records to the MDM, providing their change type so the MDM can process them correctly.\nAs for scheduling such loads you can use the\nScheduler\nto schedule a workflow that performs an MDM Load"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "3 months ago",
+        "content": "Hi Team,\nCan anyone please tell if a mdm job can be scheduled for a particular timezone? What timezone does the scheduler generally works on?\n​\n@Cansu\nPlease let me know if this should be a separate question. Added it here as it seems related"
+      },
+      {
+        "author": "AKislyakov",
+        "timestamp": "3 months ago",
+        "content": "​\n@aish_TF\nScheduler uses timezone of the server MDM runs on"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "3 months ago",
+        "content": "​\n@AKislyakov\nThank you.\nWill raising a ticket help me know where the host server located?\nRegards,\nAishwarya"
+      },
+      {
+        "author": "AKislyakov",
+        "timestamp": "3 months ago",
+        "content": "Usually, it is available in Java Properties section of Admin Center"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "3 months ago",
+        "content": "​\n@AKislyakov\nThis does not seem to be returning the timezone of where the server is located/the timezone I should use/consider while scheduling. For now, a coalleague helped me know our timezone. If I find anything that helps find the timezone for scheduling, I’ll update here"
+      }
+    ]
+  },
+  {
+    "title": "Run MDM Export workflow task does not recognize the export component",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/run-mdm-export-workflow-task-does-not-recognize-the-export-component-1567",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "The Workflow task Run MDM Export does not recognize the export component and and gives error message.\nI am assuming it is because there is no path variable set for the Export folder.\nCan someone please help me identify the issue?"
+    },
+    "answers": [
+      {
+        "author": "aish_TF",
+        "timestamp": "3 months ago",
+        "content": "Adding the error message\nERROR : (Run MDM Export) Batch export operation \"exp_job1,exp_job2” not found."
+      },
+      {
+        "author": "AKislyakov",
+        "timestamp": "3 months ago",
+        "content": "I assume you want to run multiple export operations (\nexp_job1\nand\nexp_job2\n) in parallel. However, \"Run MDM Export\" expects the name of a single export operation (unlike \"Run MDM\nMulti\nload\", which allows you to specify several with a comma separator). To run multiple MDM Exports concurrently, you need to add several \"Run MDM Export\" steps to your workflow—one for each export operation."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "3 months ago",
+        "content": "​\n@AKislyakov\nThanks a lot for the prompt reply.\nI have made the changes and its working now.\nOnce again, many thanks\nRegards,\nAishwarya"
+      }
+    ]
+  },
+  {
+    "title": "File iterator task fails when workflow deployed to server",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/file-iterator-task-fails-when-workflow-deployed-to-server-1562",
+    "question": {
+      "author": "HMJohn",
+      "timestamp": "[No timestamp]",
+      "content": "I have a workflow with a file iterator step. It runs without any issues in the IDE on my local machine, but whenever I deploy it my company’s RDM server, I get the following error:\n2025-01-07 09:05:31 INFO: starting...\n2025-01-07 09:05:31 ERROR: Problem during initialization of iterator valuejava.io.IOException: An unexpected network error occurred\nat java.io.WinNTFileSystem.canonicalize0(Native Method)\nat java.io.WinNTFileSystem.canonicalize(Unknown Source)\nat java.io.File.getCanonicalPath(Unknown Source)\nat com.ataccama.dqc.resources.local.FileResource.getCanonicalPath(FileResource.java:40)\nat com.ataccama.dqc.resources.impl.DelegatingResourceBase.getCanonicalPath(DelegatingResourceBase.java:41)\nat com.ataccama.adt.task.iterators.FileIterator$FileIteratorInstance.iterate(FileIterator.java:133)\nat com.ataccama.adt.task.iterators.TaskIteratorInstance.initAndIterate(TaskIteratorInstance.java:36)\nat com.ataccama.adt.task.exec.EwfForEachTaskInstance.run(EwfForEachTaskInstance.java:75)\nat com.ataccama.adt.internal.core.runtime.EwfTaskProcessor$ThreadSlot.run(EwfTaskProcessor.java:372)\nThe child workflow called in the Iterate step is listed in the Available workflows in the Admin console, and I’m addressing it using the same resourceID:workflow_name.ewf convention that’s in that list.\nI’ve confirmed that the service account has access to the folder, as I can write a list of filenames in that folder to a list.\nCan anyone provide any insight into the error and help with a resolution?"
+    },
+    "answers": [
+      {
+        "author": "AKislyakov",
+        "timestamp": "4 months ago",
+        "content": "Hi ​\n@HMJohn\n,\nThe problem might be caused by a missing permissions on a subfolder of a shared folder.\nhttps://learn.microsoft.com/en-au/troubleshoot/windows-server/performance/accessing-shared-folder-from-application-fails\nCan you verify if there are no subfolders in the folder you trying to operate in.\nAlso right to list folder contents does not guarantee rights to access files."
+      },
+      {
+        "author": "HMJohn",
+        "timestamp": "4 months ago",
+        "content": "Hi ​\n@AKislyakov\n,\nYes, the folder does not have any subfolders, and the Service Account has these NTFS permissions for that folder: Read, Write, Read & execute, Modify, and List folder contents."
+      },
+      {
+        "author": "AKislyakov",
+        "timestamp": "4 months ago",
+        "content": "Do you have Read permission for individual files in that folder (could be a case if inherit permission is disabled) ​\n@HMJohn\n? Also, can you try running the child workflow for individual files? Will it complete successfully?"
+      },
+      {
+        "author": "HMJohn",
+        "timestamp": "3 months ago",
+        "content": "Hi ​\n@AKislyakov\n,\nIt was a permissions issue. The service account had access to that folder and its contents but was missing permissions for a high-level folder. Running the child workflow succeeded for individual files, but the Iterate step couldn’t resolve the file paths without access along the full path.\nThank you for your assistance in figuring this out."
+      }
+    ]
+  },
+  {
+    "title": "📚 Guide: How to run GraphQL requests - Part II Working with MMM",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/guide-how-to-run-graphql-requests-part-ii-working-with-mmm-1549",
+    "question": {
+      "author": "OGordon100",
+      "timestamp": "[No timestamp]",
+      "content": "Hi everyone!\nI’m back with the second and last part of the GraphQL best practice series. First part was all about authentication types & which one you should use and how to authenticate GraphQL requests. This post will focus on how to work with MMM in GraphQL - so let’s get into it.\nIf you’d like to check out the first part I’m sharing it here 👇\n📚 Guide: How to run GraphQL requests - Part I\nONE Metadata Readers Or GraphQL?\nMMM is the name for the linked list that holds all metadata and the connections between them. Pretty much everything in MMM can be explored via GraphQL - as GraphQL is what happens behind the scenes in most steps/actions in ONE Desktop.\nAs far as ONE Desktop is concerned, while ONE Metadata Readers are often all you need, highly nested queries and associated joins can become quite tricky to handle via ONE Desktop plans, and can sometimes be simpler to build by just running a specific GraphQL query. In addition to that, some things, such as raw profiling information can only be extracted via GraphQL.\nExploring MMM\nOne of the questions you might have is how to get the data out of MMM?\nTo find a route in the MMM model, you can either use the\nSettings panel,\nor in ONE Desktop you can use the\nONE Metadata Explorer tab + the Advanced tab in Properties\nto help you plot a route.\nIn the below example, we can see that rule links to\ntermInstances\nlinks to target.\nWhen using GraphQL, you would use “term”, rather than the descriptive name “target” as part of your query:\nBrowser DevTools\nYou can also get non MMM information (e.g. job status, audit, etc), if you know what graphQL gets called by the platform at the right time. If you’d like to explore this, check your Network section under the Browser’s DevTools, which captures all web requests and responses. There are also\nweb extensions\nthat can help simplify this.\nYou can then work backwards to build your own - I’d keep in mind while reverse engineering how much of it can be put on prod.\nGraphQL Requests Structure\nTo build requests yourself, it is helpful to understand the structure of how data is held in the platform.\n💡Some tips:\nThe root of your query normally either has to refer to a singular instance of something filtered by gid\ncatalogItem(gid: \"5c866cdf-0000-7000-0000-0000000553fb\")\nor as a plural when returning for multiple items belonging to a single entity\ncatalogItems\nDepending on what you select and how you select it, you normally have to specify if you want the published or draft version, and the way in which you specify this is often inconsistent. You may also have to combine these together over the course of your query:\ncatalogItem(gid: \"5c866cdf-0000-7000-0000-0000000553fb\") {\n        publishedVersion {\n...\n\t}\n}\ncatalogItems(versionSelector: {publishedVersion: true}) {\n...\n}\nTo get at the attributes/other linked MMM items, you must almost always first go through 1-2 “layers” of non-attributes, edges and node/nodes (you will have to determine which of edge, edges, node and/or nodes work and in which order by trial/error)\ncatalogItems(versionSelector: {publishedVersion: true}) {\nedges {\n\t\tnode { --(sometimes nodes instead of node)\n\t\t\t...\n}\n}\n}\nFor performance reasons, most queries will allow you to use two top level attributes called size and skip, which lets you paginate responses. This is extremely difficult to orchestrate in ONE Desktop, but when you have the opportunity to use a different tool, and you know the response from your query will be huge it is a very good idea.\nquery GetJobs{\n  baseJobs(\n    versionSelector: {draftVersion: true}\n    orderBy: {property: \"createdAt\", direction: DESC}\n    size: 20\n\t skip: 0\n  ) {\n    edges {\n      node {\n        gid\n        type\n        draftVersion {\n          name\n          type\n          status\n          createdAt\n          linkedEntityId\n          linkedEntityNodePath\n          linkedEntityHcn\n          correlationId\n        }\n      }\n    }\n  }\n}\nPutting everything together, here is an example request that gets all Profiling data:\nquery getProfileData {\n    attributeProfiles(versionSelector: { publishedVersion: true }) {\n      edges {\n        node {\n          gid\n          publishedVersion {\n            displayName\n            attributeProfileData {\n              publishedVersion {\n                distinctCount\n                duplicateCount\n                frequencyCount\n                frequencyGroupsCount\n                masksCount\n                minValue\n                maxValue\n                nonUniqueCount\n                nullCount\n                numMin\n                numMean\n                numMax\n                numStdDeviation\n                numSum\n                numVariance\n                patternsCount\n                stringMinLength\n                stringMeanLength\n                stringMaxLength\n                totalCount\n                uniqueCount\n                frequencyGroupsHead(\n                  orderBy: { property: \"count\", direction: DESC }\n                  size: 3\n                ) {\n                  edges {\n                    node {\n                      publishedVersion {\n                        value\n                        count\n                      }\n                    }\n                  }\n                }\n                masksHead(\n                  orderBy: { property: \"count\", direction: DESC }\n                  size: 3\n                ) {\n                  edges {\n                    node {\n                      publishedVersion {\n                        value\n                        count\n                      }\n                    }\n                  }\n                }\n                patternsHead(\n                  orderBy: { property: \"count\", direction: DESC }\n                  size: 3\n                ) {\n                  edges {\n                    node {\n                      publishedVersion {\n                        value\n                        count\n                      }\n                    }\n                  }\n                }\n                quantiles(\n                  orderBy: { property: \"percentile\", direction: DESC }\n                  size: 3\n                ) {\n                  edges {\n                    node {\n                      publishedVersion {\n                        value\n                        percentile\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\nAnd that’s all!\nMy suggestion and what I use daily is to work these on the playground first, building the query in small chunks.\nHope you found this short series helpful, let me know if you have any best practices, tips, or questions in the comments!"
+    },
+    "answers": []
+  },
+  {
+    "title": "New Full Load for an already loaded source data",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/new-full-load-for-an-already-loaded-source-data-1497",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "I  have a full load already configured for a source system. This load component has 3 different entities(party, contact, address).I have used this to load data into mdm-hub as well.\nHowever, now we want to use a different source table for party entity and want to load only the records for party entity. I am planning on using a new full load with mappings only for the party entity. Will this\ncreate new instance party records and make the old records inactive?\nbring any change to the records for contact and address entities?"
+    },
+    "answers": [
+      {
+        "author": "Ales",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@aish_TF\n, assuming that the second full load operation is related to the same system and will contain the same SOURCE_IDs?\nIf so\nwill create new records and update the existing records based on the SOURCE_IDs; and deactivate the non existing ones.\nthe load itself will not bring any change to the child entities unless you have e.g. copy columns defined in your model and match the related addresses/contacts based on the matching on the parent-Party entity."
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@aish_TF\nI’m closing this thread for now, if you have any follow-up questions please share them here or create a new post 🙋‍♀️"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "5 months ago",
+        "content": "​\n@Ales\nCan you explain what changes will come into affect for point 2.\nI do have copy columns in address and contact that are fetched from party. These are used to determine address and contact matches."
+      },
+      {
+        "author": "Ales",
+        "timestamp": "5 months ago",
+        "content": "if you have copyColumns configured (copying a value from e.g. Party to Address) and there are child records related to the parent Party, the value from Party will be copied to the child which will change that way.\nSo only your CopyColumns attributes may change on the child entity + subsequently it may have an impact on your matching if configured on child entity."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "4 months ago",
+        "content": "Got it.\nThanks @Ales"
+      }
+    ]
+  },
+  {
+    "title": "Connecting Azure AD to Keycloak (SAML)",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/connecting-azure-ad-to-keycloak-saml-244",
+    "question": {
+      "author": "john.efechaobor",
+      "timestamp": "[No timestamp]",
+      "content": "Security Assertion Markup Language (SAML)\nallows users to use one set of credentials to log into many different websites. It is an open standard that allows identity providers (IdP) to pass authorization credentials to service providers(SP).\nSAML transactions use\nExtensible Markup Language (XML)\nfor standardized communications between the identity provider and service providers. SAML is the link between the authentication of a user’s identity and the authorization to use a service.\nItems to consider prior to connecting to SAML- Best Practice\nIt is important to understand how your organization’s Active Directory is setup. Some pre-requisites needed can include things such as:\nDo you have a list of groups you need to import?\nIf the answer is no, you may want to speak to your engagement manager from Ataccama to discuss in detail. In short, with AD Groups we can map Ataccama Roles to a single group. This benefit of doing this is, your internal dev-ops team won’t have to manually add/remove users to Keycloak each time someone is added/removed from Active Directory.\nOnce you have decided on the number of groups/users, you must then submit a request within your organization for a federation metadata file. How long this takes, will heavily depend on your internal processes. Without this file, you will not be able to proceed with the SAML configuration.\nBest practice is to ensure that your AD groups are flexible enough to support one Ataccama role to one Azure AD group mapping. Some organizations decide to map 1 role to many groups, but this is a little more complicated. You may want to speak to your engagement manager from Ataccama to discuss in detail.\nHave you decided what permissions each SAML group should have in regards to Ataccama?\nIf the answer is no, please contact your assigned engagement manager or visit our documentation portal to understand the default roles/permissions available to you at Roles and Permissions. This is a very important step if you are looking to build a data governance process and ensure that certain aspects of the Ataccama tool are restricted for their respective groups/users.\nBest practice is to have a meeting with an Ataccama resource in advance to discuss the various roles you have within your organization. This is very important as we will need to map your permissions to Ataccama roles. This will also have a major impact on how your groups in SAML will be created and mapped to your users.\nConsider the SAML attributes\nBecause Active Directory allows you to structure all attributes at the organization level, you must confirm with your devops/security team for these attributes.\nThe list is as follows\n:\nUsername -\nFor Azure AD, this will be\nuser.userprincipalname\nand for Okta this will be based on the Attribute Values in your Okta configuration\nFirst Name -\nFor Azure AD, this will be\nuser.givenname\nand for Okta, this will be based on the Attribute Values in your Okta configuration\nLast Name -\nFor Azure AD, this will be\nuser.surname\nand for Okta, this will be based on the Attribute Values in your Okta configuration\nEmail -\nFor Azure AD, this will be\nuser.mail\nand for Okta, this will be based on the Attribute Values in your Okta configuration\nGroups -\nFor Azure AD, this will be\nuser.groups[Security Groups]\n, and for Okta, this will be based on the Attribute Values in your Okta Configuration\nBest practice is to ensure you have all the above attributes before rushing to setup SAML. We also recommend having an SAML expert from your internal team during the call for configuration, so that there are no delays in getting it completed.\nEnsure you have the SAML form\nMost importantly, ensure you have the saml form and that it is located in the correct directory in your environment’s file system.\nThe form can be downloaded\n- SEE attachment\nOnce you have all the above information, then you are ready to proceed to the actual configuration of SAML with Keycloak 🎉\nSteps to create a SAML connection\nBefore going through the following steps, please ensure you have your keycloak location (https://<ataccama_platform_fqdn>/auth). Also, upon logging in, at the top left hand corner make sure you are selecting the realm that you want to enable SAML on. Ataccamaone will be for ALL Ataccama related applications and Master is for keycloak login directly.\nInitial Keycloak Configuration for SAML\nNavigate to “Identity Providers” on the menu on the left hand side\nSelect the drop down menu\nSelect “Saml v2.0”\nOnce selected, the following screen should appear. In this screen, you can change the alias name to how you see fit.\nBe sure to do the following checks\nCheck the Redirect URI - it should look something like: https://<ataccama_platform_fqdn>/auth/realms/ataccamaone/broker/saml/endpoint It’s important that the\nsaml\nin the Redirect URI matches the value of the Alias field\nAdditionally, make note of the Redirect URI as this will be requested by the Client’s IAM team along with the User Identifier and the Reply (ACS) URL for Azure AD\nIdentifier/Entity ID: https://<ataccama_platform_fqdn>/auth/realms/ataccamaone\nUser Identifier: user.mail\nReply (ACS) URL: https:///auth/realms/ataccamaone/broker/saml/endpoint\nDO NOT CLICK SAVE\nAzure AD Configuration\nAfter supplying the above information to the client’s IAM team, they should be able to generate an .xml file. This file should contain information that we specified in 3. Consider the SAML attributes\nTo ensure that the .xml document has all the information needed, Attributes & Claims should look similar to what’s in the image.\nuser.groups\nvalue should be user.groups[Security Groups]\nKeycloak Configuration - Settings\nNow that we have the .xml file, under the Import External IDP Config, select Import from file, navigate to the folder where the file is located and double click on it\nClick on Import\nIf the format of the file is correct you should receive a notification (see image) and the Single Sign-On Service URL will now be populated. Other settings may have been changed too.\nScroll to the top of the page, and at First Login Flow drop down, change the value to Simple Login Flow\nClick Save\nKeycloak Mappers - Mappers\nScroll to the top of the page, and click on Mappers, beside the Settings tab. Here, we will create the mappings for the different attributes discussed above.\nUsername\nFor this Mapper, the Mapper Type will be “Username Template Importer” from the drop-down menu\nThe template will be “${ATTRIBUTE.\nhttp://schemas/xmlsoap.org/ws/2005/05/identity/claims/name\n}”\nFirst Name\nFor this Mapper, the Mapper Type will be “Attribute Importer” from the drop-down menu\nThe Attribute Name will be the AD schema (\nhttp://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname\n) for first name and for Okta “firstName”\nThe User Attribute Name will be “firstName”\nLast Name\nFor this Mapper, the Mapper Type will be “Attribute Importer” from the drop-down menu. The Attribute Name will be the AD schema (\nhttp://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname\n) for Last Name and for Okta “lastName”\nThe User Attribute Name will be “lastName”\nEmail\nFor this Mapper, the Mapper Type will be “Attribute Importer” from the drop-down menu\nThe Attribute Name will be the AD schema (\nhttp://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress\n) for email and for Okta “email”\nThe User Attribute Name will be “email”\nGroups\nFor this Mapper, the Mapper Type will be “SAML Attribute to Role” from the drop-down menu\nThe Sync Mode Override will be “force” to ensure that upon logging in, users are being verified that they are still a part of that group\nThe Attribute Name will be the AD schema (\nhttp://schemas.microsoft.com/ws/2008/06/identity/claims/groups\n) for groups and for Okta, the name of the attribute\nThe Attribute Value for Azure AD, should represent the Object ID of the group. As you can see in the image below, the Object ID matches the Attribute Value shown in the image in step 3.\nThe Role represents the Keycloak role that you want the group to be assigned to\nTest SAML Connection\nOnce you have completed the steps above, you are just about done with setting up SAML in Keycloak. To validate that things are working as they should, please try to log in to the platform using the SAML button on the login page\n💡 Have a look also at\nHow to Set up Auto Login for Users in Keycloak"
+    },
+    "answers": [
+      {
+        "author": "David Suen",
+        "timestamp": "2 years ago",
+        "content": "Here is how to set up a simple login flow. Credits to\n@nataliasouza\nfor recommending. Please note this is for ONE versions prior to V14.\nV14 has a new version of keycloak where this is not needed.\nSetting up the First Login Flow\nThe First Login Flow is the process that executes when a user logs into Ataccama for the first time. In the scenario described here, a user record will be created in Keycloak with the user’s email address as their username along with their first and last names, for use within Ataccama ONE.\nLogin to the\nKeycloak Administration Console\nEnsure the\nAtaccamaone\nRealm is selected\nIn the left-hand-menu, Click on\nAuthentication\nOn the Flows tab, click\nNew\non the right-hand-side\nEnter an\nAlias\neg. Simple Login Flow and click\nSave\nWith the new flow selected, click\nAdd execution\nUnder\nProvider\n, scroll down the list and select\nCreate User If Unique\nSelect\nSave\nUnder\nRequirement\n, select\nALTERNATIVE"
+      },
+      {
+        "author": "David Suen",
+        "timestamp": "2 years ago",
+        "content": "Dear Enterprise Azure AD admins,\nWhen setting up your Enterprise AD application, please ensure the groups claim is set up correctly following the recommended steps here:\nhttps://learn.microsoft.com/en-us/azure/active-directory/hybrid/how-to-connect-fed-group-claims#add-group-claims-to-tokens-for-saml-applications-using-sso-configuration\nCreate your Enterprise application and within the process - please check the atrributes and claims and there set up your group claims.\nThe group claims should be “groups assigned to the application” with Group ID selected as source attribute."
+      },
+      {
+        "author": "David Mecca",
+        "timestamp": "5 months ago",
+        "content": "Regarding the\nGroup Claims\nconfiguration,  at a recent client, the\nSource Attribute\nin Azure\nneeded to be set to\nGroup ID\nso that the Attribute Id value setup for the Group Claim in KeyCloak would resolve.  Without this set correctly, the Group Claim was not resolving and the appropriate KeyCloak IDP role was not being assigned to the user on login."
+      }
+    ]
+  },
+  {
+    "title": "Direct Load Operation failure",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/direct-load-operation-failure-1521",
+    "question": {
+      "author": "fshahin",
+      "timestamp": "[No timestamp]",
+      "content": "Our Incremental load operation is taking huge time (2 hrs to process 5-7K records). We have applied all performance tuning things which is there in document. Apart from this we thought of loading data from DW to PostgreSQL (MDM DB) stage table and then will use that stage table as a source in Incremental load. Idea is when the server will be same for both source and target the computation will be faster.\nBut this direct load job is failing with below error. Kindly help on fixing this. Or please recommend on any other approach.\ncom.ataccama.nme.core.NmeExecutionException: Plan \"C:\\Users\\EYKU4F\\Ataccama\\workspace\\OmniChannelMDM_Latest\\Files\\engine\\load\\EPRISM_stg_eprism.comp\" execution failed: runtime.error.jdbc_reader_error - nullcom.ataccama.dqc.model.environment.AbortedExecutionException\tat com.ataccama.dqc.model.elements.data.flow.RecordQueue.putBatch(RecordQueue.java:173)\tat com.ataccama.dqc.model.elements.data.flow.RecordQueue.access$100(RecordQueue.java:35)\tat com.ataccama.dqc.model.elements.data.flow.RecordQueue$InputEndpoint.putBatch(RecordQueue.java:236)\tat com.ataccama.dqc.processor.internal.monitoring.MonitoringQueueInputPoint.putBatch(MonitoringQueueInputPoint.java:35)\tat com.ataccama.dqc.model.elements.data.flow.QueueBatcher.flush(QueueBatcher.java:88)\tat com.ataccama.dqc.tasks.io.jdbc.read.JdbcReaderInstance.run(JdbcReaderInstance.java:162)\tat com.ataccama.dqc.processor.internal.runner.ComplexStepNode.runNode(ComplexStepNode.java:69)\tat com.ataccama.dqc.processor.internal.runner.RunnableNode.run(RunnableNode.java:28)\tat com.ataccama.dqc.commons.threads.AsyncExecutor$RunningTask.run(AsyncExecutor.java:135)"
+    },
+    "answers": [
+      {
+        "author": "Ales",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@fshahin\n, can you please clarify which version of Ataccama you are using? From what I see in your post I guess it’s OMNI MDM from IBI/TIBCO, is that correct? In that case I would assume it’s version 10.x maybe?\nThanks,\nAles"
+      },
+      {
+        "author": "fshahin",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@Ales\n: Ataccama version in 13.9.1. Any other approach to optimize will also be helpful."
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@fshahin\nthank you for posting! Would you be able to create a support ticket for this at support.ataccama.com?"
+      }
+    ]
+  },
+  {
+    "title": "Spice Up Your MDM with Emojis! 🎉",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/spice-up-your-mdm-with-emojis-1536",
+    "question": {
+      "author": "jduha",
+      "timestamp": "[No timestamp]",
+      "content": "Hi community 👋\nEvery now and then, we hear from our users wondering if it’s possible to spice up their Master Data Management (MDM) interface with something a little more visual.\nRecently, I worked with one of our members who wanted to mark one of the records in a group as having a special meaning, so that it would instantly stand out to data stewards. While the logic behind selecting this record was complex, the outcome boiled down to a simple boolean flag, like\ncmo_preferred_flag = {true | false}\n. However, displaying such an attribute on the screen isn’t exactly thrilling:\nIn earlier versions, it was possible to load an image file to represent things like this, but it required customization that was tricky to maintain. Plus, it often got wiped out when regenerating the MDM project. In our current versions (14.5.x / 15.x), we’ve moved to SpringBoot, and for security reasons, loading external static content is no longer supported.\nSo, can we solve this in a fun and practical way?\nThe emoji solution 😎\nThe good news? There’s a simple yet powerful alternative: Unicode! Yep, instead of loading images, we can turn to Unicode characters—specifically,\nemojis\n.\nNow, you probably already know Unicode as a vast character set that includes fonts from across the world, even ancient scripts. But did you know it also contains a whole bunch of emojis? That’s right! You can find almost anything, from aliens 👽 to zebras 🦓.\nUnicode is packed with goodies, and according to\nthis Wiki article\n, there are entire blocks dedicated to emoticons, symbols, and pictographs, plus plenty more scattered across other blocks. Finding the perfect emoji can be as easy as a quick Google search for \"Unicode emoji lookup.\" Go ahead, find your favorites—there are plenty to choose from!\nImplementation: Bring on the emojis! 🚀\nFound your perfect emoji? Great! Now, let’s display it in MDM.\nFirst, make sure the database you're using to run the MDM repository can store and retrieve Unicode characters. This should be supported across all our platforms, but double-check that you’re using a compatible version. If you have database access, you can try inserting an emoji directly and see if you can pull it back out. If you're using Ataccama Cloud, you should be good to go since we run the latest tech stack there.\nNext, simply add a new attribute with a String type to the MDM. Use your custom logic (cleansing, merging, etc.) to calculate the value of this attribute, and store the Unicode character. That’s it! Your emoji will now display natively in MDM.\nExample: setting value of\ncmo_preferred_flag_display\nto hold the Unicode representation of the original\ncmo_preferred_flag\ncolumn. Note that the highlighted character must be an exact copy/paste of the selected Unicode character. In this case what looks like a standard ‘asterisk’ character, is actually a literal copy of Unicode\n:star:\ncharacter (it will be displayed by browser as\n⭐):\nNext up, use\ncmo_preferred_flag_display\ninstead of\ncmo_preferred_flag\nin the template configuration and voilà!:\nUsing a separate attribute for display purposes is good, because your other interfaces (Rest APIs, MDM exports, etc.) can continue to provide the original boolean\ncmo_preferred_flag\nvalue to the downstream consumers.\nBy the way, there is no need to worry about storage—after all, you’re not saving images. Unicode characters take up a small amount of space: 1 byte (UTF-8), 2 bytes (UTF-16), or 4 bytes (UTF-32), depending on the specific character or set it comes from. Just make sure your MDM attribute can handle the size (1 to 4 bytes should cover it).\nFound the perfect emoji, but it’s a little smaller (or maybe less colorful) than you imagined? Don’t fret, you can make it pop!\nSprucing it up with CSS 🎨\nOne of the coolest things about using Unicode characters is that you can style them using simple CSS, just like text!\nThere’s a default\ntemplate.css\nin the\netc/gui-templates\ndirectory that affects MDA layouts. However, I don’t recommend editing that file since your changes might get wiped out in future upgrades. Instead, create a custom CSS file specific to your project—something like\ntemplate-myproject.css\n—in the same directory. Both CSS files will be loaded automatically, so you can tweak your emoji’s size, color, or any other style to your heart’s content.\nTo increase the size of the character:\n#field\n\\\\|\nMASTER\n\\\\|\nmasters\n\\\\|\naddress\n\\\\|\ncmo_preferred_flag\nspan\n{\nfont-size\n:\n1.2\nrem\n;\n}\nTo style the character in arbitrary color just set the text color:\n#field\n\\\\|\nMASTER\n\\\\|\nmasters\n\\\\|\naddress\n\\\\|\ncmo_preferred_flag\nspan\n{\ncolor\n:\ndarkgoldenrod\n;\n}\nNow your MDM doesn’t just manage data, it\nspeaks\nit—with emojis! 🎉 Have fun giving your MDM interface that extra splash of personality, while keeping things efficient and secure.\nGive it a try and let us know how it goes or if you have any questions in the comments below👇"
+    },
+    "answers": []
+  },
+  {
+    "title": "Updates creates a record to split from its golden id",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/updates-creates-a-record-to-split-from-its-golden-id-1513",
+    "question": {
+      "author": "mauriceK",
+      "timestamp": "[No timestamp]",
+      "content": "Hi\nWe are noticing behaviour in our model where a source system will split from its golden id group when updated on matching criteria fields ( in this example address). However it only does this when the group of records was manually merged onto the golden id. It wont “jump ship” and form a new golden id when the records previously auto merged based on the matched criteria we assigned in the model.\nIs there a way we can stop this splitting from happening when the source system is updated?\nFor example we can see here the new golden id created with one SF record\nthe previous group the SF record belonged to, shows a lot of manual merging in the Match Rule Name column\nOur rematch if changed section shows these fields are used for rematching:\nWe want to keep rematching switched on, to bring other source systems into the group if they meet criteria, but we dont updates on the SF record itself to allow it to break out of the group. (We dont want “auto-splits”)\nthanks"
+    },
+    "answers": [
+      {
+        "author": "Ales",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@mauriceK\n, it sounds like that you might have a specific parameter\nremoveManualMatch\nenabled.\nIn such case the rematch operation would have the priority against the manual override.\nCan you please check your runtime.parameters\nhttps://docs.ataccama.com/mdm/13.9.x/configuration/runtime-parameters.html"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@mauriceK\n, I’m closing this thread for now, if you have any follow-up questions please share them here or create a new post 🙋‍♀️"
+      },
+      {
+        "author": "mauriceK",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@Ales\nThanks for your reply. Much appreciated. It turns there was a constraint rule in our matching layer, that didnt stop our SF records from rematching with other SF records. Even though they were rematching inactive SF records ( the greyed out lines in the above screenshot) it still recognised the rule to not rematch to them. Below is the fix we applied. We had to change the constraint rule to also check the active status. Once this was deployed, the retest showed the SF record no longer would split from the master record group and create a new group."
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@mauriceK\n, thank you for sharing your solution as well!"
+      }
+    ]
+  },
+  {
+    "title": "Error during manual Merging",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/error-during-manual-merging-1516",
+    "question": {
+      "author": "FionaF",
+      "timestamp": "[No timestamp]",
+      "content": "While trying to manually merge 2 records, facing an error stating permission issue.\nFollowed above mentioned step to merge records.\nError message"
+    },
+    "answers": [
+      {
+        "author": "Ales",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@FionaF\n, as stated in the error, please check your role and permission setup in the section Custom Permissions Settings. I guess you have a custom settings enabled.\nCheck the\novrMatch\noption.\nSee the details in the\ndoc"
+      },
+      {
+        "author": "FionaF",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@Ales\n,  taking the General MDM project - CDI example as a reference,  already had created custom permission setting.\nAlso, thankyou for sharing the documentation"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@FionaF\n, may I ask if you are still facing an error or this is resolved?"
+      },
+      {
+        "author": "FionaF",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@Cansu\n, I’m still encountering the same error. I’ve tried different setups, but the issue persists"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Could you please raise a support ticket with the link to post and any additional details at support.ataccama.com ​\n@FionaF\n? My colleagues will assist as soon as possible 🙋‍♀️"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@FionaF\n, I wanted to check back if there is anything I can help you with - please let me know! I’m closing this thread for now 🙋‍♀️"
+      }
+    ]
+  },
+  {
+    "title": "Set MDM records to inactive based on source flag and not delete",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/set-mdm-records-to-inactive-based-on-source-flag-and-not-delete-1246",
+    "question": {
+      "author": "Tyler",
+      "timestamp": "[No timestamp]",
+      "content": "Hello, from one of our source systems we were previously excluding any inactive addresses, contact details, etc. Our users have requested we load these records into MDM for visibility. My issue is that while we can add these records as is, they will not show as inactive on MDM. We could add a source active flag but for consistency with other sources we would like them to show as inactive on MDM (Greyed out).\nWe have considered doing a one time load of all the inactive instances and then excluding them from the daily load but because it is possible to create address and contact details as inactive from the source that would not work.\nI have explored using the delta load as it has a change type column that could be appropriate for our use case.\nHas anyone had to set records in MDM as inactive as part of the load not using the deletion strategy? What method did you use?\nI have also looked into creating new instance entities to store inactive records but that would be a large undertaking as we would have to rebuild all load plans rather than this single source.\nThanks for any insight,\nTyler\nP.S. We are already excluding these records from our matching rules so no issues there."
+    },
+    "answers": [
+      {
+        "author": "ivysakh",
+        "timestamp": "11 months ago",
+        "content": "Hi\n@Tyler\n,\nIf you can identify the inactive records from the source, you can conditionally assign a value to the\nchange_type\ncolumn for those records. For example:\nIf your deletion strategy is set to ‘deactivate’ for the delta load, this will mark the inactive records as ‘inactive’ in MDM.\nThis approach is preferable because the source system will continue to send inactive records as part of the delta loads and you want to retain the relationships to those inactive records.\nThanks,\nVysakh"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "10 months ago",
+        "content": "Hi\n@Tyler\n, welcome to the community and thank you for posting 🙋‍♀️\nI’m closing this thread for now, if you have any follow-up questions please feel free to share them in the comments or create a new post."
+      },
+      {
+        "author": "Tyler",
+        "timestamp": "5 months ago",
+        "content": "Thanks for the suggestion\nivysakh\n.\nFor anyone reader this now we did not want to change everything to a delta load plan just to support this change, so we went about it another way.\nWe created a active indicator column from the source loaded into the instance layer. During the master merge we are using the following to load the eng_active column: nvl(best.active_indicator,best.eng_active).\nActivity overrides in the advanced settings on the master entity need to be enabled for this to work.\nRegards,\nTyler"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Thank you for coming back to the thread and sharing your solution ​\n@Tyler\nmuch appreciated 🙌"
+      }
+    ]
+  },
+  {
+    "title": "Apply Last Changed Date Field Delta Change only on Instance Layer and not on Master Layer",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/apply-last-changed-date-field-delta-change-only-on-instance-layer-and-not-on-master-layer-1358",
+    "question": {
+      "author": "ritesh.ranjan",
+      "timestamp": "[No timestamp]",
+      "content": "Hi\n@Cansu\nand All\nIn the event if there is no change in the delta records coming in MDM except one of the Sequence Generated column, is their a way that the date field(Last Changed) gets updated with the date of the new row only on INSTANCE layer and not on the MASTER layer. So, if MDM ingests the delta record in Instance Layer and sees that there are no changes detected on any columns except the sequence column and it has nothing to update the Golden Record already existing then it should update the date field on Instance Layer only and not on Master Layer.\nPlease let me know if you have any additional questions.\nThank You\nRitesh Ranjan"
+    },
+    "answers": [
+      {
+        "author": "Ales",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@ritesh.ranjan\n,\ncan you please clarify what is the\nSequence column\n?\nA record is ingested into MDM.Instance layer only if there is at least one attribute/column changed.\nSimilarly the change is propagated to the Master layer only if there is at least one change on the master record itself i.e. based on your merge rules.\nIn other words if your Golden Record already exists and there is no update on that record even there is a related instance record changed, then it should update the date field on Instance Layer only and not on Master Layer as you mentioned.\nPlease check if and how your Golden record changed."
+      },
+      {
+        "author": "mauriceK",
+        "timestamp": "5 months ago",
+        "content": "Yes I think I agree with the previous comment. If the golden id exists and the update of one of the instances doesnt effect the fields on the golden id, based on the hierarchy youve assigned to the fields, then youre last update date on the golden id prob wont update. unless its maybe an action like a split or rematch that refreshes the master layer in some way. basically anything that would refresh the master layer specifically would be the cause for the last change update on master layer"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@ritesh.ranjan\n, I’m closing this thread for now, if you have any follow up questions please share them here or create a new post 🙋‍♀️"
+      }
+    ]
+  },
+  {
+    "title": "Unable to start keycloak locally on a Azure DevBox",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/unable-to-start-keycloak-locally-on-a-azure-devbox-1485",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "Unable to start keycloak locally on a Azure DevBox, When I run the keycloak.bat file from OneDesktop, it is immediately terminated as per console logs. Can anyone help with the diagnosis?"
+    },
+    "answers": [
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "I found the answer to this. There are two things to keep in mind whenever you setup a new project locally-\nmake sure keycloak, pgsql, mdm, mdm-server folder names are as mention in the\ndocumentation\n.\nmake sure when these packages are unzipped, the sub-folders are extracted properly.\nIn my case, second point was the issue."
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Thank you for sharing the solution as well ​\n@aish_TF\n🙌"
+      }
+    ]
+  },
+  {
+    "title": "Update flow for Delta Export",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/update-flow-for-delta-export-1470",
+    "question": {
+      "author": "debashishghosh",
+      "timestamp": "[No timestamp]",
+      "content": "We are getting errors in the delta update flow for party and policy master and this is the error message.\n“com.ataccama.nme.core.NmeExecutionException: Plan \"/opt/ataccama/one/mdm-server-config-13.9.1.221107-11165-6e37fd24/Files/engine/export/Party_Master_Delta.comp\" execution failed: runtime.error.sql.instance.processError - Transaction (Process ID 901) was deadlocked on lock | communication buffer resources with another process and has been chosen as the deadlock victim.”\nPlease advice if any help can be provided.Thanks !!"
+    },
+    "answers": [
+      {
+        "author": "ivysakh",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@debashishghosh\n,\nCould you provide a quick overview of the steps in this export plan? Since it is a deadlock error, I suspect it might be related to some custom database operations.\nIs it possible that you're updating or inserting into the same table from two different steps within the plan? This could potentially lead to the deadlock situation we're encountering.\nAny insights you can share about the plan's logic and database interactions would be greatly appreciated."
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@debashishghosh\nI’m closing this thread for now, if you have any follow up questions please share them in the comments or create a new post 🙋‍♀️"
+      }
+    ]
+  },
+  {
+    "title": "MDM Performance Issue",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/mdm-performance-issue-1486",
+    "question": {
+      "author": "fshahin",
+      "timestamp": "[No timestamp]",
+      "content": "Hi All,\nWe are facing performance issue while loading and exporting data in MDM. We have around 30 million records. We are loading data in chunks and initial few execution were very quick. After processing 20M we are observing severe degrade in performance. Now even for 10K records the job is taking 8-10 hours for both load and export. We have applied parallelism wherever its possible. Is there any other thing which we need to consider/implement which will enhance the performance?\nTIA."
+    },
+    "answers": [
+      {
+        "author": "ivysakh",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@fshahin\n,\nA thorough investigation is necessary to pinpoint potential bottlenecks in the process. By examining the load operation and individual MDM processes, you can identify the specific step that is taking too long to complete, such as matching, merging, or change detection. Once identified, you can analyze the configuration of that step in detail to uncover any issues. For instance, complex match rules with fuzzy logic can impact performance as data volume grows.\nTo get started, please refer to this online documentation for guidance on performance tuning in MDM:\nhttps://docs.ataccama.com/mdm/14.5.x/performance-tuning/performance-tuning.html\nIf you need additional help, feel free to contact the support team by opening a case."
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "5 months ago",
+        "content": "Hi ​\n@fshahin\nI’m closing this thread for now, if you have any follow up questions please feel free to share them here or create a new post 🙋‍♀️"
+      }
+    ]
+  },
+  {
+    "title": "Updating Lookup Item via GraphQL Mutation",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/updating-lookup-item-via-graphql-mutation-1495",
+    "question": {
+      "author": "jbrant",
+      "timestamp": "[No timestamp]",
+      "content": "I have an ETL process that’s run on-demand and refreshes master data referenced by several Ataccama catalog items. There’s about 60 lookup items that are created from catalog item attributes that I need to update immediately following the master data refresh. I know there’s a lookup item “Update” button in the Ataccama web interface and a method to schedule refreshes; however, I haven’t been able to find a way to update lookup items on-demand, such as through a GraphQL mutation.\nIs there an available mutation for updating lookup items on-demand, or another method that could be utilized?"
+    },
+    "answers": [
+      {
+        "author": "OGordon100",
+        "timestamp": "6 months ago",
+        "content": "Hello!\nHere is the mutation you will need - the gid is the gid of the lookupitem as seen in the page URL. <customer>.<env>.ataccama.online/dq/lookupItem/1008d15e-0000-7000-0000-000000966f5e/ would have a gid of 1008d15e-0000-7000-0000-000000966f5e for example\nmutation CreateLookup($gid: GID!) {\n  createLookup(lookupItemId: $gid) {\n    name\n    status\n    __typename\n  }\n}\nHope this helps!\nOli"
+      }
+    ]
+  },
+  {
+    "title": "MDM Instance output to represent Ids from each system",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/mdm-instance-output-to-represent-ids-from-each-system-1507",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "I want to convert the instance export table values to a new table/view.\nThe instance export contains 3 columns that I want to utilise\nSharing an example-\nI have the following instance table structure :\nMASTER_ID\nSOURCE_SYSTEM\nSOURCE_ID\n001\nsys1\n1234\n001\nsys2\n12232\n001\nsys3\n1292\n001\nsys4\n13432\n001\nsys2\n12334\n5 records from 4 different source system make a master record, I want to group it in such a manner that there is a single row for each source_system id. If a source system participate twice(with two unique records) in formation of master record, I want two rows representing the different source_ids and a column with the source system that participates twice. Here is how I intend the output table to be:\nMASTER_ID\nSYS1_ID\nSYS2_ID\nSYS3_ID\nSYS4_ID\nMULTIPLE_REC\n001\n1234\n12232\n1292\n13432\nSYS2\n001\n1234\n12234\n1292\n13432\nSYS2\nCan someone help me with the ONE Desktop step I can use for this?\nI have explored using Aggregating Column Assigner to group records but I but that wouldnt help.\nI think I can use representative creator but not sure of the configurations."
+    },
+    "answers": [
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "UPDATE\nI tried using Representative Creator. Here is the cofiguration :\nGroup By MASTER_ID\nRepresentative columns\nSys1_id =SOURCE_ID if SOURCE_SYSTEM=’Sys1’ and so on for other systems.\nThis works but misses the edge case mentioned above. So, if a master record is a result of matches from different systems and each system does not have a duplicate within itself for a particular record, the above configuration works. Can someone please help with the edge case mentioned above?\nThanks in advance"
+      }
+    ]
+  },
+  {
+    "title": "Duplicate instance record IDs with different contact values",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/duplicate-instance-record-ids-with-different-contact-values-1438",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "Taking reference of CDI Example, I have multiple contact values for the same person and I want all of these contacts to be a part of the contact master entity.\nI am not sure how the same instance record id will affect this. Will ataccama load both these records? Will both these records partivipate in match logic(same master_party_id, same_contact_type,same contact_value) or will it consider just the first one?\nAlso, if someone can please confirm if the master_party_id is id for master record derived on processing of all party records?"
+    },
+    "answers": [
+      {
+        "author": "ivysakh",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@aish_TF\n,\nTo clarify how Ataccama handles contact records with the same party instance record ID:\nLoading:\nAtaccama loads\nall\ncontact records, even with identical party instance record IDs. This ID is simply a foreign key linking contacts to parties.\nMatching:\nContact matching relies on\nmaster_party_id\n,\ncontact_type\n, and\ncontact_value\n. Identical values across these attributes trigger a match and assign the same master ID.\nMerging:\nAtaccama merges matched records, selecting attribute values based on your configured rules.\nParty-Contact Dependency:\nContacts depend on their parent Party record. The\nparty_master_id\n(generated during Party mastering) is copied to the Contact entity. This ensures that contact matching/merging occurs\nafter\nthe parent Party is mastered.\nParty-Contact relationship in instance layer\nI hope this helps! Feel free to reach out if you have any more questions."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@ivysakh\nI do have another question that concerns the significance of source_id and party_source_id fields as defined in load for contact. From what I have understood, party_source_id is supposed to be a unique identifier of each record in the party entity. Tnis acts as a foreging key for party_has_contact relationship. The source_id seems like a unique identifier for each of the contact_values. In the source_id, we prefix a value generally, can you explain the purpose of this.\nTIA\nAishwarya"
+      },
+      {
+        "author": "ivysakh",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@aish_TF\n,\nYou're right, the Source ID is the primary key (PK) in an entity's instance table. It can either come directly from the source system or be generated within MDM.\nThe logic for assigning Source IDs is defined in the corresponding load operation. A common practice is to include the source name in the ID (e.g., \"CRM_123\") to ensure uniqueness across all sources.\nTo give you a more tailored explanation, could you share how Source IDs are currently assigned for your contact entity? I can then provide specific guidance in that context."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@ivysakh\nHere is an example on how source_id are defined in contact entity  for two different source systems in context of my project.\nFor one of the source systems, it could be  “OFFICE_PHONE~^~\nphone_id\n” and the for other it could be “PERSONAL_PHONE~^~\nphone_num\n”.\nWhere\nphone_id\ncolumn is the id of each phone number and\nphone_num\ncolumn is the phone number value in the source. This was previously configured, not by me and I am not sure if there is a reason for a prefix which is the same as contact_type followed by a value which is the same as contact_value for contact entity in case of second source mentioned in this example. Please let me know if I should check something else as well.\nAishwarya"
+      },
+      {
+        "author": "ivysakh",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@aish_TF\n.\nYou have two source systems with different Source ID formats for the contact entity:\nSource System 1:\n\"OFFICE_PHONE~^~phone_id\"\nSource System 2:\n\"PERSONAL_PHONE~^~phone_num\"\nPotential Improvements and Considerations:\nUniqueness:\nSince the primary goal of a Source ID is to uniquely identify each record from a source system;\nSystem 1:\nUsing\nphone_id\nlikely ensures uniqueness, as it's a primary key in the source.\nSystem 2:\nUsing\nphone_num\nmight\nbe unique if phone numbers are unique within that source system. However, this could be problematic if the same phone number can be associated with multiple contacts (e.g., a shared business line). Including\ncontact_type\nin the Source ID will avoid this duplicate issue to some level. As long as the combination of\ncontact_type\nand\nphone_num\nis unique, you shouldn’t face any issues."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "Thank you\n@ivysakh\nBut there is no reason to make source_id have contact_type value for internal usage right? Like for creating a set values from contact entity(using ^~ as seprator) to be utilised in party_match component?\nAs for uniqueness, I also had same doubt regarding the second system. As I mentioned this configuration was not done by me. It was done by someone before me.\nI did check the records for uniqueness and they are unique in the current configuration for System 2. I do have my inhibitions to continue with the same config though."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "@ivysakh\nI have another question here kind of related to this. If you think a new post would be better do let me know.\nSo, I was trying to replicate the match logic locally, and I am getting IllegalNumberFormat error, because the source id, which has String value as we have configured in the load component but it works fine when we do not setup Standalone Bindings for the MDM project.\nCan you please explain how does the source_id column gets consumed in _match component?"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "PS: I observe that source_id defined in load component can have complete string values as well"
+      },
+      {
+        "author": "ivysakh",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@aish_TF\n,\nTo make this information more discoverable for others, I suggest creating a new topic with a specific and relevant title. This will help users searching for similar issues find the solution easily."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "Hey\n@ivysakh\nI added the query as a new post  here-\nA\nsource_id column value and matching step\nPlease have a look"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "6 months ago",
+        "content": "Hi ​\n@aish_TF\nI see ​\n@ivysakh\nhas replied there - thanks for creating a post!"
+      }
+    ]
+  },
+  {
+    "title": "source_id column value and matching step",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/source-id-column-value-and-matching-step-1496",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "Hi All,\nI have a few observations regarding the source_id column in matching step of an entity in a MDM project.\nFor context, source_id is a column with unique values (Primary Key in most cases) that we define to uniquely identify each record in a source system, connected to mdm hub.\nI was recently trying to test the match logic on OneDesktop using plan files. I used a very small subset of records from each source.\nLoad Component\nIn the project, source_id column(defined in load component) for one of these source system is “SOURCE_SYSTEM_NAME~^~pk_id”\nwhere SOURCE_SYSTEM_NAME is as string value and pk_id is the primary key.\nmatch component\nWhen we defined a match component in mdm project, we do not define standalone bindings but assumably “Id Column” would be mapped to source_id column if we are testing on OneDesktop as a plan.\nSo, when I created a plan to test the match logic, I mapped “Id Column” to source_id (with source_id having string values as mentioned above). But when I run the plan with this Matching step, I get\nIllegalNumberFormat Error\n, because the source_id has string value.\nIt looks like this happend because the matching step converts the Id Column value to integer/long. However, we do not encounter this issue when mdm-hub takes care of match component without standalone bindings.\nCan someone give their insights into why this happens? Is mdm engine handling this?\nadding References to\nMatching Step\nStandalone bindings"
+    },
+    "answers": [
+      {
+        "author": "ivysakh",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@aish_TF\n,\nWhen you create a test plan for matching components, map the standalone bindings in this fashion:\nIn our MDM system, each incoming record is assigned a unique 'Id' value. This 'Id' acts as the primary key within the instance layer, which is where we store and manage individual records.\nIt's important to differentiate 'Id' from 'source_id'. While both serve as identifiers, they have distinct purposes:\nId:\nA system-generated unique identifier for each record within our MDM system. It's essential for internal operations and data management.\nsource_id:\nThe unique identifier assigned for records within the\nsource system\nfrom which the record originated. This helps us track the record's origin but doesn't function as the primary key in our MDM database.\nWhen you test the matching plan locally using the standalone bindings, make sure the Id column is mapped to a similar unique column, which is on LONG datatype to avoid any datatype mismatch issues."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@ivysakh\nThanks for your response.\nI did exactly what you mentioned here using the sequence() function to generate a unique id for all the records.\nThis explanation clears my doubt.\nOnce again thank you for your explanation.\nRegards\nAishwarya"
+      }
+    ]
+  },
+  {
+    "title": "Efficient Bulk Profiling for Large Databases 💾",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/efficient-bulk-profiling-for-large-databases-927",
+    "question": {
+      "author": "Cansu",
+      "timestamp": "[No timestamp]",
+      "content": "Hi everyone,\nIn this post, we will cover how to do Bulk Profiling 💾\nProfiling vast databases with numerous tables can be a daunting task, but Ataccama's Bulk Profiling extension streamlines the process. This extension simplifies the profiling of database data sources with multiple tables. Instead of configuring analyses individually for each table, it enables you to import data structures directly from the database dictionary.\nBulk Profiling then automatically generates a profiling plan for each table. To top it off, the tool creates an execution batch file that can run the individual plans. This means you can perform the entire profiling process unattended, whether overnight or at a scheduled time using a task scheduler.\nStep 1: Creating a Bulk Profiling Project\nIn the\nModel Explorer\nview, click on\nNew Model Project\nin the toolbar. This will open the\nNew Model Project\ndialog.\nIn the dialog, select the\nBulk Profiling\nmodel template.\nClick\nFinish\n.\nThis initiates the process of creating a Bulk Profiling project.\nStep 2: Setting up a Database Connection\nSwitch to the\nFile Explorer\nview.\nRight-click on\nDatabases\nand select\nNew Database Connection\n. For instance, if you are connecting to an Oracle database, make sure to use the\nTest Database Connection\nbutton to verify the correctness of your parameters. You can find detailed information about connecting to a database\nhere\n.\nPlease note that drivers for certain databases might not come preconfigured with the product and may require separate configuration.\nStep 3: Importing Tables\nReturn to the\nModel Explorer\nview.\nStart by double-clicking on the parameters node and choose the data source you wish to profile (the database connection you created).\nIf you want to store the drill-through information, select the appropriate data source.\nRight-click on the\nTables\nnode and choose\nImport Database Metadata\n. In the wizard's first step, select the tables you intend to profile.\nThe next step allows you to pick columns for import.\nClick\nFinish\n.\nThis step imports the necessary table metadata.\nStep 4: Generating Profiling Plans\nRight-click on the\nProfiling Plans\nnode and choose\nGenerate\n.\nThis generates the profiling plans based on the imported metadata.\nStep 5: Executing Profiling Plans\nThe generation creates a folder labeled\nFiles\n, containing the profiling plans, and a batch file named\nrun.bat\n. This batch file runs the profiling plans sequentially.\nDouble-click on\nrun.bat\nto execute the plans.\nThe profiling plans will execute in a separate window. Once the execution is complete, you can close the window. Alternatively, you can run the batch file from a command prompt or a task scheduler.\nStep 6: Browsing Profiling Results\nAfter the execution is finished, open the\nFiles/prof\nfolder.\nEither press F5 or choose\nRefresh\nfrom the context menu. This action will reveal the computed profiles.\nThe generated profiles can now be viewed or exported as required.\nAnd that’s all! Let us know if you have any questions in the comments 👇🏻"
+    },
+    "answers": [
+      {
+        "author": "sdonka1",
+        "timestamp": "1 year ago",
+        "content": "Great opportunity to perform Bulk Profiling which is a big pain everywhere."
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "1 year ago",
+        "content": "Thanks for sharing your positive feedback\n@sdonka1\nmuch appreciated 🙌🏻"
+      },
+      {
+        "author": "Mkurup",
+        "timestamp": "1 year ago",
+        "content": "Can the profiling results be reported or emailed automatically to the data stewards or data owners?"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "1 year ago",
+        "content": "Hi\n@Mkurup\n, thanks for posting! Outputs from Bulk Profiling can be shared with other ONE Desktop users but they can not be shared or emailed to other users automatically. When you initiate Bulk Profiling you would also specify where to save these outputs (Step 4). You could create an\newf workflow\nto archive (.zip) the profiling outputs and share them with other users as needed. Hope this helps!"
+      },
+      {
+        "author": "Mr.DQ",
+        "timestamp": "6 months ago",
+        "content": "I was able to create and run 240 table profiles but need to export them to html for publishing purposes.  Is there a way to do this without clicking export on each one?  I was able to get the profiles to save as .xml or .json at the time of execution of the profile, but I still need some way to transform them from that format to html.  Anyone have any ideas?"
+      }
+    ]
+  },
+  {
+    "title": "Programming Languages",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/programming-languages-808",
+    "question": {
+      "author": "Jason.Suptic",
+      "timestamp": "[No timestamp]",
+      "content": "Howdy community!\nToday’s post is a very quick thought on some language knowledge that seems to help me when searching for answers about a project I might be working on in Ataccama. When I search online for an answer about an expression, or maybe an error I am seeing, I typically search in the following order. In this example we will assume I want to change a date to a string in a Column Assigner.\nI always start with SQL. So my search might be “PGSQL to turn a date into a string”\nNext I usually go to JAVA. Same search but with JAVA instead of PGSQL.\nFinally (and I usually reserve this one more for troubleshooting), I go to XML. While it might not be super useful for this example, there have been a couple times where searching for certain XML. One example is from another of my post on making a field nillable (able to accept a null value). The way I was helped by looking up XML functions, was that I was actually able to view the XML for the Enrichment I was creating and search it piece by piece, until I found what was happening to my fields. That post is found here:\nRDM Table Enrichment with Null Value | Community (ataccama.com)\n. What I noticed is that “nillable” was set to false, and needed to be set to true. Once I understood this, I was able to go back to the One Desktop IDE and find how to set this value (though I admit it took a while).\nI just created a post on how to see your XML for an online service, so it is still being reviewed, but you should be able to find it under my posts.\nEnjoy!\nJason R.S."
+    },
+    "answers": [
+      {
+        "author": "Cansu",
+        "timestamp": "1 year ago",
+        "content": "Thank you for sharing\n@Jason.Suptic\n- I have featured this one on our homepage 🙌"
+      },
+      {
+        "author": "TimBrown74",
+        "timestamp": "6 months ago",
+        "content": "When would you use the Ataccama language?  Where is the documentation for it?"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@TimBrown74\n, welcome to the community and thank you for posting! We don’t have an Ataccama language, however we have rules, expressions and plans used commonly. I suggest starting out with some of our getting started to Ataccama DQG Guides such as the ones below and use our documentation for any additional explanations. If you have any further questions regarding your use case please do let us know  🙌\nM\nExpressions 101 for non-technical users...\nA Beginner's Guide to Data Quality: Introduction 101 - Part 3  ✨\nBest Practice\n(The first two parts are linked on top of the post)"
+      }
+    ]
+  },
+  {
+    "title": "Load data in ERP Systems",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/load-data-in-erp-systems-1467",
+    "question": {
+      "author": "FionaF",
+      "timestamp": "[No timestamp]",
+      "content": "How to load result data from Ataccama ONE MDM to ERP systems like SAP?"
+    },
+    "answers": [
+      {
+        "author": "oliver",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@FionaF\n,\nFor this purpose we usually use batch Export operation. There are 2 types of the export operation:\nFULL - exports all data from MDM repository\nDELTA - exports only changed data since last execution of the export\nYou can also specify the list of the entities and columns which will be exported.\nResult is usually written to DB table you need to specify and then it can be loaded from that table to SAP or any other system.\nYou can find example of such export operations in our CDI example - see on the picture below:\nOliver"
+      },
+      {
+        "author": "Ales",
+        "timestamp": "6 months ago",
+        "content": "@FionaF\nI would just add that the specific connection to ERP typically depends on the target system. In case of SAP, Ataccama can connect through SAP RFC however just to read or execute on the RFC server.\nThere is no way how to write directly to SAP unless you use some standard SAP API or batch format to ingest the data in.\nThe export table\n@oliver\nmentioned above can be the source for SAP to ingest the data as well."
+      }
+    ]
+  },
+  {
+    "title": "Deactivation of historical data based on deletion in source",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/deactivation-of-historical-data-based-on-deletion-in-source-1463",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "I have a scenario where I do not want to deactivate the source party records in Ataccama, even though it no longer exists in the source. Is there a way to achieve this?"
+    },
+    "answers": [
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "Trying to explain a bit more:\nSo here’s the scenario.\nI have multiple source systems(3+) and the data gets refreshed every month.\nThe refreshed data might have some records deleted from the source system which would lead for them to be deactivated(as per my current source deletion strategy) in mdm, but I don’t want to lose out any processing within ataccama that(such Inactive records) would participate in - like in determining a golden record or in scenarios where we might want to manually compare two or more instance/master records and make a new golden record.\nAs per whatever information I could gather till now-\nIf I keep the source deletion strategy as deactivate, I will be able to\nCompare two records that belong to the same entity and form a golden record\nCompare two golden records and merge them.\nIf I change my Export strategy to export all existing records, I will be able to do a mapping between Inactive instance records and the golden records (irrespective of manual merge or merge due to mdm processing).\nHowever, if there is a way to not deactivate a record if it is deleted in the next cycle of refresh. Please let me know.\nAlso, if someone could please review my current understanding and guide me on my approach, it would be really helpful.\nThanks In Advance\nAishwarya"
+      },
+      {
+        "author": "oliver",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@aish_TF\n,\nIf you use Full load operation, all records removed from the source system will be deactivated/deleted in MDM - depending on your settings. Your undestanding is correct. If you choose deactivation, these records are still existing in MDM hub and are used in all layers (cleansing, matching, merging). The only difference is that they are marked as Inactive in UI and if Master record consists only from the inactive instances, it will be marked as Inactive as well.\nYou are also correct regarding the export - if you change exporty strategy to export all existing records, you can get both active and inactive records in the export.\nRegarding your last question - if you don’t want to delete/deactivate the missing records in MDM, you can use Delta load operation. In the incremental load, you need to provide change type flag, which tells MDM if the record is upsert (insert/update) or delete. So the difference between full and incremental load is following:\nFULL - MDM excepts all records from the source system and missing records will be deleted/deactivated\nDELTA - only the records where change_type is “D” are deleted/deactivated, the rest is upserted\nHope this helps or let me know if you have any other questions.\nOliver"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@oliver\nThis answers my questions. I have a follow-up question regarding delta load.\nSo, if I put change type as U for all the records after a data refresh, it would mean that the records that were deleted in source will not get deactivated in the web application, right?\nRegards,\nAishwarya"
+      },
+      {
+        "author": "oliver",
+        "timestamp": "6 months ago",
+        "content": "Yes, all incoming records will be considered as upsert and nothing will be deactivated.\nConsider please if it is a right approach - usually we want to have same records in the source system and MDM instance layer and if the record was deleted in the source, it should be probably be marked as inactive in MDM as well.\nOliver"
+      }
+    ]
+  },
+  {
+    "title": "Multiplicative Pattern Parser - unable to parse /",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/multiplicative-pattern-parser-unable-to-parse-1462",
+    "question": {
+      "author": "Szymon Olejniczak",
+      "timestamp": "[No timestamp]",
+      "content": "Hello,\nI am trying to use MPP step to derive some values from some free text field.\nI am struggling to parse any regex pattern for string like “A/B”.\nIt seems to work but whenever there is / sign it just doesn’t parse it.\nI tried to escape it using \\/ and also some other different options but nothing seems to work.\nWhat am I doing wrong?\nEDIT:\nTried to parse similar REGEX against Regex Matching step and here it seems to work:\nCould it be possible that MPP step is parsing incorrectly?\nEDIT 2:\nI might have found the issue. I took Tokenizer part from our another component and it started working correctly. However, I still don’t understand exactly how Tokenizer works and the docs aren’t providing with great examples on how to understand it.\nSzymek"
+    },
+    "answers": [
+      {
+        "author": "AKislyakov",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@Szymon Olejniczak\nPattern parser description:\nThe input text is first split into tokens using the defined tokenizer. Tokens are then matched against defined patterns and their components.\nTokenizer Config:\nThis element is used for demarcating/splitting input text string into particular components (tokens) depending on defined rules. Every token type is specified using two sets of characters:\ntokenStartCharacters\nand\ntokenCharacters\n.\nWithin the tokenization process, the input string is analyzed one character at a time, and when any character corresponding to\ntokenStartCharacters\nis found, this character is considered the beginning of a new token of the defined type. Any other characters found and corresponding to\ntokenCharacters\nare then included into this new token.\nIn other words Pattern parser first splits your string into tokens (you can think of them as “words”) and they tries to match these tokens (“words”) with components of your patterns.\nIn your configuration all patterns consist of a single token, thus for Pattern parser to be able correctly match string to a pattern tokenizer config should include\n/\nas a token character. Another solution might be to alter Patterns to include multiple tokens, e.g. a\n{LETTER}/{LETTER?}\nwill match A/ and A/B inputs.\nYou can find more detailed example in the:\nTutorials project > 06 Transform > 06.04 Pattern Parser.plan\n(This one also includes non-default Tokenizer config)\nTutorials project > 06 Transform > 06.09 Multiplicative Pattern Parser.plan"
+      }
+    ]
+  },
+  {
+    "title": "Workflow Parameter in Admin Centre",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/workflow-parameter-in-admin-centre-1454",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "Please help/guide me on how to create parameters to enter values for a workflow in admin centre. I have an already configured workflow with parameters in Admin centre but I want to remove it. I am not aware of this change as it was made previously by another person. If there is some documentation in ataccama docs that someone could point me towards, that would also be great.\nTIA"
+    },
+    "answers": [
+      {
+        "author": "[Unknown]",
+        "timestamp": "7 months ago",
+        "content": "Hi\n@aish_TF\n,\nYou can define new or update existing in parameters in the Global Porperties of the workflow. To access it you need to double-click the canvas in the workflow and then go to Variables.\nYou can find more details in the following documentation\nhttps://docs.ataccama.com/runtime-server/latest/workflow-and-scheduler/workflow-variables.html"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "Thank you\nThis helped :)"
+      }
+    ]
+  },
+  {
+    "title": "Duplicate source_id MDM",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/duplicate-source-id-mdm-1440",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "Can we have duplicate source_id column values in mdm full load?"
+    },
+    "answers": [
+      {
+        "author": "aish_TF",
+        "timestamp": "7 months ago",
+        "content": "Adding some more information,\nI have a1:N relationship between party and contact entities. i.e. a party record has multiple contact values  associated with it in a source system.\nExample\nParty\nparty_id\nparty_name\n01\nabc\n02\nfgh\nContact for party_id 01\nparty_id\nph_id\nph_no\nph_location\n01\n01\n9387782823\nA\n01\n02\n2738467389\nB\n01\n03\n9384677283\nC\nI want all the contact values to be a part of the master contact record(based on ph location- one for each location. And hence, I am defining contact_type to represent each location. However, this situation associates multiple party_source_id for each ph number record and hence party_source_id will have duplicates in load for contact.(see source column mapping SS above). I am concerned if this will break the load operation.\nPS: The model defined has a 1:N relation between party and contact entities"
+      },
+      {
+        "author": "ivysakh",
+        "timestamp": "7 months ago",
+        "content": "Hi\n@aish_TF\n,\nThe party_source_id, being a FK in the contact entity should not cause you any duplicate errors in the load operation. However, in order to simplify the model complexity, you can do below:\nIntroduce an intermediate entity to represent the \"Party-Location\" relationship. This entity would have a 1:N relationship with both Party and Contact.\nParty\n1:N\nParty-Location\n1:N\nContact\nKey Definition:\nParty-Location:\nThe primary key would be a combination of\nparty_source_id\nand\nph_location\n.\nContact:\nThe primary key would be\nph_no\n(assuming phone number is unique within a location).\nMapping:\nMap\nparty_source_id\nand\nph_location\nfrom your source to the Party-Location entity.\nMap\nph_no\n,\ncontact_type\n, and other contact details to the Contact entity.\nThis method povides a more accurate representation of the relationships in your data and helps avoid duplicates and ensures contacts are correctly linked to parties and locations.\nCheers!\nVysakh Indrasenan"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "7 months ago",
+        "content": "Hi\n@ivysakh\nI see what you are suggesting. This would give me a M:N relation between party and contact. What I was thinking of is this-\nthe contact entity can have contact_type as {location}_PHONE and contact_value as whatever is the value. As I mentioned, this would mean that my party_source_id would have duplicate values.\nThere are two reasons for me to have it this way:\nThe party entity already has the primary location, if I bring in a location entity, it might confuse the business users.\nThe contact entity has multiple locations only in one source system, there are other source system which do not have a location or even duplicates for phone number values.\nPlease let me know if my approach makes sense, or is there any way apart from creating a M:N relationship between party and contact. In theory, I don’t think it is a 1:N relationship as a party has N contacts but the reverse cannot be true."
+      },
+      {
+        "author": "ivysakh",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@aish_TF\n,\nI agree, if location isn't a major analytical dimension in your model, a separate entity might be overkill. It will keep the model simpler and potentially easier for business users to understand. Your approach of having the location information captured in the\ncontact_type\n.\nattribute would work, or rather add a new attribute called\nph_location\ndirectly to the\ncontact\nentity. This attribute would store the location code (\"A\", \"B\", \"C\", etc.) for each phone number. This would mean:\nExplicit location information:\nThe\nph_location\nattribute clearly stores the location of each phone number.\nSimpler than M:N:\nAvoids the complexity of an intermediate \"Party-Location\" entity.\nMore flexible for future analysis:\nYou can easily query and analyze contacts based on their location.\nCombining\nlocation\nand\ncontact_type\nmight make the\ncontact_type\nless intuitive and harder to manage."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@ivysakh\nWill try this approach.\nThank you :)"
+      }
+    ]
+  },
+  {
+    "title": "Complex Delta Load not visible in Admin Centre",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/complex-delta-load-not-visible-in-admin-centre-1464",
+    "question": {
+      "author": "aish_TF",
+      "timestamp": "[No timestamp]",
+      "content": "I created two Complex Delta Load file and this led to addition of related details in\n.metadata/md/co‎nnected_systems‎\nBut these two files don’t show up in the Admin Centre. Please tell me what can be done?"
+    },
+    "answers": [
+      {
+        "author": "ivysakh",
+        "timestamp": "6 months ago",
+        "content": "Hello\n@aish_TF\n,\nI assume you have performed a SRG (Save-Reload-Generate) after adding the new complex delta load operations. To ensure they are added to the configuration, you could check the nme-batch.gen.xml file located under Files-->etc folder, in your workspace/project directory:\nIf everything went well, you should see an entry similar to this in this file, one for each complex delta load you configured:\nTry a server restart after this, and you should see the load operations in Admin Center."
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "6 months ago",
+        "content": "Hi\n@ivysakh\nThank you for the response. I did Generate but not at the project level but at the connected system level to generate the load component files.\nWill keep in mind regarding the nme.batch.gen.xml file for future.\nThanks a lot :)"
+      }
+    ]
+  },
+  {
+    "title": "Is it possible to create list of values in a parameter?",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/is-it-possible-to-create-list-of-values-in-a-parameter-1337",
+    "question": {
+      "author": "hkulkarni",
+      "timestamp": "[No timestamp]",
+      "content": "I have created a workflow to call a component which is selecting data based on a value provided by user in the admin center workflow input parameter.\nTo make it error free so that the user doesn’t input any wrong value for the parameter, I was wondering if it is possible to create a dropdown or bullet with accepted parameter values in the admin center so we could just choose the value and run the workflow?\nPlease let me know if anyone has tried this.\nThank you,"
+    },
+    "answers": [
+      {
+        "author": "AKislyakov",
+        "timestamp": "9 months ago",
+        "content": "Hi\n@hkulkarni\nThere is not option to define a picklist for the Workflow parameter, however there are several mitigation strategies:\nIf you add a comment for your input parameter, it will be visible in the Admin Center. You can put a list of acceptable values there.\nYou can add a derived variable based on the input one and accept only valid values there. Use the derived one for further processing.\nIf your picklist is short, you may create each value as a separate input variable and treat them as yes/no flags."
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "9 months ago",
+        "content": "Hi\n@hkulkarni\n, welcome back to the community ☺️ I’m closing this thread for now, if you have any follow up questions please don’t hesitate to share them here or create a new post 🙋‍♀️"
+      },
+      {
+        "author": "aish_TF",
+        "timestamp": "7 months ago",
+        "content": "Hi\n@hkulkarni\nCan you please help/guide me on how to create parameters to enter values for a workflow in admin centre. I have an already configured workflow with parameters in Admin centre but I want to remove it. Could you please help me with this? If there is some documentation in ataccama docs that you could point me towards, that would also be great.\nTIA\nAish"
+      },
+      {
+        "author": "Cansu",
+        "timestamp": "7 months ago",
+        "content": "Hi\n@aish_TF\nthank you for creating a\nnew post here\n, I’ve asked our team to support you in case there are no answers from the community 🙋‍♀️"
+      }
+    ]
+  },
+  {
+    "title": "Match on US Name Synonyms",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/match-on-us-name-synonyms-1410",
+    "question": {
+      "author": "fshahin",
+      "timestamp": "[No timestamp]",
+      "content": "Hi All,\nHow can I use the file us_ca_firstname_synonym.lkp to create a match? Like Robert Smith should match with Bob Smith. I checked the file and for one name it has multiple synonyms. I can fetch the result in clean component but not sure how do I use that in Match component to generate match. Your help is much appreciated. Thanks in advance.\nThanks\nFS"
+    },
+    "answers": [
+      {
+        "author": "Ales",
+        "timestamp": "7 months ago",
+        "content": "Hi\n@fshahin\n,\nthe file us_ca_firstname_synonym.lkp is a lookup file specifically generated for a Name standardization component. Of course you can use it for any other use case you might want however you might need to generate a specific .lkp file which would fit your purpose.\nIf you are ok with the structure of us_ca_firstname_synonym.lkp as it is, you use the lkp in the matching following these steps:\nmatching plan - prepare a MAT_FIRST_NAME_SYNONYMS value which based on the .lkp file would contain ALL the synonyms + the original name. Use a reasonable separator between values\npass this value to the matching\ncreate a Key Rule Name in the matching step by using this MAT value similarly as depicted below (just a non working example)\nthis will allow the engine to match records based on ALL synonyms in the field / the “behave as set” option enabled is important.\nadjust your Matching rules as you need"
+      }
+    ]
+  },
+  {
+    "title": "Why not to DELETE/TRUNCATE data directly in the MDM storage (v13.8.0)",
+    "url": "https://community.ataccama.com/master-data-management-reference-data-management-92/why-not-to-delete-truncate-data-directly-in-the-mdm-storage-v13-8-0-280",
+    "question": {
+      "author": "Ales",
+      "timestamp": "7 months ago",
+      "content": "Reasons for deletion\nThere are several reasons why you might want to delete data from your MDM.\nLegal reasons e.g. GDPR\nIncorrect load operation happened\nThe data is simply not relevant anymore\nPerformance issues while keeping redundant data\netc.\nTruncate tables?\nPeople usually ask if a TRUNCATE operation worked. The simple answer is NO. It might work only in isolated edge cases. You typically need to consider MANY other things and at least some of them need to be resolved.\nuncommitted transactions\nrelated tables/records\nx... tables\nhistorical table(s)\ndirect deletion will not be properly removed from the history and must be removed separately\nmaster table(s)\nmatching repository and matching proposals repository (if matching is enabled)\nthink about copyColumns - are there any data copied from that specific entity to a related one\nexport operations (truncated data will not be exported)\nevent handlers (truncated data will not be published)\nauditing\ndirect deletion will not be logged and will ignore any permissions\nAll of the above need to be considered and taken care of.\nFor that reason, the TRUNCATE operation (as any other direct DB operation) is not RECOMMENDED\nThe only edge case might be an isolated instance entity (without any relationships), no matching enabled and no related master entity exists. In that case, the truncate operation might be the fastest way how to delete all data in the table when\nthe MDM server is not running\nthere is no uncommitted transaction\nx Tables have to be truncated as well\nWhat is the best approach\nIf you wanna physically delete specific records, you can use the\nProcessPurge service\n. It allows remote applications to completely purge records from the hub. The service purges a record of a given entity by ID (you need to provide the list of IDs).\nIf you want to perform a bulk delete or delete multiple or whole entities, it’s better to create a dedicated load operation with the\nsource deletion strategy set to DELETE\n.\nDeleted records are no longer available to any MDM hub processes, and will not be visible in MDA. To remove a deleted record from the repository, either run the\nProcess Purge Service\nimmediately or remove it by using the\nhousekeeping Purge API\n.\nIt can be FULL or DELTA load depending on how generic the load operation should be and what input records you can provide. E.g. if you want to delete whole entities, you can use a full load operation and send an empty file as an input, and don’t forget about the processed entities definition in the given load."
+    },
+    "answers": [
+      {
+        "author": "srini",
+        "timestamp": "7 months ago",
+        "content": "Hi\n@Ales\n,\nThanks for your post!!\nAs per my understanding “Process Purge Service” will delete the whole entity (master record + instance layer record + relationships if provided).\nand this service is not usable for only to delete instance layer records, please clarify this.\nAlso, we have created a dedicated load operation with the\nsource deletion strategy set to DELETE\nto delete only few instance records, however the record disappeared yesterday when we ran the load job but after some time deleted instance records are reappeared, is this because of not running\nhousekeeping Purge API\n.?\nBest Regards,"
+      },
+      {
+        "author": "Ales",
+        "timestamp": "7 months ago",
+        "content": "Hi\n@srini\n,\nProcess Purge Service will delete the whole entity including related entities if you configure that request properly - see the example from our doc below.\nIf you delete a master record, the process will automatically delete instances as well.\nYou can delete instances only. If you delete the whole matching group, the process will automatically delete the relevant master record as well.\n<\nrequest\n>\n<\nparty\n>\n<\nid\n>\n1004\n</\nid\n>\n<\nrelationships\n>\n<!-- Optional, purge related records as well, same format as in preloadedRelationships. -->\n<\nrel\nname\n=\n\"addresses\"\n/>\n<\nrel\nname\n=\n\"contacts/contact_infos\"\n/>\n<!-- more relationships -->\n</\nrelationships\n>\n</\nparty\n>\n<!-- more records - of party or any other entity -->\n<\nrequest\n>\nSee more examples in the\ndoc (v15)\nRegarding your second question - when you run the load operation with Deletion strategy set to DELETE, it means that records will still be kept physically in the DB however not visible for any MDM interface. You should see\neng_existing=false\nAnd yes, those records will stay physically in the DB until you run the Housekeeping operation.\nRecords can be reactivated only if there is another load which actually activated those records back ie. records arrive again as active ones.\nYou can check eng_deletion_date vs eng_last_update_date vs eng_activation_date\nHope that helps,\nAles"
+      }
+    ]
+  }
+]
