@@ -142,6 +142,8 @@ def create_react_agent(retriever_db, plan_type: str, tone: str):
         "Use the `SearchDocs` tool to find relevant info from Ataccama docs.\n"
         "Think step-by-step. If needed, make multiple searches to answer fully.\n\n"
         "Always use the exact Ataccama transformation step names, like 'Alter Format', 'Representative Creator', 'Column Assigner', etc.\n"
+        "Dont hallucinate steps, dont come up with step names, the docs have all the available steps in Ataccama's repository with a description of what each one does, use them.\n"
+        "Make sure the context is correct, if they are asking about ONE Desktop, give them whats available in One desktop, do not confuse what can be done where, stay within the real of Ataccama and the tool of choice, desktop or webapp\n"
         f"Respond in this tone: {tone}.\n"
     )
 
