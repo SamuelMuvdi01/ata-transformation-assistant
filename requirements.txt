@@ -1,8 +1,12 @@
 streamlit
-requests
 langchain
 langchain-community
-pypdf
-faiss-cpu
 sentence-transformers
-bs4
+huggingface-hub
+faiss-cpu
+pymupdf
+pdfplumber
+requests
+tqdm
+protobuf
+langchain-openai

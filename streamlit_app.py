@@ -3,13 +3,20 @@ import streamlit as st
 import os
 import requests
 import json
-import re
 import hashlib
+import faiss
 
-from langchain_community.document_loaders import TextLoader, PyPDFLoader, CSVLoader
+from langchain_community.document_loaders import TextLoader, PyMuPDFLoader, CSVLoader
+from langchain.document_loaders import UnstructuredPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
+from langchain_core.documents import Document
+
+from langchain.agents import Tool, AgentExecutor, initialize_agent
+from langchain.chains.llm import LLMChain
+from langchain_core.prompts import PromptTemplate
+from langchain_openai import AzureChatOpenAI
 
 # --- Config ---
 API_KEY = st.secrets["api_key"]
@@ -24,36 +31,59 @@ st.title("Welcome to :violet[Ataccama's] Transformation Assistant Bot")
 # --- Load Vector Stores ---
 @st.cache_resource
 def load_vectorstores():
-    def load_and_chunk(directory):
+    def try_fallback_pdf_loader(path):
+        try:
+            return PyMuPDFLoader(path)
+        except Exception:
+            print(f"🔁 Falling back to OCR for: {path}")
+            return UnstructuredPDFLoader(path, strategy="ocr_only")
+
+    def load_and_chunk(directory, index_name):
+        index_path = f"{index_name}.faiss"
+
+        if os.path.exists(index_path) and os.path.exists(f"{index_name}.pkl"):
+            return FAISS.load_local(index_name, embeddings, allow_dangerous_deserialization=True)
+
         documents = []
+        loader_map = {
+            ".txt": lambda path: TextLoader(path, encoding="utf-8"),
+            ".html": lambda path: TextLoader(path, encoding="utf-8"),
+            ".xml": lambda path: TextLoader(path, encoding="utf-8"),
+            ".json": lambda path: TextLoader(path, encoding="utf-8"),
+            ".properties": lambda path: TextLoader(path, encoding="utf-8"),
+            ".pdf": lambda path: try_fallback_pdf_loader(path),
+            ".csv": lambda path: CSVLoader(file_path=path),
+        }
+
         for file in os.listdir(directory):
             path = os.path.join(directory, file)
-            try:
-                if file.endswith((".txt", ".html", ".xml", ".json")):
-                    loader = TextLoader(path, encoding="utf-8")
-                    documents.extend(loader.load())
-                elif file.endswith(".pdf"):
-                    loader = PyPDFLoader(path)
-                    documents.extend(loader.load())
-                elif file.endswith(".csv"):
-                    loader = CSVLoader(file_path=path)
-                    documents.extend(loader.load())
-            except Exception as e:
-                print(f"❌ Error loading {file}: {e}")
+            ext = os.path.splitext(file)[1].lower()
+            loader_fn = loader_map.get(ext)
+            if loader_fn:
+                try:
+                    loader = loader_fn(path)
+                    loaded_docs = loader.load()
+                    for doc in loaded_docs:
+                        doc.metadata["source"] = file
+                    documents.extend(loaded_docs)
+                except Exception as e:
+                    print(f"❌ Error loading {file}: {e}")
+            else:
+                print(f"⚠️ Skipped unsupported file type: {file}")
 
         splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)
-        return splitter.split_documents(documents)
-
-    desktop_chunks = load_and_chunk("docs/one-desktop-plans")
-    webapp_chunks = load_and_chunk("docs/webapp-transformation-plans")
+        chunks = splitter.split_documents(documents)
+        db = FAISS.from_documents(chunks, embeddings)
+        db.save_local(index_name)
+        return db
 
     embeddings = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
-    desktop_db = FAISS.from_documents(desktop_chunks, embeddings)
-    webapp_db = FAISS.from_documents(webapp_chunks, embeddings)
+    desktop_db = load_and_chunk("docs/one-desktop-plans", "desktop_index")
+    webapp_db = load_and_chunk("docs/webapp-transformation-plans", "webapp_index")
 
-    return desktop_db.as_retriever(), webapp_db.as_retriever()
+    return desktop_db, webapp_db
 
-desktop_retriever, webapp_retriever = load_vectorstores()
+desktop_db, webapp_db = load_vectorstores()
 
 # --- Interpreter Agent (Scoped to Ataccama Steps) ---
 @st.cache_data(show_spinner=False)
@@ -67,11 +97,9 @@ def interpret_question(original_query: str) -> str:
         "You are an expert query rewriting agent for an Ataccama-specific assistant. "
         "Your task is to take the user's original search query and rewrite it to be more effective for retrieving relevant information "
         "from an Ataccama transformation plan knowledge base.\n\n"
-        "Your goal is to help identify the most relevant Ataccama transformation step or component. "
         "Stay strictly within the scope of Ataccama ONE Desktop and WebApp capabilities.\n\n"
-        "Avoid mentioning or implying non-Ataccama tools (e.g., Tableau, Excel, Power BI).\n\n"
-        f"Here is the user's original query:\n\"{original_query}\"\n\n"
-        "Rewrite this query to best retrieve Ataccama-specific documentation. Respond with only the rewritten query."
+        f"Original query:\n\"{original_query}\"\n\n"
+        "Rewrite this query to best retrieve Ataccama-specific documentation. Return only the rewritten query."
     )
 
     payload = {
@@ -86,34 +114,47 @@ def interpret_question(original_query: str) -> str:
         return original_query
     return response.json()["choices"][0]["message"]["content"].strip()
 
-# --- Final Answer Generator with Step-Specific Prompt ---
-@st.cache_data(show_spinner=False)
-def call_openai_solution(prompt: str, cache_key: str) -> str:
-    headers = {
-        "Content-Type": "application/json",
-        "api-key": API_KEY
-    }
-    payload = {
-        "messages": [
-            {
-                "role": "system",
-                "content": (
-                    "You are Ata-cat, a friendly and expert assistant in Ataccama ONE Desktop and WebApp transformation plans.\n"
-                    "Always name the exact transformation step(s) when applicable — like 'Alter Format', 'Filter', 'Column Assigner', 'Deduplicate'. "
-                    "Avoid vague terms like 'Transformation Step' or 'Clean Step'. Use Ataccama terms only.\n\n"
-                    "If helpful, explain the steps in clear, numbered lists. Stick strictly to Ataccama features."
-                )
-            },
-            {"role": "user", "content": prompt}
-        ],
-        "temperature": 0.5,
-        "max_tokens": 1000
-    }
-    url = f"{API_ENDPOINT}/openai/deployments/{DEPLOYMENT_NAME}/chat/completions?api-version={API_VERSION}"
-    response = requests.post(url, headers=headers, json=payload)
-    if response.status_code != 200:
-        return f"[ERROR {response.status_code}]: {response.text}"
-    return response.json()["choices"][0]["message"]["content"]
+# --- Build a ReAct Agent with Document Tool ---
+def create_react_agent(retriever_db, plan_type: str, tone: str):
+    def search_docs(query: str) -> str:
+        docs = retriever_db.similarity_search(query, k=4)
+        return "\n\n".join([doc.page_content for doc in docs])
+
+    tools = [
+        Tool(
+            name="SearchDocs",
+            func=search_docs,
+            description=f"Search the Ataccama {plan_type} documentation to find info about transformation steps, components, or behavior."
+        )
+    ]
+
+    llm = AzureChatOpenAI(
+        azure_endpoint=API_ENDPOINT,
+        api_key=API_KEY,
+        deployment_name=DEPLOYMENT_NAME,
+        openai_api_version=API_VERSION,
+        temperature=0.4,
+        model_kwargs={"top_p": 0.9}
+    )
+
+    system_msg = (
+        "You are Ata-cat, a smart and friendly Ataccama assistant for transformation plan questions.\n"
+        "Use the `SearchDocs` tool to find relevant info from Ataccama docs.\n"
+        "Think step-by-step. If needed, make multiple searches to answer fully.\n\n"
+        "Always use the exact Ataccama transformation step names, like 'Alter Format', 'Deduplicate', 'Column Assigner', etc.\n"
+        f"Respond in this tone: {tone}.\n"
+    )
+
+    agent = initialize_agent(
+        tools,
+        llm,
+        agent="chat-zero-shot-react-description",
+        verbose=False,
+        handle_parsing_errors=True,
+        agent_kwargs={"system_message": system_msg}
+    )
+
+    return agent
 
 # --- UI Setup ---
 if "messages" not in st.session_state:
@@ -129,14 +170,14 @@ tone = st.select_slider(
     value="Neutral"
 )
 
-tone_instruction_map = {
-    "Very Chatty": "Be extremely detailed, explain the plan step-by-step, use examples, and describe the function of each Ataccama component.",
-    "Chatty": "Be friendly and clear, include best practices and component names.",
-    "Neutral": "Balance detail and brevity. Explain clearly and provide examples.",
-    "Concise": "Be brief and focus only on core transformation components.",
-    "Very Concise": "List only the minimum transformation steps in plain text."
+tone_map = {
+    "Very Chatty": "Be extremely detailed, step-by-step with examples and analogies.",
+    "Chatty": "Be clear and friendly with component names.",
+    "Neutral": "Balance detail and brevity with Ataccama-specific clarity.",
+    "Concise": "Be brief and stick to component names.",
+    "Very Concise": "Just list the required Ataccama steps plainly."
 }
-tone_instruction = tone_instruction_map[tone]
+tone_instruction = tone_map[tone]
 
 user_input = st.chat_input("Type your question...")
 
@@ -146,31 +187,14 @@ if user_input:
 
     st.markdown(f"**You asked:** {user_input}")
 
-    with st.spinner("Retrieving relevant documentation..."):
-        retriever = desktop_retriever if plan_type == "desktop" else webapp_retriever
-        docs = retriever.get_relevant_documents(interpreted_question)
-        context_text = "\n\n".join([doc.page_content for doc in docs[:3]])
+    with st.spinner("Reasoning and searching with Ata-cat agent..."):
+        retriever_db = desktop_db if plan_type == "desktop" else webapp_db
+        agent = create_react_agent(retriever_db, plan_type, tone_instruction)
+        try:
+            response = agent.run(interpreted_question)
+        except Exception as e:
+            response = f"🤖 Sorry, there was an error: {e}"
 
-    with st.spinner("Writing a step-by-step answer..."):
-        examples = (
-            "Examples:\n"
-            "- To add or remove columns → use 'Alter Format'\n"
-            "- To rename a column → use 'Column Assigner'\n"
-            "- To filter records → use 'Filter'\n"
-            "- To remove duplicates → use 'Deduplicate'\n\n"
-        )
-        full_prompt = (
-            f"{examples}"
-            f"The user originally asked: {user_input}\n"
-            f"Interpreted and cleaned question: {interpreted_question}\n\n"
-            f"Relevant context from documentation:\n{context_text}\n\n"
-            f"{tone_instruction}\n\n"
-            f"Be accurate. Mention exact Ataccama transformation steps if relevant. "
-            f"Do not suggest or invent technologies outside the Ataccama platform."
-        )
-
-        cache_key = hashlib.sha256((interpreted_question + tone).encode()).hexdigest()
-        response = call_openai_solution(full_prompt, cache_key)
         st.session_state.messages.append({"role": "assistant", "content": response})
         st.markdown(response)
 
