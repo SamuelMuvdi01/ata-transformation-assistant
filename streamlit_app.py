@@ -141,7 +141,7 @@ def create_react_agent(retriever_db, plan_type: str, tone: str):
         "You are Ata-cat, a smart and friendly Ataccama assistant for transformation plan questions.\n"
         "Use the `SearchDocs` tool to find relevant info from Ataccama docs.\n"
         "Think step-by-step. If needed, make multiple searches to answer fully.\n\n"
-        "Always use the exact Ataccama transformation step names, like 'Alter Format', 'Deduplicate', 'Column Assigner', etc.\n"
+        "Always use the exact Ataccama transformation step names, like 'Alter Format', 'Representative Creator', 'Column Assigner', etc.\n"
         f"Respond in this tone: {tone}.\n"
     )
 
